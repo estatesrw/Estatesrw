@@ -14,16 +14,330 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          property_id: string
+          status: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          property_id: string
+          status?: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          property_id?: string
+          status?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bookings: {
+        Row: {
+          created_at: string
+          end_date: string | null
+          id: string
+          monthly_rent: number
+          property_id: string
+          start_date: string
+          status: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          monthly_rent?: number
+          property_id: string
+          start_date: string
+          status?: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          monthly_rent?: number
+          property_id?: string
+          start_date?: string
+          status?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      maintenance_tickets: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          description: string | null
+          id: string
+          priority: string
+          property_id: string
+          reported_by: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          priority?: string
+          property_id: string
+          reported_by: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          priority?: string
+          property_id?: string
+          reported_by?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "maintenance_tickets_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          read: boolean
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          booking_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          payment_method: string | null
+          status: string
+          tenant_id: string
+        }
+        Insert: {
+          amount: number
+          booking_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          payment_method?: string | null
+          status?: string
+          tenant_id: string
+        }
+        Update: {
+          amount?: number
+          booking_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          payment_method?: string | null
+          status?: string
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone_number?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          address: string
+          amenities: string[] | null
+          area: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          city: string
+          created_at: string
+          description: string | null
+          id: string
+          images: string[] | null
+          landlord_id: string
+          price: number
+          property_type: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          amenities?: string[] | null
+          area?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          landlord_id: string
+          price?: number
+          property_type?: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          amenities?: string[] | null
+          area?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          landlord_id?: string
+          price?: number
+          property_type?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_property_owner: {
+        Args: { _property_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "tenant" | "landlord" | "service_provider" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +464,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["tenant", "landlord", "service_provider", "admin"],
+    },
   },
 } as const
