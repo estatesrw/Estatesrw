@@ -3,22 +3,22 @@ import { Home, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } fro
 const Footer = () => {
   const footerLinks = {
     company: [
-      { label: "About Us", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "Browse Properties", href: "/dashboard/browse" },
+      { label: "Services", href: "#services" },
+      { label: "How It Works", href: "#how-it-works" },
+      { label: "Sign Up", href: "/auth" },
     ],
     support: [
-      { label: "Help Center", href: "#" },
-      { label: "Contact Us", href: "#" },
-      { label: "FAQs", href: "#" },
-      { label: "Safety", href: "#" },
+      { label: "Help Center", href: "/auth" },
+      { label: "Contact Us", href: "/auth" },
+      { label: "FAQs", href: "#how-it-works" },
+      { label: "Dashboard", href: "/dashboard" },
     ],
     legal: [
-      { label: "Terms of Service", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Cookie Policy", href: "#" },
-      { label: "Accessibility", href: "#" },
+      { label: "Terms of Service", href: "/auth" },
+      { label: "Privacy Policy", href: "/auth" },
+      { label: "Cookie Policy", href: "/auth" },
+      { label: "Accessibility", href: "/auth" },
     ],
   };
 

@@ -53,7 +53,7 @@ const HowItWorks = () => {
   const steps = activeRole === "tenant" ? tenantSteps : landlordSteps;
 
   return (
-    <section className="py-20 bg-secondary">
+    <section id="how-it-works" className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">

@@ -83,7 +83,7 @@ const HeroSection = () => {
                   </button>
                 ))}
               </div>
-              <Button variant="hero" size="xl" className="h-14">
+              <Button variant="hero" size="xl" className="h-14" onClick={() => window.location.href = '/dashboard/browse'}>
                 <Search className="w-5 h-5" />
                 Search
               </Button>

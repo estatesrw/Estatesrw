@@ -10,11 +10,9 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const navLinks = [
-    { label: "Buy", href: "#" },
-    { label: "Rent", href: "#" },
-    { label: "Sell", href: "#" },
+    { label: "Browse Properties", href: "/dashboard/browse" },
     { label: "Services", href: "#services" },
-    { label: "About", href: "#" },
+    { label: "How It Works", href: "#how-it-works" },
   ];
 
   const handleSignOut = async () => {
