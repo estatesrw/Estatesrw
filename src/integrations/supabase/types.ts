@@ -298,6 +298,117 @@ export type Database = {
         }
         Relationships: []
       }
+      service_bookings: {
+        Row: {
+          created_at: string
+          customer_id: string
+          id: string
+          notes: string | null
+          property_id: string | null
+          provider_id: string
+          scheduled_date: string
+          scheduled_time: string | null
+          service_id: string
+          status: string
+          total_price: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_id: string
+          id?: string
+          notes?: string | null
+          property_id?: string | null
+          provider_id: string
+          scheduled_date: string
+          scheduled_time?: string | null
+          service_id: string
+          status?: string
+          total_price?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_id?: string
+          id?: string
+          notes?: string | null
+          property_id?: string | null
+          provider_id?: string
+          scheduled_date?: string
+          scheduled_time?: string | null
+          service_id?: string
+          status?: string
+          total_price?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_bookings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          category: string
+          city: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          price: number
+          price_type: string
+          provider_id: string
+          rating: number | null
+          status: string
+          title: string
+          total_reviews: number | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          price?: number
+          price_type?: string
+          provider_id: string
+          rating?: number | null
+          status?: string
+          title: string
+          total_reviews?: number | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          city?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          price?: number
+          price_type?: string
+          provider_id?: string
+          rating?: number | null
+          status?: string
+          title?: string
+          total_reviews?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
