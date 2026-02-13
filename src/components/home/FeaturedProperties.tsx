@@ -152,7 +152,7 @@ const PropertyCard = ({ property }: { property: typeof properties[0] }) => {
               <span className="text-muted-foreground">/month</span>
             )}
           </div>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => window.location.href = '/dashboard/browse'}>
             View Details
           </Button>
         </div>
@@ -175,7 +175,7 @@ const FeaturedProperties = () => {
               Discover Our Best Properties
             </h2>
           </div>
-          <Button variant="ghost" className="group self-start md:self-auto">
+          <Button variant="ghost" className="group self-start md:self-auto" onClick={() => window.location.href = '/dashboard/browse'}>
             View All Properties
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>

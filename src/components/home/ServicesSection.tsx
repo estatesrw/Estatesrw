@@ -85,7 +85,7 @@ const ServicesSection = () => {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Button variant="default" size="lg">
+          <Button variant="default" size="lg" onClick={() => window.location.href = '/auth'}>
             Become a Service Provider
           </Button>
         </div>
