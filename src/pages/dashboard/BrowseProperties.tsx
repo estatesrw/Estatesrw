@@ -75,7 +75,12 @@ const BrowseProperties = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {properties.map((p) => (
-            <Card key={p.id} className="shadow-card hover:shadow-card-hover transition-shadow">
+            <Card key={p.id} className="shadow-card hover:shadow-card-hover transition-shadow overflow-hidden">
+              {p.images && p.images.length > 0 && (
+                <div className="aspect-video overflow-hidden">
+                  <img src={p.images[0]} alt={p.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </div>
+              )}
               <CardContent className="p-5">
                 <h3 className="font-display font-semibold text-foreground mb-1">{p.title}</h3>
                 <p className="text-sm text-muted-foreground flex items-center gap-1 mb-3"><MapPin className="w-3 h-3" />{p.address}, {p.city}</p>

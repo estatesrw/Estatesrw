@@ -21,7 +21,7 @@ const PropertiesPage = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({
     title: "", description: "", property_type: "apartment", address: "", city: "",
-    price: "", bedrooms: "0", bathrooms: "0", area: "0",
+    price: "", bedrooms: "0", bathrooms: "0", area: "0", image_url: "",
   });
 
   const fetchProperties = async () => {
@@ -34,18 +34,23 @@ const PropertiesPage = () => {
   useEffect(() => { if (user) fetchProperties(); }, [user]);
 
   const resetForm = () => {
-    setForm({ title: "", description: "", property_type: "apartment", address: "", city: "", price: "", bedrooms: "0", bathrooms: "0", area: "0" });
+    setForm({ title: "", description: "", property_type: "apartment", address: "", city: "", price: "", bedrooms: "0", bathrooms: "0", area: "0", image_url: "" });
     setEditingId(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
-      ...form,
+      title: form.title,
+      description: form.description,
+      property_type: form.property_type,
+      address: form.address,
+      city: form.city,
       price: Number(form.price),
       bedrooms: Number(form.bedrooms),
       bathrooms: Number(form.bathrooms),
       area: Number(form.area),
+      images: form.image_url ? [form.image_url] : [],
       landlord_id: user!.id,
     };
 
@@ -71,6 +76,7 @@ const PropertiesPage = () => {
       title: p.title, description: p.description || "", property_type: p.property_type,
       address: p.address, city: p.city, price: String(p.price),
       bedrooms: String(p.bedrooms), bathrooms: String(p.bathrooms), area: String(p.area),
+      image_url: p.images?.[0] || "",
     });
     setEditingId(p.id);
     setDialogOpen(true);
@@ -147,6 +153,10 @@ const PropertiesPage = () => {
                     <Input type="number" value={form.area} onChange={(e) => setForm({ ...form, area: e.target.value })} />
                   </div>
                 </div>
+                <div className="space-y-2">
+                  <Label>Image URL (optional)</Label>
+                  <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://images.unsplash.com/..." />
+                </div>
                 <Button type="submit" className="w-full">{editingId ? "Update" : "Add"} Property</Button>
               </form>
             </DialogContent>
@@ -159,7 +169,12 @@ const PropertiesPage = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {properties.map((p) => (
-            <Card key={p.id} className="shadow-card hover:shadow-card-hover transition-shadow">
+            <Card key={p.id} className="shadow-card hover:shadow-card-hover transition-shadow overflow-hidden">
+              {p.images && p.images.length > 0 && (
+                <div className="aspect-video overflow-hidden">
+                  <img src={p.images[0]} alt={p.title} className="w-full h-full object-cover" />
+                </div>
+              )}
               <CardContent className="p-5">
                 <div className="flex justify-between items-start mb-3">
                   <div>
