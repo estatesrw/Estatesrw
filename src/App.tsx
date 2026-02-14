@@ -17,6 +17,9 @@ import MessagesPage from "./pages/dashboard/MessagesPage";
 import PaymentsPage from "./pages/dashboard/PaymentsPage";
 import BrowseProperties from "./pages/dashboard/BrowseProperties";
 import UsersPage from "./pages/dashboard/UsersPage";
+import ServicesPage from "./pages/dashboard/ServicesPage";
+import BrowseServicesPage from "./pages/dashboard/BrowseServicesPage";
+import ServiceBookingsPage from "./pages/dashboard/ServiceBookingsPage";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +43,9 @@ const AppRoutes = () => (
     <Route path="/dashboard/messages" element={<ProtectedRoute><DashboardLayout><MessagesPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/payments" element={<ProtectedRoute><DashboardLayout><PaymentsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/users" element={<ProtectedRoute><DashboardLayout><UsersPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/services" element={<ProtectedRoute><DashboardLayout><ServicesPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/browse-services" element={<ProtectedRoute><DashboardLayout><BrowseServicesPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/service-bookings" element={<ProtectedRoute><DashboardLayout><ServiceBookingsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
