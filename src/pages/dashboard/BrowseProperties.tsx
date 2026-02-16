@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -7,10 +8,11 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Bed, Bath, Maximize, Search, Send } from "lucide-react";
+import { MapPin, Bed, Bath, Maximize, Search, Send, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const BrowseProperties = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
   const [properties, setProperties] = useState<any[]>([]);
@@ -91,9 +93,14 @@ const BrowseProperties = () => {
                   <span className="flex items-center gap-1"><Bath className="w-3 h-3" />{p.bathrooms} bath</span>
                   <span className="flex items-center gap-1"><Maximize className="w-3 h-3" />{p.area} sqft</span>
                 </div>
-                <Button className="w-full" onClick={() => setApplyDialog(p)}>
-                  <Send className="w-4 h-4 mr-2" />Apply Now
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" className="flex-1" onClick={() => navigate(`/dashboard/property/${p.id}`)}>
+                    <Eye className="w-4 h-4 mr-2" />Details
+                  </Button>
+                  <Button className="flex-1" onClick={() => setApplyDialog(p)}>
+                    <Send className="w-4 h-4 mr-2" />Apply
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
