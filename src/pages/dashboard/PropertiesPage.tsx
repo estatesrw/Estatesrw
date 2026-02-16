@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus, MapPin, Bed, Bath, Maximize, Pencil, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import PropertyImageUpload from "@/components/properties/PropertyImageUpload";
 
 const PropertiesPage = () => {
   const { user, roles } = useAuth();
@@ -21,7 +22,7 @@ const PropertiesPage = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({
     title: "", description: "", property_type: "apartment", address: "", city: "",
-    price: "", bedrooms: "0", bathrooms: "0", area: "0", image_url: "",
+    price: "", bedrooms: "0", bathrooms: "0", area: "0", uploadedImages: [] as string[],
   });
 
   const fetchProperties = async () => {
@@ -34,7 +35,7 @@ const PropertiesPage = () => {
   useEffect(() => { if (user) fetchProperties(); }, [user]);
 
   const resetForm = () => {
-    setForm({ title: "", description: "", property_type: "apartment", address: "", city: "", price: "", bedrooms: "0", bathrooms: "0", area: "0", image_url: "" });
+    setForm({ title: "", description: "", property_type: "apartment", address: "", city: "", price: "", bedrooms: "0", bathrooms: "0", area: "0", uploadedImages: [] });
     setEditingId(null);
   };
 
@@ -50,7 +51,7 @@ const PropertiesPage = () => {
       bedrooms: Number(form.bedrooms),
       bathrooms: Number(form.bathrooms),
       area: Number(form.area),
-      images: form.image_url ? [form.image_url] : [],
+      images: form.uploadedImages,
       landlord_id: user!.id,
     };
 
@@ -76,7 +77,7 @@ const PropertiesPage = () => {
       title: p.title, description: p.description || "", property_type: p.property_type,
       address: p.address, city: p.city, price: String(p.price),
       bedrooms: String(p.bedrooms), bathrooms: String(p.bathrooms), area: String(p.area),
-      image_url: p.images?.[0] || "",
+      uploadedImages: p.images || [],
     });
     setEditingId(p.id);
     setDialogOpen(true);
@@ -153,10 +154,11 @@ const PropertiesPage = () => {
                     <Input type="number" value={form.area} onChange={(e) => setForm({ ...form, area: e.target.value })} />
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label>Image URL (optional)</Label>
-                  <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://images.unsplash.com/..." />
-                </div>
+                <PropertyImageUpload
+                  userId={user!.id}
+                  images={form.uploadedImages}
+                  onChange={(imgs) => setForm({ ...form, uploadedImages: imgs })}
+                />
                 <Button type="submit" className="w-full">{editingId ? "Update" : "Add"} Property</Button>
               </form>
             </DialogContent>
