@@ -20,6 +20,7 @@ import UsersPage from "./pages/dashboard/UsersPage";
 import ServicesPage from "./pages/dashboard/ServicesPage";
 import BrowseServicesPage from "./pages/dashboard/BrowseServicesPage";
 import ServiceBookingsPage from "./pages/dashboard/ServiceBookingsPage";
+import PropertyDetailsPage from "./pages/dashboard/PropertyDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const AppRoutes = () => (
     <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout><DashboardOverview /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/properties" element={<ProtectedRoute><DashboardLayout><PropertiesPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/browse" element={<ProtectedRoute><DashboardLayout><BrowseProperties /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/property/:id" element={<ProtectedRoute><DashboardLayout><PropertyDetailsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/applications" element={<ProtectedRoute><DashboardLayout><ApplicationsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/bookings" element={<ProtectedRoute><DashboardLayout><BookingsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/maintenance" element={<ProtectedRoute><DashboardLayout><MaintenancePage /></DashboardLayout></ProtectedRoute>} />
