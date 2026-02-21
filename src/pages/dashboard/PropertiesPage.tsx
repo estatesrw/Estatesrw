@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, MapPin, Bed, Bath, Maximize, Pencil, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import PropertyImageUpload from "@/components/properties/PropertyImageUpload";
+import AmenitiesPicker from "@/components/properties/AmenitiesPicker";
 
 const PropertiesPage = () => {
   const { user, roles } = useAuth();
@@ -23,6 +24,7 @@ const PropertiesPage = () => {
   const [form, setForm] = useState({
     title: "", description: "", property_type: "apartment", address: "", city: "",
     price: "", bedrooms: "0", bathrooms: "0", area: "0", uploadedImages: [] as string[],
+    amenities: [] as string[],
   });
 
   const fetchProperties = async () => {
@@ -35,7 +37,7 @@ const PropertiesPage = () => {
   useEffect(() => { if (user) fetchProperties(); }, [user]);
 
   const resetForm = () => {
-    setForm({ title: "", description: "", property_type: "apartment", address: "", city: "", price: "", bedrooms: "0", bathrooms: "0", area: "0", uploadedImages: [] });
+    setForm({ title: "", description: "", property_type: "apartment", address: "", city: "", price: "", bedrooms: "0", bathrooms: "0", area: "0", uploadedImages: [], amenities: [] });
     setEditingId(null);
   };
 
@@ -52,6 +54,7 @@ const PropertiesPage = () => {
       bathrooms: Number(form.bathrooms),
       area: Number(form.area),
       images: form.uploadedImages,
+      amenities: form.amenities,
       landlord_id: user!.id,
     };
 
@@ -77,7 +80,7 @@ const PropertiesPage = () => {
       title: p.title, description: p.description || "", property_type: p.property_type,
       address: p.address, city: p.city, price: String(p.price),
       bedrooms: String(p.bedrooms), bathrooms: String(p.bathrooms), area: String(p.area),
-      uploadedImages: p.images || [],
+      uploadedImages: p.images || [], amenities: p.amenities || [],
     });
     setEditingId(p.id);
     setDialogOpen(true);
@@ -158,6 +161,10 @@ const PropertiesPage = () => {
                   userId={user!.id}
                   images={form.uploadedImages}
                   onChange={(imgs) => setForm({ ...form, uploadedImages: imgs })}
+                />
+                <AmenitiesPicker
+                  selected={form.amenities}
+                  onChange={(amenities) => setForm({ ...form, amenities })}
                 />
                 <Button type="submit" className="w-full">{editingId ? "Update" : "Add"} Property</Button>
               </form>

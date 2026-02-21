@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   Home, Building2, Users, Wrench, MessageSquare, CreditCard,
   BarChart3, Settings, LogOut, Menu, X, FileText, ClipboardList,
-  Briefcase, ShoppingBag, CalendarCheck
+  Briefcase, ShoppingBag, CalendarCheck, PenSquare, Megaphone
 } from "lucide-react";
 import { useState } from "react";
 
@@ -50,6 +50,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-5 h-5" /> },
           { label: "Bookings", href: "/dashboard/bookings", icon: <FileText className="w-5 h-5" /> },
           { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-5 h-5" /> },
+          { label: "Blog", href: "/dashboard/blog", icon: <PenSquare className="w-5 h-5" /> },
+          { label: "Advertisements", href: "/dashboard/ads", icon: <Megaphone className="w-5 h-5" /> },
           { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-5 h-5" /> },
         ];
       case "service_provider":
