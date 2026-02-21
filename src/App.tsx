@@ -7,6 +7,8 @@ import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Blog from "./pages/Blog";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DashboardOverview from "./pages/dashboard/DashboardOverview";
 import PropertiesPage from "./pages/dashboard/PropertiesPage";
@@ -21,6 +23,8 @@ import ServicesPage from "./pages/dashboard/ServicesPage";
 import BrowseServicesPage from "./pages/dashboard/BrowseServicesPage";
 import ServiceBookingsPage from "./pages/dashboard/ServiceBookingsPage";
 import PropertyDetailsPage from "./pages/dashboard/PropertyDetailsPage";
+import BlogManagementPage from "./pages/dashboard/BlogManagementPage";
+import AdsManagementPage from "./pages/dashboard/AdsManagementPage";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +39,8 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Index />} />
     <Route path="/auth" element={<Auth />} />
+    <Route path="/privacy" element={<PrivacyPolicy />} />
+    <Route path="/blog" element={<Blog />} />
     <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout><DashboardOverview /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/properties" element={<ProtectedRoute><DashboardLayout><PropertiesPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/browse" element={<ProtectedRoute><DashboardLayout><BrowseProperties /></DashboardLayout></ProtectedRoute>} />
@@ -48,6 +54,8 @@ const AppRoutes = () => (
     <Route path="/dashboard/services" element={<ProtectedRoute><DashboardLayout><ServicesPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/browse-services" element={<ProtectedRoute><DashboardLayout><BrowseServicesPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/service-bookings" element={<ProtectedRoute><DashboardLayout><ServiceBookingsPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/blog" element={<ProtectedRoute><DashboardLayout><BlogManagementPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/ads" element={<ProtectedRoute><DashboardLayout><AdsManagementPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );

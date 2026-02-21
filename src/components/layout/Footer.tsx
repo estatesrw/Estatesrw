@@ -15,10 +15,10 @@ const Footer = () => {
       { label: "Dashboard", href: "/dashboard" },
     ],
     legal: [
-      { label: "Terms of Service", href: "/auth" },
-      { label: "Privacy Policy", href: "/auth" },
-      { label: "Cookie Policy", href: "/auth" },
-      { label: "Accessibility", href: "/auth" },
+      { label: "Terms of Service", href: "/privacy" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Cookie Policy", href: "/privacy" },
+      { label: "Accessibility", href: "/privacy" },
     ],
   };
 
@@ -92,7 +92,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                +250 788 000 000
+                +250 791 915 459
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
