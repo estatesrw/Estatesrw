@@ -1,24 +1,24 @@
+import { Link } from "react-router-dom";
 import { Home, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   const footerLinks = {
     company: [
-      { label: "Browse Properties", href: "/dashboard/browse" },
-      { label: "Services", href: "#services" },
-      { label: "How It Works", href: "#how-it-works" },
-      { label: "Sign Up", href: "/auth" },
+      { label: "About Us", href: "/about-us" },
+      { label: "Properties", href: "/dashboard/browse" },
+      { label: "Blog", href: "/blog" },
+      { label: "Contact", href: "/contact" },
     ],
     support: [
-      { label: "Help Center", href: "/auth" },
-      { label: "Contact Us", href: "/auth" },
-      { label: "FAQs", href: "#how-it-works" },
+      { label: "Help Center", href: "/contact" },
+      { label: "How It Works", href: "/#how-it-works" },
+      { label: "FAQs", href: "/contact" },
       { label: "Dashboard", href: "/dashboard" },
     ],
     legal: [
-      { label: "Terms of Service", href: "/privacy" },
       { label: "Privacy Policy", href: "/privacy" },
-      { label: "Cookie Policy", href: "/privacy" },
-      { label: "Accessibility", href: "/privacy" },
+      { label: "Terms & Conditions", href: "/terms-and-conditions" },
+      { label: "Disclaimer", href: "/disclaimer" },
     ],
   };
 
@@ -56,28 +56,22 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
+                  <Link to={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
+            <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
+              {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
+                  <Link to={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -10,9 +10,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const navLinks = [
-    { label: "Browse Properties", href: "/dashboard/browse" },
-    { label: "Services", href: "#services" },
-    { label: "How It Works", href: "#how-it-works" },
+    { label: "Properties", href: "/dashboard/browse" },
+    { label: "Blog", href: "/blog" },
+    { label: "About", href: "/about-us" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const handleSignOut = async () => {
@@ -33,9 +34,9 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground font-medium transition-colors">
+              <Link key={link.label} to={link.href} className="text-muted-foreground hover:text-foreground font-medium transition-colors">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -62,9 +63,9 @@ const Navbar = () => {
           <div className="md:hidden py-4 border-t border-border animate-fade-up">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <a key={link.label} href={link.href} className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors">
+                <Link key={link.label} to={link.href} className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors">
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="flex flex-col gap-2 mt-4 px-4">
                 {user ? (
