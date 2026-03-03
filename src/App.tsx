@@ -31,6 +31,16 @@ import ServiceBookingsPage from "./pages/dashboard/ServiceBookingsPage";
 import PropertyDetailsPage from "./pages/dashboard/PropertyDetailsPage";
 import BlogManagementPage from "./pages/dashboard/BlogManagementPage";
 import AdsManagementPage from "./pages/dashboard/AdsManagementPage";
+import VendorRegister from "./pages/dashboard/vendor/VendorRegister";
+import VendorProperties from "./pages/dashboard/vendor/VendorProperties";
+import VendorRoomTypes from "./pages/dashboard/vendor/VendorRoomTypes";
+import VendorBookings from "./pages/dashboard/vendor/VendorBookings";
+import VendorCalendar from "./pages/dashboard/vendor/VendorCalendar";
+import VendorRevenue from "./pages/dashboard/vendor/VendorRevenue";
+import VendorGuests from "./pages/dashboard/vendor/VendorGuests";
+import VendorManagement from "./pages/dashboard/admin/VendorManagement";
+import PlatformAnalytics from "./pages/dashboard/admin/PlatformAnalytics";
+import CommissionManagement from "./pages/dashboard/admin/CommissionManagement";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +77,16 @@ const AppRoutes = () => (
     <Route path="/dashboard/service-bookings" element={<ProtectedRoute><DashboardLayout><ServiceBookingsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/blog" element={<ProtectedRoute><DashboardLayout><BlogManagementPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/ads" element={<ProtectedRoute><DashboardLayout><AdsManagementPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/register" element={<ProtectedRoute><DashboardLayout><VendorRegister /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/properties" element={<ProtectedRoute><DashboardLayout><VendorProperties /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/rooms" element={<ProtectedRoute><DashboardLayout><VendorRoomTypes /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/bookings" element={<ProtectedRoute><DashboardLayout><VendorBookings /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/calendar" element={<ProtectedRoute><DashboardLayout><VendorCalendar /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/revenue" element={<ProtectedRoute><DashboardLayout><VendorRevenue /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/vendor/guests" element={<ProtectedRoute><DashboardLayout><VendorGuests /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/admin/vendors" element={<ProtectedRoute><DashboardLayout><VendorManagement /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/admin/analytics" element={<ProtectedRoute><DashboardLayout><PlatformAnalytics /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/admin/commissions" element={<ProtectedRoute><DashboardLayout><CommissionManagement /></DashboardLayout></ProtectedRoute>} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );

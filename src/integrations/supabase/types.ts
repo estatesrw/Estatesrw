@@ -14,6 +14,112 @@ export type Database = {
   }
   public: {
     Tables: {
+      accommodation_bookings: {
+        Row: {
+          approved_at: string | null
+          booking_ref: string
+          cancellation_policy: string | null
+          cancelled_at: string | null
+          check_in: string
+          check_out: string
+          commission_amount: number
+          created_at: string
+          guest_email: string | null
+          guest_id: string
+          guest_name: string
+          guest_phone: string | null
+          guests: number
+          id: string
+          nights: number
+          notes: string | null
+          payment_method: string | null
+          payment_status: string
+          property_id: string
+          room_type_id: string
+          status: string
+          total_price: number
+          updated_at: string
+          vendor_id: string
+          vendor_payout: number
+        }
+        Insert: {
+          approved_at?: string | null
+          booking_ref?: string
+          cancellation_policy?: string | null
+          cancelled_at?: string | null
+          check_in: string
+          check_out: string
+          commission_amount?: number
+          created_at?: string
+          guest_email?: string | null
+          guest_id: string
+          guest_name: string
+          guest_phone?: string | null
+          guests?: number
+          id?: string
+          nights?: number
+          notes?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          property_id: string
+          room_type_id: string
+          status?: string
+          total_price?: number
+          updated_at?: string
+          vendor_id: string
+          vendor_payout?: number
+        }
+        Update: {
+          approved_at?: string | null
+          booking_ref?: string
+          cancellation_policy?: string | null
+          cancelled_at?: string | null
+          check_in?: string
+          check_out?: string
+          commission_amount?: number
+          created_at?: string
+          guest_email?: string | null
+          guest_id?: string
+          guest_name?: string
+          guest_phone?: string | null
+          guests?: number
+          id?: string
+          nights?: number
+          notes?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          property_id?: string
+          room_type_id?: string
+          status?: string
+          total_price?: number
+          updated_at?: string
+          vendor_id?: string
+          vendor_payout?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "accommodation_bookings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "accommodation_bookings_room_type_id_fkey"
+            columns: ["room_type_id"]
+            isOneToOne: false
+            referencedRelation: "room_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "accommodation_bookings_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       advertisements: {
         Row: {
           created_at: string
@@ -84,6 +190,61 @@ export type Database = {
             columns: ["property_id"]
             isOneToOne: false
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blocked_dates: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: string
+          property_id: string
+          reason: string | null
+          room_type_id: string | null
+          start_date: string
+          vendor_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: string
+          property_id: string
+          reason?: string | null
+          room_type_id?: string | null
+          start_date: string
+          vendor_id: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: string
+          property_id?: string
+          reason?: string | null
+          room_type_id?: string | null
+          start_date?: string
+          vendor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blocked_dates_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocked_dates_room_type_id_fkey"
+            columns: ["room_type_id"]
+            isOneToOne: false
+            referencedRelation: "room_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocked_dates_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
             referencedColumns: ["id"]
           },
         ]
@@ -376,6 +537,78 @@ export type Database = {
         }
         Relationships: []
       }
+      room_types: {
+        Row: {
+          amenities: string[] | null
+          created_at: string
+          description: string | null
+          id: string
+          images: string[] | null
+          max_guests: number
+          minimum_stay: number
+          monthly_price: number | null
+          name: string
+          price_per_night: number
+          property_id: string
+          status: string
+          total_rooms: number
+          updated_at: string
+          vendor_id: string
+          weekend_price: number | null
+        }
+        Insert: {
+          amenities?: string[] | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          max_guests?: number
+          minimum_stay?: number
+          monthly_price?: number | null
+          name: string
+          price_per_night?: number
+          property_id: string
+          status?: string
+          total_rooms?: number
+          updated_at?: string
+          vendor_id: string
+          weekend_price?: number | null
+        }
+        Update: {
+          amenities?: string[] | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          max_guests?: number
+          minimum_stay?: number
+          monthly_price?: number | null
+          name?: string
+          price_per_night?: number
+          property_id?: string
+          status?: string
+          total_rooms?: number
+          updated_at?: string
+          vendor_id?: string
+          weekend_price?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "room_types_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "room_types_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       service_bookings: {
         Row: {
           created_at: string
@@ -508,11 +741,117 @@ export type Database = {
         }
         Relationships: []
       }
+      vendor_commissions: {
+        Row: {
+          booking_amount: number
+          booking_id: string
+          commission_amount: number
+          commission_rate: number
+          created_at: string
+          id: string
+          paid_at: string | null
+          status: string
+          vendor_id: string
+          vendor_payout: number
+        }
+        Insert: {
+          booking_amount: number
+          booking_id: string
+          commission_amount: number
+          commission_rate: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          status?: string
+          vendor_id: string
+          vendor_payout: number
+        }
+        Update: {
+          booking_amount?: number
+          booking_id?: string
+          commission_amount?: number
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          status?: string
+          vendor_id?: string
+          vendor_payout?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vendor_commissions_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "accommodation_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vendor_commissions_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vendors: {
+        Row: {
+          address: string | null
+          business_name: string
+          business_type: string
+          city: string
+          commission_rate: number
+          created_at: string
+          description: string | null
+          email: string | null
+          id: string
+          logo_url: string | null
+          phone: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          business_name: string
+          business_type?: string
+          city?: string
+          commission_rate?: number
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          logo_url?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          business_name?: string
+          business_type?: string
+          city?: string
+          commission_rate?: number
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          logo_url?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      get_vendor_id: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -524,9 +863,13 @@ export type Database = {
         Args: { _property_id: string; _user_id: string }
         Returns: boolean
       }
+      is_vendor_owner: {
+        Args: { _user_id: string; _vendor_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      app_role: "tenant" | "landlord" | "service_provider" | "admin"
+      app_role: "tenant" | "landlord" | "service_provider" | "admin" | "vendor"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -654,7 +997,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["tenant", "landlord", "service_provider", "admin"],
+      app_role: ["tenant", "landlord", "service_provider", "admin", "vendor"],
     },
   },
 } as const
