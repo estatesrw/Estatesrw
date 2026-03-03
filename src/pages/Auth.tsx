@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Home, Mail, Lock, User, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type AppRole = "tenant" | "landlord" | "service_provider";
+type AppRole = "tenant" | "landlord" | "service_provider" | "vendor";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -45,8 +45,9 @@ const Auth = () => {
   };
 
   const roles: { value: AppRole; label: string; desc: string }[] = [
-    { value: "tenant", label: "Tenant", desc: "Browse & rent properties" },
-    { value: "landlord", label: "Landlord", desc: "List & manage properties" },
+    { value: "tenant", label: "Tenant / Guest", desc: "Browse & book accommodations" },
+    { value: "landlord", label: "Landlord", desc: "List & manage rental properties" },
+    { value: "vendor", label: "Vendor", desc: "Hotel, apartment or guesthouse owner" },
     { value: "service_provider", label: "Service Provider", desc: "Offer property services" },
   ];
 

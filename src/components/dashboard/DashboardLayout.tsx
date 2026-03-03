@@ -44,6 +44,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       case "admin":
         return [
           { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-5 h-5" /> },
+          { label: "Platform Analytics", href: "/dashboard/admin/analytics", icon: <BarChart3 className="w-5 h-5" /> },
+          { label: "Vendors", href: "/dashboard/admin/vendors", icon: <Building2 className="w-5 h-5" /> },
+          { label: "Commissions", href: "/dashboard/admin/commissions", icon: <CreditCard className="w-5 h-5" /> },
           { label: "Users", href: "/dashboard/users", icon: <Users className="w-5 h-5" /> },
           { label: "Properties", href: "/dashboard/properties", icon: <Building2 className="w-5 h-5" /> },
           { label: "Services", href: "/dashboard/services", icon: <Briefcase className="w-5 h-5" /> },
@@ -61,6 +64,17 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "Service Requests", href: "/dashboard/service-bookings", icon: <CalendarCheck className="w-5 h-5" /> },
           { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-5 h-5" /> },
           { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-5 h-5" /> },
+        ];
+      case "vendor":
+        return [
+          { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-5 h-5" /> },
+          { label: "Properties", href: "/dashboard/vendor/properties", icon: <Building2 className="w-5 h-5" /> },
+          { label: "Room Types", href: "/dashboard/vendor/rooms", icon: <ClipboardList className="w-5 h-5" /> },
+          { label: "Bookings", href: "/dashboard/vendor/bookings", icon: <FileText className="w-5 h-5" /> },
+          { label: "Calendar", href: "/dashboard/vendor/calendar", icon: <CalendarCheck className="w-5 h-5" /> },
+          { label: "Revenue", href: "/dashboard/vendor/revenue", icon: <CreditCard className="w-5 h-5" /> },
+          { label: "Guests", href: "/dashboard/vendor/guests", icon: <Users className="w-5 h-5" /> },
+          { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-5 h-5" /> },
         ];
       default: // tenant
         return [
