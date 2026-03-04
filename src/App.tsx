@@ -41,6 +41,10 @@ import VendorGuests from "./pages/dashboard/vendor/VendorGuests";
 import VendorManagement from "./pages/dashboard/admin/VendorManagement";
 import PlatformAnalytics from "./pages/dashboard/admin/PlatformAnalytics";
 import CommissionManagement from "./pages/dashboard/admin/CommissionManagement";
+import AdminBookingsPage from "./pages/dashboard/admin/AdminBookingsPage";
+import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
+import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
+import GuestPaymentHistoryPage from "./pages/dashboard/GuestPaymentHistoryPage";
 
 const queryClient = new QueryClient();
 
@@ -87,6 +91,10 @@ const AppRoutes = () => (
     <Route path="/dashboard/admin/vendors" element={<ProtectedRoute><DashboardLayout><VendorManagement /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/admin/analytics" element={<ProtectedRoute><DashboardLayout><PlatformAnalytics /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/admin/commissions" element={<ProtectedRoute><DashboardLayout><CommissionManagement /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/admin/bookings" element={<ProtectedRoute><DashboardLayout><AdminBookingsPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/guest-bookings" element={<ProtectedRoute><DashboardLayout><GuestBookingsPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/saved" element={<ProtectedRoute><DashboardLayout><SavedPropertiesPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/guest-payments" element={<ProtectedRoute><DashboardLayout><GuestPaymentHistoryPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );

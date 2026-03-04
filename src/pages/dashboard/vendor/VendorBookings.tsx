@@ -30,14 +30,7 @@ const VendorBookings = () => {
 
   useEffect(() => { fetchData(); }, [user, filter]);
 
-  const updateStatus = async (id: string, status: string) => {
-    const update: any = { status };
-    if (status === "confirmed") update.approved_at = new Date().toISOString();
-    if (status === "cancelled") update.cancelled_at = new Date().toISOString();
-    await supabase.from("accommodation_bookings").update(update).eq("id", id);
-    toast({ title: `Booking ${status}` });
-    fetchData();
-  };
+  // Vendors can no longer approve bookings - only Admin can
 
   const exportCSV = () => {
     const headers = ["Ref", "Guest", "Check-in", "Check-out", "Nights", "Total", "Commission", "Status"];
@@ -52,6 +45,10 @@ const VendorBookings = () => {
 
   const statusColor = (s: string) => {
     switch (s) { case "confirmed": return "bg-primary/10 text-primary"; case "completed": return "bg-primary/10 text-primary"; case "cancelled": return "bg-destructive/10 text-destructive"; case "no_show": return "bg-destructive/10 text-destructive"; default: return "bg-accent/10 text-accent"; }
+  };
+
+  const statusLabel = (s: string) => {
+    switch (s) { case "pending": return "Pending Payment Approval"; case "confirmed": return "Confirmed"; case "completed": return "Completed"; case "cancelled": return "Cancelled"; default: return s; }
   };
 
   if (!vendor) return <div className="text-center py-20 text-muted-foreground">Register as a vendor first.</div>;
@@ -72,7 +69,7 @@ const VendorBookings = () => {
           <SelectTrigger className="w-40"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Status</SelectItem>
-            <SelectItem value="pending">Pending</SelectItem>
+            <SelectItem value="pending">Pending Approval</SelectItem>
             <SelectItem value="confirmed">Confirmed</SelectItem>
             <SelectItem value="completed">Completed</SelectItem>
             <SelectItem value="cancelled">Cancelled</SelectItem>
@@ -91,7 +88,7 @@ const VendorBookings = () => {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <p className="font-medium text-foreground">{b.guest_name}</p>
-                      <Badge className={statusColor(b.status)}>{b.status}</Badge>
+                      <Badge className={statusColor(b.status)}>{statusLabel(b.status)}</Badge>
                       <span className="text-xs text-muted-foreground">{b.booking_ref}</span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -101,10 +98,7 @@ const VendorBookings = () => {
                     {b.guest_email && <p className="text-xs text-muted-foreground">{b.guest_email} · {b.guest_phone}</p>}
                   </div>
                   {b.status === "pending" && (
-                    <div className="flex gap-2">
-                      <Button size="sm" onClick={() => updateStatus(b.id, "confirmed")}><Check className="w-4 h-4 mr-1" /> Approve</Button>
-                      <Button size="sm" variant="outline" onClick={() => updateStatus(b.id, "cancelled")} className="text-destructive"><X className="w-4 h-4 mr-1" /> Reject</Button>
-                    </div>
+                    <Badge className="bg-accent/10 text-accent text-xs">Admin approval required</Badge>
                   )}
                 </div>
               </CardContent>

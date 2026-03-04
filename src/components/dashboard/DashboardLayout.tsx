@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import {
   Home, Building2, Users, Wrench, MessageSquare, CreditCard,
   BarChart3, Settings, LogOut, Menu, X, FileText, ClipboardList,
-  Briefcase, ShoppingBag, CalendarCheck, PenSquare, Megaphone
+  Briefcase, ShoppingBag, CalendarCheck, PenSquare, Megaphone,
+  Heart, Star
 } from "lucide-react";
 import { useState } from "react";
 
@@ -45,11 +46,12 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         return [
           { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-5 h-5" /> },
           { label: "Platform Analytics", href: "/dashboard/admin/analytics", icon: <BarChart3 className="w-5 h-5" /> },
-          { label: "Vendors", href: "/dashboard/admin/vendors", icon: <Building2 className="w-5 h-5" /> },
+          { label: "Hotels & Apartments", href: "/dashboard/admin/vendors", icon: <Building2 className="w-5 h-5" /> },
+          { label: "Booking Approvals", href: "/dashboard/admin/bookings", icon: <CalendarCheck className="w-5 h-5" /> },
           { label: "Commissions", href: "/dashboard/admin/commissions", icon: <CreditCard className="w-5 h-5" /> },
           { label: "Users", href: "/dashboard/users", icon: <Users className="w-5 h-5" /> },
           { label: "Properties", href: "/dashboard/properties", icon: <Building2 className="w-5 h-5" /> },
-          { label: "Services", href: "/dashboard/services", icon: <Briefcase className="w-5 h-5" /> },
+          { label: "Service Providers", href: "/dashboard/services", icon: <Briefcase className="w-5 h-5" /> },
           { label: "Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-5 h-5" /> },
           { label: "Bookings", href: "/dashboard/bookings", icon: <FileText className="w-5 h-5" /> },
           { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-5 h-5" /> },
@@ -61,9 +63,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         return [
           { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-5 h-5" /> },
           { label: "My Services", href: "/dashboard/services", icon: <Briefcase className="w-5 h-5" /> },
-          { label: "Service Requests", href: "/dashboard/service-bookings", icon: <CalendarCheck className="w-5 h-5" /> },
+          { label: "Booking Requests", href: "/dashboard/service-bookings", icon: <CalendarCheck className="w-5 h-5" /> },
+          { label: "Revenue", href: "/dashboard/payments", icon: <CreditCard className="w-5 h-5" /> },
           { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-5 h-5" /> },
-          { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-5 h-5" /> },
         ];
       case "vendor":
         return [
@@ -74,19 +76,21 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "Calendar", href: "/dashboard/vendor/calendar", icon: <CalendarCheck className="w-5 h-5" /> },
           { label: "Revenue", href: "/dashboard/vendor/revenue", icon: <CreditCard className="w-5 h-5" /> },
           { label: "Guests", href: "/dashboard/vendor/guests", icon: <Users className="w-5 h-5" /> },
+          { label: "Browse Services", href: "/dashboard/browse-services", icon: <ShoppingBag className="w-5 h-5" /> },
           { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-5 h-5" /> },
         ];
-      default: // tenant
+      default: // tenant / guest
         return [
           { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-5 h-5" /> },
           { label: "Browse Properties", href: "/dashboard/browse", icon: <Building2 className="w-5 h-5" /> },
           { label: "Browse Services", href: "/dashboard/browse-services", icon: <ShoppingBag className="w-5 h-5" /> },
+          { label: "My Bookings", href: "/dashboard/guest-bookings", icon: <CalendarCheck className="w-5 h-5" /> },
+          { label: "Saved Properties", href: "/dashboard/saved", icon: <Heart className="w-5 h-5" /> },
           { label: "My Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-5 h-5" /> },
-          { label: "My Bookings", href: "/dashboard/bookings", icon: <FileText className="w-5 h-5" /> },
+          { label: "Rental Bookings", href: "/dashboard/bookings", icon: <FileText className="w-5 h-5" /> },
           { label: "Service Bookings", href: "/dashboard/service-bookings", icon: <CalendarCheck className="w-5 h-5" /> },
-          { label: "Maintenance", href: "/dashboard/maintenance", icon: <Wrench className="w-5 h-5" /> },
+          { label: "Payment History", href: "/dashboard/guest-payments", icon: <CreditCard className="w-5 h-5" /> },
           { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-5 h-5" /> },
-          { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-5 h-5" /> },
         ];
     }
   })();
