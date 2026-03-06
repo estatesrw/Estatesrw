@@ -5,6 +5,7 @@ import AdBanner from "@/components/home/AdBanner";
 import FeaturedProperties from "@/components/home/FeaturedProperties";
 import HowItWorks from "@/components/home/HowItWorks";
 import ServicesSection from "@/components/home/ServicesSection";
+import ProductShowcase from "@/components/home/ProductShowcase";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
 
@@ -17,6 +18,7 @@ const Index = () => {
         <AdBanner />
         <FeaturedProperties />
         <HowItWorks />
+        <ProductShowcase />
         <ServicesSection />
         <TestimonialsSection />
         <CTASection />
