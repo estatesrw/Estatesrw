@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Core brand colors - Deep Teal & Warm Tones */
+    /* Core brand - #004428 = HSL 155 100% 13% */
     --background: 40 33% 98%;
     --foreground: 200 25% 15%;
 
@@ -16,8 +16,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 200 25% 15%;
 
-    /* Deep Teal - Trust & Real Estate */
-    --primary: 168 55% 28%;
+    /* Brand Green #004428 */
+    --primary: 155 100% 13%;
     --primary-foreground: 0 0% 100%;
 
     /* Warm Cream */
@@ -34,28 +34,38 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 20% 88%;
+    --border: 40 20% 90%;
     --input: 40 20% 88%;
-    --ring: 168 55% 28%;
+    --ring: 155 100% 13%;
 
     --radius: 0.75rem;
 
+    /* Status colors */
+    --success: 155 70% 35%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 200 25% 15%;
+    --info: 210 80% 55%;
+    --info-foreground: 0 0% 100%;
+
     /* Custom tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(168 55% 28%) 0%, hsl(180 45% 22%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(155 100% 13%) 0%, hsl(155 80% 18%) 50%, hsl(160 60% 22%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(28 85% 55%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(40 30% 98%) 100%);
-    --shadow-card: 0 4px 20px -4px hsl(200 25% 15% / 0.08);
-    --shadow-card-hover: 0 12px 40px -8px hsl(200 25% 15% / 0.15);
-    --shadow-elevated: 0 20px 60px -15px hsl(200 25% 15% / 0.2);
+    --gradient-surface: linear-gradient(135deg, hsl(40 33% 98%) 0%, hsl(40 20% 96%) 100%);
+    --shadow-card: 0 1px 3px hsl(200 25% 15% / 0.06), 0 4px 16px hsl(200 25% 15% / 0.04);
+    --shadow-card-hover: 0 4px 12px hsl(200 25% 15% / 0.08), 0 12px 40px hsl(200 25% 15% / 0.06);
+    --shadow-elevated: 0 8px 30px -6px hsl(200 25% 15% / 0.12), 0 20px 60px -15px hsl(200 25% 15% / 0.08);
+    --shadow-soft: 0 2px 8px hsl(200 25% 15% / 0.04);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 168 55% 28%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 40 30% 94%;
-    --sidebar-accent-foreground: 200 25% 15%;
-    --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 168 55% 28%;
+    --sidebar-background: 155 100% 13%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 200 25% 15%;
+    --sidebar-accent: 155 80% 18%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 155 60% 18%;
+    --sidebar-ring: 38 92% 50%;
   }
 
   .dark {
@@ -68,8 +78,8 @@
     --popover: 200 25% 12%;
     --popover-foreground: 40 20% 95%;
 
-    --primary: 168 55% 45%;
-    --primary-foreground: 200 25% 8%;
+    --primary: 155 70% 35%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 200 20% 18%;
     --secondary-foreground: 40 20% 95%;
@@ -85,16 +95,23 @@
 
     --border: 200 20% 20%;
     --input: 200 20% 20%;
-    --ring: 168 55% 45%;
+    --ring: 155 70% 35%;
+
+    --success: 155 70% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 200 25% 8%;
+    --info: 210 80% 60%;
+    --info-foreground: 0 0% 100%;
 
     --sidebar-background: 200 25% 10%;
     --sidebar-foreground: 40 20% 95%;
-    --sidebar-primary: 168 55% 45%;
+    --sidebar-primary: 155 70% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 200 20% 18%;
     --sidebar-accent-foreground: 40 20% 95%;
     --sidebar-border: 200 20% 20%;
-    --sidebar-ring: 168 55% 45%;
+    --sidebar-ring: 155 70% 35%;
   }
 }
 
@@ -143,6 +160,10 @@
     background: var(--gradient-card);
   }
 
+  .bg-gradient-surface {
+    background: var(--gradient-surface);
+  }
+
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
@@ -153,6 +174,10 @@
 
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
   }
 
   .animate-float {
@@ -166,35 +191,28 @@
   .animate-scale-in {
     animation: scaleIn 0.4s ease-out forwards;
   }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.4s ease-out forwards;
+  }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
 }
