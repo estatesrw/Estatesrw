@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { ThemeProvider } from "next-themes";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -45,6 +46,7 @@ import AdminBookingsPage from "./pages/dashboard/admin/AdminBookingsPage";
 import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
 import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
 import GuestPaymentHistoryPage from "./pages/dashboard/GuestPaymentHistoryPage";
+import WithdrawalsPage from "./pages/dashboard/WithdrawalsPage";
 
 const queryClient = new QueryClient();
 
@@ -81,6 +83,7 @@ const AppRoutes = () => (
     <Route path="/dashboard/service-bookings" element={<ProtectedRoute><DashboardLayout><ServiceBookingsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/blog" element={<ProtectedRoute><DashboardLayout><BlogManagementPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/ads" element={<ProtectedRoute><DashboardLayout><AdsManagementPage /></DashboardLayout></ProtectedRoute>} />
+    <Route path="/dashboard/withdrawals" element={<ProtectedRoute><DashboardLayout><WithdrawalsPage /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/vendor/register" element={<ProtectedRoute><DashboardLayout><VendorRegister /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/vendor/properties" element={<ProtectedRoute><DashboardLayout><VendorProperties /></DashboardLayout></ProtectedRoute>} />
     <Route path="/dashboard/vendor/rooms" element={<ProtectedRoute><DashboardLayout><VendorRoomTypes /></DashboardLayout></ProtectedRoute>} />
@@ -101,17 +104,19 @@ const AppRoutes = () => (
 
 const App = () => (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AuthProvider>
-            <AppRoutes />
-          </AuthProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AuthProvider>
+              <AppRoutes />
+            </AuthProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   </HelmetProvider>
 );
 
