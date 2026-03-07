@@ -84,6 +84,7 @@ const VendorOverview = () => {
             <h2 className="font-display text-2xl font-bold text-foreground">Application Under Review</h2>
             <p className="text-muted-foreground text-sm">Your vendor application is being reviewed. You'll be notified once approved.</p>
             <Badge className="bg-warning/10 text-warning">Pending Approval</Badge>
+            <p className="text-xs text-muted-foreground">Note: New registrations are now auto-approved. If you see this, please contact support.</p>
           </CardContent>
         </Card>
       </div>

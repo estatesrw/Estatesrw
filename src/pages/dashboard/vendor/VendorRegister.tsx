@@ -31,10 +31,11 @@ const VendorRegister = () => {
     if (!user) return;
     setLoading(true);
 
-    // Insert vendor record
+    // Insert vendor record - auto-approved
     const { error } = await supabase.from("vendors").insert({
       user_id: user.id,
       ...form,
+      status: "approved",
     });
 
     if (error) {
@@ -42,7 +43,7 @@ const VendorRegister = () => {
     } else {
       // Also add vendor role
       await supabase.from("user_roles").insert({ user_id: user.id, role: "vendor" as any });
-      toast({ title: "Application submitted!", description: "Your vendor application is under review." });
+      toast({ title: "Registration complete!", description: "Your vendor account is now active. Start adding properties!" });
       navigate("/dashboard");
     }
     setLoading(false);
