@@ -4,12 +4,15 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Home, Building2, Users, Wrench, MessageSquare, CreditCard,
-  BarChart3, Settings, LogOut, Menu, X, FileText, ClipboardList,
+  BarChart3, LogOut, Menu, X, FileText, ClipboardList,
   Briefcase, ShoppingBag, CalendarCheck, PenSquare, Megaphone,
-  Heart, BedDouble, Calendar, ListChecks, DollarSign, Shield,
+  Heart, BedDouble, Calendar, DollarSign, Wallet,
   ChevronDown
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "@/components/ThemeToggle";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface NavGroup {
   label: string;
@@ -20,6 +23,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { user, roles, profile, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
 
@@ -43,26 +47,27 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       case "landlord":
         return [
           { label: "Main", items: [
-            { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
+            { label: t("dashboard.overview"), href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
-          { label: "Properties", items: [
-            { label: "My Properties", href: "/dashboard/properties", icon: <Building2 className="w-4 h-4" /> },
-            { label: "Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
-            { label: "Bookings", href: "/dashboard/bookings", icon: <FileText className="w-4 h-4" /> },
-            { label: "Maintenance", href: "/dashboard/maintenance", icon: <Wrench className="w-4 h-4" /> },
+          { label: t("dashboard.properties"), items: [
+            { label: t("dashboard.properties"), href: "/dashboard/properties", icon: <Building2 className="w-4 h-4" /> },
+            { label: t("dashboard.applications"), href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
+            { label: t("dashboard.bookings"), href: "/dashboard/bookings", icon: <FileText className="w-4 h-4" /> },
+            { label: t("dashboard.maintenance"), href: "/dashboard/maintenance", icon: <Wrench className="w-4 h-4" /> },
           ]},
-          { label: "Services", items: [
-            { label: "Browse Services", href: "/dashboard/browse-services", icon: <ShoppingBag className="w-4 h-4" /> },
+          { label: t("dashboard.services"), items: [
+            { label: t("dashboard.services"), href: "/dashboard/browse-services", icon: <ShoppingBag className="w-4 h-4" /> },
           ]},
           { label: "Finance", items: [
-            { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
-            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+            { label: t("dashboard.payments"), href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
+            { label: t("dashboard.withdrawals"), href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
+            { label: t("dashboard.messages"), href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
         ];
       case "admin":
         return [
           { label: "Dashboard", items: [
-            { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
+            { label: t("dashboard.overview"), href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
             { label: "Analytics", href: "/dashboard/admin/analytics", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
           { label: "Vendors", items: [
@@ -71,74 +76,77 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             { label: "Commissions", href: "/dashboard/admin/commissions", icon: <DollarSign className="w-4 h-4" /> },
           ]},
           { label: "Platform", items: [
-            { label: "Users", href: "/dashboard/users", icon: <Users className="w-4 h-4" /> },
-            { label: "Properties", href: "/dashboard/properties", icon: <Building2 className="w-4 h-4" /> },
+            { label: t("dashboard.users"), href: "/dashboard/users", icon: <Users className="w-4 h-4" /> },
+            { label: t("dashboard.properties"), href: "/dashboard/properties", icon: <Building2 className="w-4 h-4" /> },
             { label: "Service Providers", href: "/dashboard/services", icon: <Briefcase className="w-4 h-4" /> },
           ]},
           { label: "Operations", items: [
-            { label: "Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
-            { label: "Bookings", href: "/dashboard/bookings", icon: <FileText className="w-4 h-4" /> },
-            { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
+            { label: t("dashboard.applications"), href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
+            { label: t("dashboard.bookings"), href: "/dashboard/bookings", icon: <FileText className="w-4 h-4" /> },
+            { label: t("dashboard.payments"), href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
+            { label: t("dashboard.withdrawals"), href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
           ]},
           { label: "Content", items: [
             { label: "Blog", href: "/dashboard/blog", icon: <PenSquare className="w-4 h-4" /> },
             { label: "Advertisements", href: "/dashboard/ads", icon: <Megaphone className="w-4 h-4" /> },
-            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+            { label: t("dashboard.messages"), href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
         ];
       case "service_provider":
         return [
           { label: "Main", items: [
-            { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
+            { label: t("dashboard.overview"), href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
-          { label: "Services", items: [
+          { label: t("dashboard.services"), items: [
             { label: "My Services", href: "/dashboard/services", icon: <Briefcase className="w-4 h-4" /> },
             { label: "Booking Requests", href: "/dashboard/service-bookings", icon: <CalendarCheck className="w-4 h-4" /> },
           ]},
           { label: "Finance", items: [
-            { label: "Revenue", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
-            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+            { label: t("dashboard.revenue"), href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
+            { label: t("dashboard.withdrawals"), href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
+            { label: t("dashboard.messages"), href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
         ];
       case "vendor":
         return [
           { label: "Dashboard", items: [
-            { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
+            { label: t("dashboard.overview"), href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
           { label: "Property Management", items: [
-            { label: "Properties", href: "/dashboard/vendor/properties", icon: <Building2 className="w-4 h-4" /> },
+            { label: t("dashboard.properties"), href: "/dashboard/vendor/properties", icon: <Building2 className="w-4 h-4" /> },
             { label: "Units / Rooms", href: "/dashboard/vendor/rooms", icon: <BedDouble className="w-4 h-4" /> },
-            { label: "Bookings", href: "/dashboard/vendor/bookings", icon: <FileText className="w-4 h-4" /> },
-            { label: "Calendar", href: "/dashboard/vendor/calendar", icon: <Calendar className="w-4 h-4" /> },
-            { label: "Guests", href: "/dashboard/vendor/guests", icon: <Users className="w-4 h-4" /> },
+            { label: t("dashboard.bookings"), href: "/dashboard/vendor/bookings", icon: <FileText className="w-4 h-4" /> },
+            { label: t("dashboard.calendar"), href: "/dashboard/vendor/calendar", icon: <Calendar className="w-4 h-4" /> },
+            { label: t("dashboard.guests"), href: "/dashboard/vendor/guests", icon: <Users className="w-4 h-4" /> },
           ]},
           { label: "Finance", items: [
-            { label: "Revenue", href: "/dashboard/vendor/revenue", icon: <DollarSign className="w-4 h-4" /> },
+            { label: t("dashboard.revenue"), href: "/dashboard/vendor/revenue", icon: <DollarSign className="w-4 h-4" /> },
+            { label: t("dashboard.withdrawals"), href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
           ]},
-          { label: "Services", items: [
-            { label: "Browse Services", href: "/dashboard/browse-services", icon: <ShoppingBag className="w-4 h-4" /> },
-            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+          { label: t("dashboard.services"), items: [
+            { label: t("dashboard.services"), href: "/dashboard/browse-services", icon: <ShoppingBag className="w-4 h-4" /> },
+            { label: t("dashboard.messages"), href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
         ];
       default: // tenant / guest
         return [
           { label: "Main", items: [
-            { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
+            { label: t("dashboard.overview"), href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
           { label: "Accommodation", items: [
-            { label: "Browse Properties", href: "/dashboard/browse", icon: <Building2 className="w-4 h-4" /> },
-            { label: "My Bookings", href: "/dashboard/guest-bookings", icon: <CalendarCheck className="w-4 h-4" /> },
-            { label: "Saved Properties", href: "/dashboard/saved", icon: <Heart className="w-4 h-4" /> },
+            { label: t("dashboard.browseProperties"), href: "/dashboard/browse", icon: <Building2 className="w-4 h-4" /> },
+            { label: t("dashboard.bookings"), href: "/dashboard/guest-bookings", icon: <CalendarCheck className="w-4 h-4" /> },
+            { label: t("dashboard.savedProperties"), href: "/dashboard/saved", icon: <Heart className="w-4 h-4" /> },
           ]},
           { label: "Rentals", items: [
-            { label: "Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
+            { label: t("dashboard.applications"), href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
             { label: "Rental Bookings", href: "/dashboard/bookings", icon: <FileText className="w-4 h-4" /> },
           ]},
           { label: "Services & Payments", items: [
-            { label: "Browse Services", href: "/dashboard/browse-services", icon: <ShoppingBag className="w-4 h-4" /> },
+            { label: t("dashboard.services"), href: "/dashboard/browse-services", icon: <ShoppingBag className="w-4 h-4" /> },
             { label: "Service Bookings", href: "/dashboard/service-bookings", icon: <CalendarCheck className="w-4 h-4" /> },
-            { label: "Payment History", href: "/dashboard/guest-payments", icon: <CreditCard className="w-4 h-4" /> },
-            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+            { label: t("dashboard.paymentHistory"), href: "/dashboard/guest-payments", icon: <CreditCard className="w-4 h-4" /> },
+            { label: t("dashboard.messages"), href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
         ];
     }
@@ -156,7 +164,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Sidebar - Dark brand sidebar */}
+      {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-sidebar text-sidebar-foreground transform transition-transform duration-300 ease-out lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex flex-col h-full">
           {/* Logo */}
@@ -182,7 +190,6 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           <nav className="flex-1 px-3 py-3 overflow-y-auto space-y-4">
             {navGroups.map((group) => {
               const isCollapsed = collapsedGroups.has(group.label);
-              const hasActive = group.items.some(i => location.pathname === i.href);
               return (
                 <div key={group.label}>
                   <button
@@ -223,7 +230,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           <div className="px-3 py-3 border-t border-sidebar-border space-y-0.5">
             <button onClick={handleSignOut} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-sidebar-foreground/50 hover:bg-destructive/20 hover:text-destructive transition-all w-full">
               <LogOut className="w-4 h-4" />
-              Sign Out
+              {t("nav.signOut")}
             </button>
           </div>
         </div>
@@ -245,6 +252,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             </h1>
           </div>
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
             <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
               <span className="text-xs font-bold text-primary">{(profile?.full_name || user?.email || "U").charAt(0).toUpperCase()}</span>
             </div>

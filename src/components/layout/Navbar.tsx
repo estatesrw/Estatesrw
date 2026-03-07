@@ -3,17 +3,21 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Home } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "@/components/ThemeToggle";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const navLinks = [
-    { label: "Properties", href: "/dashboard/browse" },
-    { label: "Blog", href: "/blog" },
-    { label: "About", href: "/about-us" },
-    { label: "Contact", href: "/contact" },
+    { label: t("nav.properties"), href: "/dashboard/browse" },
+    { label: t("nav.blog"), href: "/blog" },
+    { label: t("nav.about"), href: "/about-us" },
+    { label: t("nav.contact"), href: "/contact" },
   ];
 
   const handleSignOut = async () => {
@@ -40,16 +44,18 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
             {user ? (
               <>
-                <Button variant="ghost" onClick={() => navigate("/dashboard")}>Dashboard</Button>
-                <Button variant="outline" onClick={handleSignOut}>Sign Out</Button>
+                <Button variant="ghost" onClick={() => navigate("/dashboard")}>{t("nav.dashboard")}</Button>
+                <Button variant="outline" onClick={handleSignOut}>{t("nav.signOut")}</Button>
               </>
             ) : (
               <>
-                <Button variant="ghost" onClick={() => navigate("/auth")}>Sign In</Button>
-                <Button variant="default" onClick={() => navigate("/auth")}>List Property</Button>
+                <Button variant="ghost" onClick={() => navigate("/auth")}>{t("nav.signIn")}</Button>
+                <Button variant="default" onClick={() => navigate("/auth")}>{t("nav.listProperty")}</Button>
               </>
             )}
           </div>
@@ -63,20 +69,24 @@ const Navbar = () => {
           <div className="md:hidden py-4 border-t border-border animate-fade-up">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <Link key={link.label} to={link.href} className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors">
+                <Link key={link.label} to={link.href} className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors" onClick={() => setIsOpen(false)}>
                   {link.label}
                 </Link>
               ))}
-              <div className="flex flex-col gap-2 mt-4 px-4">
+              <div className="flex items-center gap-2 px-4 py-2">
+                <LanguageSwitcher />
+                <ThemeToggle />
+              </div>
+              <div className="flex flex-col gap-2 mt-2 px-4">
                 {user ? (
                   <>
-                    <Button variant="outline" className="w-full" onClick={() => navigate("/dashboard")}>Dashboard</Button>
-                    <Button variant="default" className="w-full" onClick={handleSignOut}>Sign Out</Button>
+                    <Button variant="outline" className="w-full" onClick={() => { navigate("/dashboard"); setIsOpen(false); }}>{t("nav.dashboard")}</Button>
+                    <Button variant="default" className="w-full" onClick={handleSignOut}>{t("nav.signOut")}</Button>
                   </>
                 ) : (
                   <>
-                    <Button variant="outline" className="w-full" onClick={() => navigate("/auth")}>Sign In</Button>
-                    <Button variant="default" className="w-full" onClick={() => navigate("/auth")}>List Property</Button>
+                    <Button variant="outline" className="w-full" onClick={() => { navigate("/auth"); setIsOpen(false); }}>{t("nav.signIn")}</Button>
+                    <Button variant="default" className="w-full" onClick={() => { navigate("/auth"); setIsOpen(false); }}>{t("nav.listProperty")}</Button>
                   </>
                 )}
               </div>
