@@ -43,7 +43,7 @@ const VendorRegister = () => {
     } else {
       // Also add vendor role
       await supabase.from("user_roles").insert({ user_id: user.id, role: "vendor" as any });
-      toast({ title: "Registration complete!", description: "Your vendor account is now active. Start adding properties!" });
+      toast({ title: "Application submitted!", description: "Your vendor application is under review. You'll be notified once approved." });
       navigate("/dashboard");
     }
     setLoading(false);
