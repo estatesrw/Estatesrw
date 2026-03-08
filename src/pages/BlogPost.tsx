@@ -213,8 +213,8 @@ const BlogPost = () => {
               prose-li:mb-2
               prose-img:rounded-xl"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(renderContentWithAds(post.content), {
-              ALLOWED_TAGS: ['p','h2','h3','h4','h5','h6','ul','ol','li','strong','em','a','blockquote','img','ins','div','br','span'],
-              ALLOWED_ATTR: ['href','src','alt','class','style','data-ad-client','data-ad-slot','data-ad-format','data-full-width-responsive','target','rel','loading']
+              ALLOWED_TAGS: ['p','h2','h3','h4','h5','h6','ul','ol','li','strong','em','a','blockquote','img','ins','div','br','span','code','pre','video','iframe'],
+              ALLOWED_ATTR: ['href','src','alt','class','style','data-ad-client','data-ad-slot','data-ad-format','data-full-width-responsive','target','rel','loading','controls','frameborder','allowfullscreen','width','height']
             }) }}
           />
 

@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useEffect, useRef, useState } from "react";
 
 const Footer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    const handleCanPlay = () => {
+      setVideoLoaded(true);
+      video.play().catch(() => {});
+    };
+    
+    video.addEventListener("canplay", handleCanPlay);
+    return () => video.removeEventListener("canplay", handleCanPlay);
+  }, []);
+
   const footerLinks = {
     company: [
       { label: "About Us", href: "/about-us" },
@@ -19,23 +36,29 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-sidebar text-sidebar-foreground overflow-hidden">
-      {/* Background video */}
+      {/* Background video - aerial/city footage */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.1] pointer-events-none mix-blend-luminosity"
+        className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ${videoLoaded ? 'opacity-20' : 'opacity-0'}`}
       >
         <source
-          src="https://videos.pexels.com/video-files/3629519/3629519-sd_640_360_25fps.mp4"
+          src="https://cdn.coverr.co/videos/coverr-aerial-view-of-city-buildings-1573/1080p.mp4"
+          type="video/mp4"
+        />
+        {/* Fallback source */}
+        <source
+          src="https://static.videezy.com/system/resources/previews/000/044/601/original/SA_08.mp4"
           type="video/mp4"
         />
       </video>
 
-      {/* Dark overlay to keep text readable */}
-      <div className="absolute inset-0 bg-sidebar/80 pointer-events-none" />
+      {/* Overlay gradient for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sidebar/70 via-sidebar/80 to-sidebar/90 pointer-events-none" />
 
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
