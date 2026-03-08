@@ -69,7 +69,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                   <Link to={link.href} className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -79,7 +79,7 @@ const Footer = () => {
 
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3 text-primary-foreground/70">
+            <ul className="space-y-3 text-sidebar-foreground/70">
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
                 Kigali, Rwanda
