@@ -219,6 +219,36 @@ export type Database = {
           },
         ]
       }
+      agents: {
+        Row: {
+          bio: string | null
+          commission_rate: number
+          created_at: string
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       applications: {
         Row: {
           created_at: string
@@ -394,6 +424,51 @@ export type Database = {
             columns: ["property_id"]
             isOneToOne: false
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      calendar_availability: {
+        Row: {
+          booking_id: string | null
+          created_at: string
+          date: string
+          id: string
+          price_override: number | null
+          status: string
+          unit_id: string
+        }
+        Insert: {
+          booking_id?: string | null
+          created_at?: string
+          date: string
+          id?: string
+          price_override?: number | null
+          status?: string
+          unit_id: string
+        }
+        Update: {
+          booking_id?: string | null
+          created_at?: string
+          date?: string
+          id?: string
+          price_override?: number | null
+          status?: string
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_availability_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "accommodation_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calendar_availability_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "room_types"
             referencedColumns: ["id"]
           },
         ]
@@ -612,11 +687,14 @@ export type Database = {
           bathrooms: number | null
           bedrooms: number | null
           city: string
+          country: string
           created_at: string
           description: string | null
           id: string
           images: string[] | null
           landlord_id: string
+          latitude: number | null
+          longitude: number | null
           price: number
           property_type: string
           status: string
@@ -630,11 +708,14 @@ export type Database = {
           bathrooms?: number | null
           bedrooms?: number | null
           city: string
+          country?: string
           created_at?: string
           description?: string | null
           id?: string
           images?: string[] | null
           landlord_id: string
+          latitude?: number | null
+          longitude?: number | null
           price?: number
           property_type?: string
           status?: string
@@ -648,11 +729,14 @@ export type Database = {
           bathrooms?: number | null
           bedrooms?: number | null
           city?: string
+          country?: string
           created_at?: string
           description?: string | null
           id?: string
           images?: string[] | null
           landlord_id?: string
+          latitude?: number | null
+          longitude?: number | null
           price?: number
           property_type?: string
           status?: string
@@ -660,6 +744,41 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      property_images: {
+        Row: {
+          caption: string | null
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          property_id: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          property_id: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          property_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_images_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       reviews: {
         Row: {
@@ -920,6 +1039,41 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      unit_images: {
+        Row: {
+          caption: string | null
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          unit_id: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          unit_id: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_images_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "room_types"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
