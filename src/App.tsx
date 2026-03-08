@@ -47,6 +47,7 @@ import AdminBookingsPage from "./pages/dashboard/admin/AdminBookingsPage";
 import AdminAgents from "./pages/dashboard/admin/AdminAgents";
 import AgentReferrals from "./pages/dashboard/agent/AgentReferrals";
 import AgentCommissions from "./pages/dashboard/agent/AgentCommissions";
+import BrowseAccommodationPage from "./pages/dashboard/BrowseAccommodationPage";
 import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
 import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
 import GuestPaymentHistoryPage from "./pages/dashboard/GuestPaymentHistoryPage";
@@ -89,6 +90,7 @@ const AppRoutes = () => (
     <Route path="/dashboard/browse-services" element={<DashboardRoute><BrowseServicesPage /></DashboardRoute>} />
 
     {/* Guest */}
+    <Route path="/dashboard/accommodation" element={<DashboardRoute><BrowseAccommodationPage /></DashboardRoute>} />
     <Route path="/dashboard/guest-bookings" element={<DashboardRoute><GuestBookingsPage /></DashboardRoute>} />
     <Route path="/dashboard/saved" element={<DashboardRoute><SavedPropertiesPage /></DashboardRoute>} />
     <Route path="/dashboard/guest-payments" element={<DashboardRoute><GuestPaymentHistoryPage /></DashboardRoute>} />
