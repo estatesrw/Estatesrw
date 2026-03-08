@@ -60,7 +60,7 @@ const Auth = () => {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center mb-8">
-          <img src={logo} alt="EstatesRW Logo" className="h-14 w-auto object-contain md:h-16" />
+          <img src={logo} alt="EstatesRW Logo" className="h-14 w-auto object-contain md:h-16 dark:brightness-0 dark:invert" />
         </div>
 
         <Card className="shadow-elevated border-border">
