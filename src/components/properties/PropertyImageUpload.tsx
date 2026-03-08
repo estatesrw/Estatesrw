@@ -10,25 +10,31 @@ interface PropertyImageUploadProps {
   userId: string;
   images: string[];
   onChange: (images: string[]) => void;
+  bucket?: string;
+  accept?: string;
+  label?: string;
+  maxSizeMB?: number;
 }
 
-const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadProps) => {
+const PropertyImageUpload = ({ userId, images, onChange, bucket = "property-images", accept = "image/*,video/*", label = "Property Images & Videos", maxSizeMB = 20 }: PropertyImageUploadProps) => {
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const isVideo = (url: string) => /\.(mp4|webm|mov|avi|mkv)(\?|$)/i.test(url);
 
   const uploadFile = async (file: File) => {
     const fileExt = file.name.split(".").pop();
     const filePath = `${userId}/${crypto.randomUUID()}.${fileExt}`;
 
     const { error } = await supabase.storage
-      .from("property-images")
+      .from(bucket)
       .upload(filePath, file);
 
     if (error) throw error;
 
     const { data: urlData } = supabase.storage
-      .from("property-images")
+      .from(bucket)
       .getPublicUrl(filePath);
 
     return urlData.publicUrl;
@@ -42,15 +48,20 @@ const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadPr
     try {
       const newUrls: string[] = [];
       for (const file of Array.from(files)) {
-        if (file.size > 5 * 1024 * 1024) {
-          toast({ title: "File too large", description: `${file.name} exceeds 5MB limit`, variant: "destructive" });
+        if (file.size > maxSizeMB * 1024 * 1024) {
+          toast({ title: "File too large", description: `${file.name} exceeds ${maxSizeMB}MB limit`, variant: "destructive" });
           continue;
         }
         const url = await uploadFile(file);
         newUrls.push(url);
       }
       onChange([...images, ...newUrls]);
-      toast({ title: `${newUrls.length} image(s) uploaded` });
+      const videoCount = newUrls.filter(isVideo).length;
+      const imageCount = newUrls.length - videoCount;
+      const parts = [];
+      if (imageCount > 0) parts.push(`${imageCount} image(s)`);
+      if (videoCount > 0) parts.push(`${videoCount} video(s)`);
+      toast({ title: `${parts.join(" and ")} uploaded` });
     } catch (error: any) {
       toast({ title: "Upload failed", description: error.message, variant: "destructive" });
     } finally {
@@ -65,12 +76,16 @@ const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadPr
 
   return (
     <div className="space-y-3">
-      <Label>Property Images</Label>
+      <Label>{label}</Label>
       {images.length > 0 && (
         <div className="grid grid-cols-3 gap-2">
           {images.map((url, i) => (
             <div key={i} className="relative group aspect-video rounded-md overflow-hidden border border-border">
-              <img src={url} alt={`Property ${i + 1}`} className="w-full h-full object-cover" />
+              {isVideo(url) ? (
+                <video src={url} className="w-full h-full object-cover" muted />
+              ) : (
+                <img src={url} alt={`Upload ${i + 1}`} className="w-full h-full object-cover" />
+              )}
               <button
                 type="button"
                 onClick={() => removeImage(i)}
@@ -86,7 +101,7 @@ const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadPr
         <Input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept={accept}
           multiple
           onChange={handleUpload}
           className="hidden"
@@ -99,7 +114,7 @@ const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadPr
           onClick={() => fileInputRef.current?.click()}
         >
           {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
-          {uploading ? "Uploading..." : "Upload Images"}
+          {uploading ? "Uploading..." : "Upload Images & Videos"}
         </Button>
       </div>
     </div>

@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus, Pencil, Trash2, Star, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import PropertyImageUpload from "@/components/properties/PropertyImageUpload";
 
 const categories = [
   { value: "property_management", label: "Property Management" },
@@ -33,7 +34,7 @@ const ServicesPage = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({
-    title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "",
+    title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "", uploadedMedia: [] as string[],
   });
 
   const fetchServices = async () => {
@@ -46,13 +47,15 @@ const ServicesPage = () => {
   useEffect(() => { if (user) fetchServices(); }, [user]);
 
   const resetForm = () => {
-    setForm({ title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "" });
+    setForm({ title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "", uploadedMedia: [] });
     setEditingId(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...form, price: Number(form.price), provider_id: user!.id };
+    const mainImage = form.uploadedMedia.length > 0 ? form.uploadedMedia[0] : form.image_url;
+    const { uploadedMedia, ...rest } = form;
+    const payload = { ...rest, price: Number(form.price), provider_id: user!.id, image_url: mainImage };
     let error;
     if (editingId) {
       ({ error } = await supabase.from("services").update(payload).eq("id", editingId));
@@ -72,7 +75,7 @@ const ServicesPage = () => {
   const handleEdit = (s: any) => {
     setForm({
       title: s.title, description: s.description || "", category: s.category,
-      price: String(s.price), price_type: s.price_type, city: s.city, image_url: s.image_url || "",
+      price: String(s.price), price_type: s.price_type, city: s.city, image_url: s.image_url || "", uploadedMedia: s.image_url ? [s.image_url] : [],
     });
     setEditingId(s.id);
     setDialogOpen(true);
@@ -142,8 +145,15 @@ const ServicesPage = () => {
                     <Input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} required />
                   </div>
                 </div>
+                <PropertyImageUpload
+                  userId={user!.id}
+                  images={form.uploadedMedia}
+                  onChange={(media) => setForm({ ...form, uploadedMedia: media })}
+                  bucket="media"
+                  label="Service Images & Videos"
+                />
                 <div className="space-y-2">
-                  <Label>Image URL (optional)</Label>
+                  <Label>Or paste Image URL</Label>
                   <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://..." />
                 </div>
                 <Button type="submit" className="w-full">{editingId ? "Update" : "Add"} Service</Button>
