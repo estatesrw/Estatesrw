@@ -90,6 +90,7 @@ const AppRoutes = () => (
     <Route path="/dashboard/browse-services" element={<DashboardRoute><BrowseServicesPage /></DashboardRoute>} />
 
     {/* Guest */}
+    <Route path="/dashboard/accommodation" element={<DashboardRoute><BrowseAccommodationPage /></DashboardRoute>} />
     <Route path="/dashboard/guest-bookings" element={<DashboardRoute><GuestBookingsPage /></DashboardRoute>} />
     <Route path="/dashboard/saved" element={<DashboardRoute><SavedPropertiesPage /></DashboardRoute>} />
     <Route path="/dashboard/guest-payments" element={<DashboardRoute><GuestPaymentHistoryPage /></DashboardRoute>} />
