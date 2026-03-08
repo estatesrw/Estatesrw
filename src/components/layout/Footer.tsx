@@ -29,11 +29,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Home className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="font-display text-xl font-bold">EstatesRW</span>
+            <div className="mb-6">
+              <img src={logo} alt="EstatesRW Logo" className="h-14 w-auto object-contain brightness-0 invert" />
             </div>
             <p className="text-sidebar-foreground/70 mb-6 max-w-sm">
               Rwanda's premier property management platform. Find your perfect home, list your property, or discover professional services.
