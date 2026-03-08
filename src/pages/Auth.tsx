@@ -8,8 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Home, Mail, Lock, User, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
-type AppRole = "tenant" | "landlord" | "service_provider" | "vendor";
+type AppRole = "tenant" | "landlord" | "vendor" | "service_provider" | "agent";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,6 +22,7 @@ const Auth = () => {
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,16 +47,16 @@ const Auth = () => {
   };
 
   const roles: { value: AppRole; label: string; desc: string }[] = [
-    { value: "tenant", label: "Tenant / Guest", desc: "Browse & book accommodations" },
+    { value: "tenant", label: "Guest", desc: "Search & request accommodation bookings" },
+    { value: "vendor", label: "Property Vendor", desc: "Hotels, apartments, guesthouses" },
     { value: "landlord", label: "Landlord", desc: "List & manage rental properties" },
-    { value: "vendor", label: "Vendor", desc: "Hotel, apartment or guesthouse owner" },
-    { value: "service_provider", label: "Service Provider", desc: "Offer property services" },
+    { value: "service_provider", label: "Service Provider", desc: "Cleaning, maintenance, photography" },
+    { value: "agent", label: "Referral Agent", desc: "Refer guests & earn commissions" },
   ];
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-8">
           <div className="w-12 h-12 rounded-xl bg-gradient-hero flex items-center justify-center">
             <Home className="w-6 h-6 text-primary-foreground" />

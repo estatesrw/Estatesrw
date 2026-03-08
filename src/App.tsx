@@ -39,10 +39,14 @@ import VendorBookings from "./pages/dashboard/vendor/VendorBookings";
 import VendorCalendar from "./pages/dashboard/vendor/VendorCalendar";
 import VendorRevenue from "./pages/dashboard/vendor/VendorRevenue";
 import VendorGuests from "./pages/dashboard/vendor/VendorGuests";
+import VendorChannels from "./pages/dashboard/vendor/VendorChannels";
 import VendorManagement from "./pages/dashboard/admin/VendorManagement";
 import PlatformAnalytics from "./pages/dashboard/admin/PlatformAnalytics";
 import CommissionManagement from "./pages/dashboard/admin/CommissionManagement";
 import AdminBookingsPage from "./pages/dashboard/admin/AdminBookingsPage";
+import AdminAgents from "./pages/dashboard/admin/AdminAgents";
+import AgentReferrals from "./pages/dashboard/agent/AgentReferrals";
+import AgentCommissions from "./pages/dashboard/agent/AgentCommissions";
 import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
 import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
 import GuestPaymentHistoryPage from "./pages/dashboard/GuestPaymentHistoryPage";
@@ -57,8 +61,13 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
+const DashboardRoute = ({ children }: { children: React.ReactNode }) => (
+  <ProtectedRoute><DashboardLayout>{children}</DashboardLayout></ProtectedRoute>
+);
+
 const AppRoutes = () => (
   <Routes>
+    {/* Public */}
     <Route path="/" element={<Index />} />
     <Route path="/auth" element={<Auth />} />
     <Route path="/privacy" element={<PrivacyPolicy />} />
@@ -68,36 +77,55 @@ const AppRoutes = () => (
     <Route path="/contact" element={<Contact />} />
     <Route path="/blog" element={<Blog />} />
     <Route path="/blog/:slug" element={<BlogPost />} />
-    <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout><DashboardOverview /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/properties" element={<ProtectedRoute><DashboardLayout><PropertiesPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/browse" element={<ProtectedRoute><DashboardLayout><BrowseProperties /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/property/:id" element={<ProtectedRoute><DashboardLayout><PropertyDetailsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/applications" element={<ProtectedRoute><DashboardLayout><ApplicationsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/bookings" element={<ProtectedRoute><DashboardLayout><BookingsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/maintenance" element={<ProtectedRoute><DashboardLayout><MaintenancePage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/messages" element={<ProtectedRoute><DashboardLayout><MessagesPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/payments" element={<ProtectedRoute><DashboardLayout><PaymentsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/users" element={<ProtectedRoute><DashboardLayout><UsersPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/services" element={<ProtectedRoute><DashboardLayout><ServicesPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/browse-services" element={<ProtectedRoute><DashboardLayout><BrowseServicesPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/service-bookings" element={<ProtectedRoute><DashboardLayout><ServiceBookingsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/blog" element={<ProtectedRoute><DashboardLayout><BlogManagementPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/ads" element={<ProtectedRoute><DashboardLayout><AdsManagementPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/withdrawals" element={<ProtectedRoute><DashboardLayout><WithdrawalsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/register" element={<ProtectedRoute><DashboardLayout><VendorRegister /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/properties" element={<ProtectedRoute><DashboardLayout><VendorProperties /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/rooms" element={<ProtectedRoute><DashboardLayout><VendorRoomTypes /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/bookings" element={<ProtectedRoute><DashboardLayout><VendorBookings /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/calendar" element={<ProtectedRoute><DashboardLayout><VendorCalendar /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/revenue" element={<ProtectedRoute><DashboardLayout><VendorRevenue /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/vendor/guests" element={<ProtectedRoute><DashboardLayout><VendorGuests /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/admin/vendors" element={<ProtectedRoute><DashboardLayout><VendorManagement /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/admin/analytics" element={<ProtectedRoute><DashboardLayout><PlatformAnalytics /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/admin/commissions" element={<ProtectedRoute><DashboardLayout><CommissionManagement /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/admin/bookings" element={<ProtectedRoute><DashboardLayout><AdminBookingsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/guest-bookings" element={<ProtectedRoute><DashboardLayout><GuestBookingsPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/saved" element={<ProtectedRoute><DashboardLayout><SavedPropertiesPage /></DashboardLayout></ProtectedRoute>} />
-    <Route path="/dashboard/guest-payments" element={<ProtectedRoute><DashboardLayout><GuestPaymentHistoryPage /></DashboardLayout></ProtectedRoute>} />
+
+    {/* Dashboard - Shared */}
+    <Route path="/dashboard" element={<DashboardRoute><DashboardOverview /></DashboardRoute>} />
+    <Route path="/dashboard/messages" element={<DashboardRoute><MessagesPage /></DashboardRoute>} />
+    <Route path="/dashboard/withdrawals" element={<DashboardRoute><WithdrawalsPage /></DashboardRoute>} />
+
+    {/* Marketplace / Browse */}
+    <Route path="/dashboard/browse" element={<DashboardRoute><BrowseProperties /></DashboardRoute>} />
+    <Route path="/dashboard/property/:id" element={<DashboardRoute><PropertyDetailsPage /></DashboardRoute>} />
+    <Route path="/dashboard/browse-services" element={<DashboardRoute><BrowseServicesPage /></DashboardRoute>} />
+
+    {/* Guest */}
+    <Route path="/dashboard/guest-bookings" element={<DashboardRoute><GuestBookingsPage /></DashboardRoute>} />
+    <Route path="/dashboard/saved" element={<DashboardRoute><SavedPropertiesPage /></DashboardRoute>} />
+    <Route path="/dashboard/guest-payments" element={<DashboardRoute><GuestPaymentHistoryPage /></DashboardRoute>} />
+    <Route path="/dashboard/service-bookings" element={<DashboardRoute><ServiceBookingsPage /></DashboardRoute>} />
+
+    {/* Landlord */}
+    <Route path="/dashboard/properties" element={<DashboardRoute><PropertiesPage /></DashboardRoute>} />
+    <Route path="/dashboard/applications" element={<DashboardRoute><ApplicationsPage /></DashboardRoute>} />
+    <Route path="/dashboard/bookings" element={<DashboardRoute><BookingsPage /></DashboardRoute>} />
+    <Route path="/dashboard/maintenance" element={<DashboardRoute><MaintenancePage /></DashboardRoute>} />
+    <Route path="/dashboard/payments" element={<DashboardRoute><PaymentsPage /></DashboardRoute>} />
+
+    {/* Vendor */}
+    <Route path="/dashboard/vendor/register" element={<DashboardRoute><VendorRegister /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/properties" element={<DashboardRoute><VendorProperties /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/rooms" element={<DashboardRoute><VendorRoomTypes /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/bookings" element={<DashboardRoute><VendorBookings /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/calendar" element={<DashboardRoute><VendorCalendar /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/revenue" element={<DashboardRoute><VendorRevenue /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/guests" element={<DashboardRoute><VendorGuests /></DashboardRoute>} />
+    <Route path="/dashboard/vendor/channels" element={<DashboardRoute><VendorChannels /></DashboardRoute>} />
+
+    {/* Agent */}
+    <Route path="/dashboard/agent/referrals" element={<DashboardRoute><AgentReferrals /></DashboardRoute>} />
+    <Route path="/dashboard/agent/commissions" element={<DashboardRoute><AgentCommissions /></DashboardRoute>} />
+
+    {/* Admin */}
+    <Route path="/dashboard/users" element={<DashboardRoute><UsersPage /></DashboardRoute>} />
+    <Route path="/dashboard/services" element={<DashboardRoute><ServicesPage /></DashboardRoute>} />
+    <Route path="/dashboard/admin/vendors" element={<DashboardRoute><VendorManagement /></DashboardRoute>} />
+    <Route path="/dashboard/admin/analytics" element={<DashboardRoute><PlatformAnalytics /></DashboardRoute>} />
+    <Route path="/dashboard/admin/commissions" element={<DashboardRoute><CommissionManagement /></DashboardRoute>} />
+    <Route path="/dashboard/admin/bookings" element={<DashboardRoute><AdminBookingsPage /></DashboardRoute>} />
+    <Route path="/dashboard/admin/agents" element={<DashboardRoute><AdminAgents /></DashboardRoute>} />
+    <Route path="/dashboard/blog" element={<DashboardRoute><BlogManagementPage /></DashboardRoute>} />
+    <Route path="/dashboard/ads" element={<DashboardRoute><AdsManagementPage /></DashboardRoute>} />
+
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
