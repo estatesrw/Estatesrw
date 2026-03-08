@@ -76,12 +76,16 @@ const PropertyImageUpload = ({ userId, images, onChange, bucket = "property-imag
 
   return (
     <div className="space-y-3">
-      <Label>Property Images</Label>
+      <Label>{label}</Label>
       {images.length > 0 && (
         <div className="grid grid-cols-3 gap-2">
           {images.map((url, i) => (
             <div key={i} className="relative group aspect-video rounded-md overflow-hidden border border-border">
-              <img src={url} alt={`Property ${i + 1}`} className="w-full h-full object-cover" />
+              {isVideo(url) ? (
+                <video src={url} className="w-full h-full object-cover" muted />
+              ) : (
+                <img src={url} alt={`Upload ${i + 1}`} className="w-full h-full object-cover" />
+              )}
               <button
                 type="button"
                 onClick={() => removeImage(i)}
@@ -97,7 +101,7 @@ const PropertyImageUpload = ({ userId, images, onChange, bucket = "property-imag
         <Input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept={accept}
           multiple
           onChange={handleUpload}
           className="hidden"
@@ -110,7 +114,7 @@ const PropertyImageUpload = ({ userId, images, onChange, bucket = "property-imag
           onClick={() => fileInputRef.current?.click()}
         >
           {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
-          {uploading ? "Uploading..." : "Upload Images"}
+          {uploading ? "Uploading..." : "Upload Images & Videos"}
         </Button>
       </div>
     </div>
