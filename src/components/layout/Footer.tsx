@@ -25,10 +25,11 @@ const Footer = () => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.08] pointer-events-none"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.1] pointer-events-none mix-blend-luminosity"
       >
         <source
-          src="https://videos.pexels.com/video-files/5765298/5765298-uhd_2560_1440_30fps.mp4"
+          src="https://videos.pexels.com/video-files/3629519/3629519-sd_640_360_25fps.mp4"
           type="video/mp4"
         />
       </video>
