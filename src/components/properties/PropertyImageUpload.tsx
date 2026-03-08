@@ -10,25 +10,31 @@ interface PropertyImageUploadProps {
   userId: string;
   images: string[];
   onChange: (images: string[]) => void;
+  bucket?: string;
+  accept?: string;
+  label?: string;
+  maxSizeMB?: number;
 }
 
-const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadProps) => {
+const PropertyImageUpload = ({ userId, images, onChange, bucket = "property-images", accept = "image/*,video/*", label = "Property Images & Videos", maxSizeMB = 20 }: PropertyImageUploadProps) => {
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const isVideo = (url: string) => /\.(mp4|webm|mov|avi|mkv)(\?|$)/i.test(url);
 
   const uploadFile = async (file: File) => {
     const fileExt = file.name.split(".").pop();
     const filePath = `${userId}/${crypto.randomUUID()}.${fileExt}`;
 
     const { error } = await supabase.storage
-      .from("property-images")
+      .from(bucket)
       .upload(filePath, file);
 
     if (error) throw error;
 
     const { data: urlData } = supabase.storage
-      .from("property-images")
+      .from(bucket)
       .getPublicUrl(filePath);
 
     return urlData.publicUrl;
@@ -42,15 +48,20 @@ const PropertyImageUpload = ({ userId, images, onChange }: PropertyImageUploadPr
     try {
       const newUrls: string[] = [];
       for (const file of Array.from(files)) {
-        if (file.size > 5 * 1024 * 1024) {
-          toast({ title: "File too large", description: `${file.name} exceeds 5MB limit`, variant: "destructive" });
+        if (file.size > maxSizeMB * 1024 * 1024) {
+          toast({ title: "File too large", description: `${file.name} exceeds ${maxSizeMB}MB limit`, variant: "destructive" });
           continue;
         }
         const url = await uploadFile(file);
         newUrls.push(url);
       }
       onChange([...images, ...newUrls]);
-      toast({ title: `${newUrls.length} image(s) uploaded` });
+      const videoCount = newUrls.filter(isVideo).length;
+      const imageCount = newUrls.length - videoCount;
+      const parts = [];
+      if (imageCount > 0) parts.push(`${imageCount} image(s)`);
+      if (videoCount > 0) parts.push(`${videoCount} video(s)`);
+      toast({ title: `${parts.join(" and ")} uploaded` });
     } catch (error: any) {
       toast({ title: "Upload failed", description: error.message, variant: "destructive" });
     } finally {
