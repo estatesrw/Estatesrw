@@ -47,7 +47,7 @@ const ServicesPage = () => {
   useEffect(() => { if (user) fetchServices(); }, [user]);
 
   const resetForm = () => {
-    setForm({ title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "" });
+    setForm({ title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "", uploadedMedia: [] });
     setEditingId(null);
   };
 
