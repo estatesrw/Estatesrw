@@ -53,7 +53,9 @@ const ServicesPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...form, price: Number(form.price), provider_id: user!.id };
+    const mainImage = form.uploadedMedia.length > 0 ? form.uploadedMedia[0] : form.image_url;
+    const { uploadedMedia, ...rest } = form;
+    const payload = { ...rest, price: Number(form.price), provider_id: user!.id, image_url: mainImage };
     let error;
     if (editingId) {
       ({ error } = await supabase.from("services").update(payload).eq("id", editingId));
