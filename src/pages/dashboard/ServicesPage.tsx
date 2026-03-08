@@ -73,7 +73,7 @@ const ServicesPage = () => {
   const handleEdit = (s: any) => {
     setForm({
       title: s.title, description: s.description || "", category: s.category,
-      price: String(s.price), price_type: s.price_type, city: s.city, image_url: s.image_url || "",
+      price: String(s.price), price_type: s.price_type, city: s.city, image_url: s.image_url || "", uploadedMedia: s.image_url ? [s.image_url] : [],
     });
     setEditingId(s.id);
     setDialogOpen(true);
