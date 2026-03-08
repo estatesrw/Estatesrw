@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import DOMPurify from "dompurify";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Calendar, User, ArrowLeft, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
