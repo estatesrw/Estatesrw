@@ -23,7 +23,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-foreground text-primary-foreground">
+    <footer className="bg-sidebar-background text-sidebar-foreground">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Column */}
@@ -34,7 +34,7 @@ const Footer = () => {
               </div>
               <span className="font-display text-xl font-bold">EstatesRW</span>
             </div>
-            <p className="text-primary-foreground/70 mb-6 max-w-sm">
+            <p className="text-sidebar-foreground/70 mb-6 max-w-sm">
               Rwanda's premier property management platform. Find your perfect home, list your property, or discover professional services.
             </p>
             <div className="flex gap-4">
@@ -42,7 +42,7 @@ const Footer = () => {
                 <a
                   key={i}
                   href="#"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors"
+                  className="w-10 h-10 rounded-full bg-sidebar-foreground/10 flex items-center justify-center hover:bg-sidebar-accent transition-colors"
                 >
                   <Icon className="w-5 h-5" />
                 </a>
@@ -56,7 +56,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                   <Link to={link.href} className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -69,7 +69,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                   <Link to={link.href} className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -79,7 +79,7 @@ const Footer = () => {
 
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-3 text-primary-foreground/70">
+            <ul className="space-y-3 text-sidebar-foreground/70">
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
                 Kigali, Rwanda
@@ -96,7 +96,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center text-primary-foreground/50 text-sm">
+        <div className="border-t border-sidebar-foreground/10 mt-12 pt-8 text-center text-sidebar-foreground/50 text-sm">
           <p>© {new Date().getFullYear()} EstatesRW. All rights reserved.</p>
         </div>
       </div>
