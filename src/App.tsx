@@ -47,6 +47,7 @@ import AdminBookingsPage from "./pages/dashboard/admin/AdminBookingsPage";
 import AdminAgents from "./pages/dashboard/admin/AdminAgents";
 import AgentReferrals from "./pages/dashboard/agent/AgentReferrals";
 import AgentCommissions from "./pages/dashboard/agent/AgentCommissions";
+import BrowseAccommodationPage from "./pages/dashboard/BrowseAccommodationPage";
 import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
 import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
 import GuestPaymentHistoryPage from "./pages/dashboard/GuestPaymentHistoryPage";
