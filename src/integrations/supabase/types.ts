@@ -156,6 +156,69 @@ export type Database = {
         }
         Relationships: []
       }
+      agent_referrals: {
+        Row: {
+          agent_id: string
+          booking_id: string | null
+          commission_amount: number
+          commission_rate: number
+          created_at: string
+          guest_email: string | null
+          guest_name: string
+          guest_phone: string | null
+          id: string
+          notes: string | null
+          property_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          agent_id: string
+          booking_id?: string | null
+          commission_amount?: number
+          commission_rate?: number
+          created_at?: string
+          guest_email?: string | null
+          guest_name: string
+          guest_phone?: string | null
+          id?: string
+          notes?: string | null
+          property_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          agent_id?: string
+          booking_id?: string | null
+          commission_amount?: number
+          commission_rate?: number
+          created_at?: string
+          guest_email?: string | null
+          guest_name?: string
+          guest_phone?: string | null
+          id?: string
+          notes?: string | null
+          property_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_referrals_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "accommodation_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agent_referrals_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       applications: {
         Row: {
           created_at: string
@@ -331,6 +394,67 @@ export type Database = {
             columns: ["property_id"]
             isOneToOne: false
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      channel_links: {
+        Row: {
+          created_at: string
+          ical_url: string
+          id: string
+          last_synced_at: string | null
+          platform: string
+          property_id: string
+          room_type_id: string | null
+          sync_status: string
+          updated_at: string
+          vendor_id: string
+        }
+        Insert: {
+          created_at?: string
+          ical_url: string
+          id?: string
+          last_synced_at?: string | null
+          platform?: string
+          property_id: string
+          room_type_id?: string | null
+          sync_status?: string
+          updated_at?: string
+          vendor_id: string
+        }
+        Update: {
+          created_at?: string
+          ical_url?: string
+          id?: string
+          last_synced_at?: string | null
+          platform?: string
+          property_id?: string
+          room_type_id?: string | null
+          sync_status?: string
+          updated_at?: string
+          vendor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "channel_links_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "channel_links_room_type_id_fkey"
+            columns: ["room_type_id"]
+            isOneToOne: false
+            referencedRelation: "room_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "channel_links_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
             referencedColumns: ["id"]
           },
         ]
@@ -985,7 +1109,13 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "tenant" | "landlord" | "service_provider" | "admin" | "vendor"
+      app_role:
+        | "tenant"
+        | "landlord"
+        | "service_provider"
+        | "admin"
+        | "vendor"
+        | "agent"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1113,7 +1243,14 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["tenant", "landlord", "service_provider", "admin", "vendor"],
+      app_role: [
+        "tenant",
+        "landlord",
+        "service_provider",
+        "admin",
+        "vendor",
+        "agent",
+      ],
     },
   },
 } as const
