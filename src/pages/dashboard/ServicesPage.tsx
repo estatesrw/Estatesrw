@@ -34,7 +34,7 @@ const ServicesPage = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({
-    title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "",
+    title: "", description: "", category: "general", price: "", price_type: "fixed", city: "Kigali", image_url: "", uploadedMedia: [] as string[],
   });
 
   const fetchServices = async () => {
