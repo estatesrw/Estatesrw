@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,10 +31,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-hero flex items-center justify-center">
-              <Home className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="font-display text-xl font-bold text-foreground">EstatesRW</span>
+            <img src={logo} alt="EstatesRW Logo" className="h-10 w-auto object-contain md:h-12" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
