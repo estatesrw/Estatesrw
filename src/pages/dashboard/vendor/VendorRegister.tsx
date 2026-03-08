@@ -35,7 +35,7 @@ const VendorRegister = () => {
     const { error } = await supabase.from("vendors").insert({
       user_id: user.id,
       ...form,
-      status: "approved",  // Auto-approved on registration
+      status: "pending",
     });
 
     if (error) {
