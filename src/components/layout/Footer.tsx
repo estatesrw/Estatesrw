@@ -34,7 +34,7 @@ const Footer = () => {
               </div>
               <span className="font-display text-xl font-bold">EstatesRW</span>
             </div>
-            <p className="text-primary-foreground/70 mb-6 max-w-sm">
+            <p className="text-sidebar-foreground/70 mb-6 max-w-sm">
               Rwanda's premier property management platform. Find your perfect home, list your property, or discover professional services.
             </p>
             <div className="flex gap-4">
