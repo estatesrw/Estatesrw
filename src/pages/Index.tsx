@@ -9,6 +9,7 @@ import ProductShowcase from "@/components/home/ProductShowcase";
 import TrustedBySection from "@/components/home/TrustedBySection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
+import PartnersSlider from "@/components/home/PartnersSlider";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <HeroSection />
         <AdBanner />
         <TrustedBySection />
+        <PartnersSlider />
         <FeaturedProperties />
         <HowItWorks />
         <ProductShowcase />
