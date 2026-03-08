@@ -145,8 +145,15 @@ const ServicesPage = () => {
                     <Input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} required />
                   </div>
                 </div>
+                <PropertyImageUpload
+                  userId={user!.id}
+                  images={form.uploadedMedia}
+                  onChange={(media) => setForm({ ...form, uploadedMedia: media })}
+                  bucket="media"
+                  label="Service Images & Videos"
+                />
                 <div className="space-y-2">
-                  <Label>Image URL (optional)</Label>
+                  <Label>Or paste Image URL</Label>
                   <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="https://..." />
                 </div>
                 <Button type="submit" className="w-full">{editingId ? "Update" : "Add"} Service</Button>
