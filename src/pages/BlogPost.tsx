@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import DOMPurify from "dompurify";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Calendar, User, ArrowLeft, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
@@ -211,7 +212,10 @@ const BlogPost = () => {
               prose-ul:text-muted-foreground prose-ol:text-muted-foreground
               prose-li:mb-2
               prose-img:rounded-xl"
-            dangerouslySetInnerHTML={{ __html: renderContentWithAds(post.content) }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(renderContentWithAds(post.content), {
+              ALLOWED_TAGS: ['p','h2','h3','h4','h5','h6','ul','ol','li','strong','em','a','blockquote','img','ins','div','br','span'],
+              ALLOWED_ATTR: ['href','src','alt','class','style','data-ad-client','data-ad-slot','data-ad-format','data-full-width-responsive','target','rel','loading']
+            }) }}
           />
 
           {/* End-of-article ad */}
