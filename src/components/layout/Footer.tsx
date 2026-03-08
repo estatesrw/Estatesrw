@@ -96,7 +96,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center text-primary-foreground/50 text-sm">
+        <div className="border-t border-sidebar-foreground/10 mt-12 pt-8 text-center text-sidebar-foreground/50 text-sm">
           <p>© {new Date().getFullYear()} EstatesRW. All rights reserved.</p>
         </div>
       </div>
