@@ -172,7 +172,7 @@ const AdminBookingsPage = () => {
                       {b.payment_method && <p className="text-xs text-muted-foreground">Payment: {b.payment_method} · {b.payment_status}</p>}
                     </div>
                     <div className="flex gap-2 shrink-0 flex-wrap">
-                      {st.next && (
+                      {"next" in st && st.next && (
                         <Button size="sm" onClick={() => advanceStatus(b.id, st.next!)}>
                           <Check className="w-4 h-4 mr-1" /> {st.nextLabel}
                         </Button>
