@@ -63,6 +63,16 @@ const VendorOverview = () => {
       setLoading(false);
     };
     load();
+
+    // Subscribe to vendor status changes for auto-update on approval
+    const channel = supabase
+      .channel('vendor-status')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'vendors', filter: `user_id=eq.${user.id}` }, () => {
+        load();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
   }, [user]);
 
   if (loading) return <div className="flex items-center justify-center py-20 text-muted-foreground">Loading...</div>;
