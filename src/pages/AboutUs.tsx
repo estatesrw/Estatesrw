@@ -14,13 +14,13 @@ const AboutUs = () => (
     <main className="container mx-auto px-4 py-24 max-w-4xl">
       <h1 className="font-display text-4xl font-bold text-foreground mb-6">About EstatesRW</h1>
 
-      <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
-        <p className="text-lg leading-relaxed">
+      <div className="prose prose-lg max-w-none space-y-6">
+        <p className="text-lg leading-relaxed text-foreground/80">
           EstatesRW is Rwanda's premier digital real estate platform, founded with the mission of making property search, management, and services accessible to everyone in Rwanda. We connect landlords, tenants, and professional service providers through an intuitive, transparent, and secure online marketplace.
         </p>
 
         <h2 className="font-display text-2xl text-foreground">Our Mission</h2>
-        <p>
+        <p className="text-foreground/70">
           To revolutionize Rwanda's real estate industry by providing a trusted, technology-driven platform that simplifies property transactions, enhances transparency, and empowers both property owners and tenants to make informed decisions. We believe that finding a home or managing a property should be straightforward, safe, and efficient.
         </p>
 
