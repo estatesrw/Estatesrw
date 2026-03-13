@@ -254,6 +254,66 @@ const Services = () => {
           </div>
         </section>
 
+        {/* Consultation Request Form */}
+        <section id="consultation-form" className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-10">
+                <span className="text-primary font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+                  Request a Free Consultation
+                </h2>
+                <p className="text-muted-foreground">
+                  Tell us about your property needs and our experts will get back to you within 24 hours.
+                </p>
+              </div>
+
+              <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input id="name" placeholder="John Doe" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input id="email" type="email" placeholder="you@email.com" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input id="phone" placeholder="+250 7XX XXX XXX" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="service_type">Service Needed *</Label>
+                      <Select value={form.service_type} onValueChange={v => setForm(f => ({ ...f, service_type: v }))}>
+                        <SelectTrigger id="service_type">
+                          <SelectValue placeholder="Select a service" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {[...coreServices, ...additionalServices].map(s => (
+                            <SelectItem key={s.title} value={s.title}>{s.title}</SelectItem>
+                          ))}
+                          <SelectItem value="Other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Tell us about your needs</Label>
+                    <Textarea id="message" rows={4} placeholder="Describe your property goals, challenges, or questions..." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+                  </div>
+                  <Button type="submit" size="lg" className="w-full text-base" disabled={submitting}>
+                    {submitting ? "Sending..." : "Submit Request"}
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20 bg-primary relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20.5h2V0h2v20.5h2V0h2v20.5h2V0h2v20.5h2V0h2v22H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20z\' fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")' }} />
