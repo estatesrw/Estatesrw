@@ -1,7 +1,14 @@
+import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { 
   Building2, ClipboardCheck, HardHat, Briefcase, Scale, 
   TrendingUp, ShieldCheck, Paintbrush, TreeDeciduous, Truck,
@@ -64,6 +71,32 @@ const stats = [
 
 const Services = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", service_type: "", message: "" });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.service_type) {
+      toast({ title: "Please select a service", variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    const { error } = await supabase.from("consultation_requests" as any).insert([{
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      service_type: form.service_type,
+      message: form.message.trim() || null,
+    }]);
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Failed to submit", description: "Please try again later.", variant: "destructive" });
+    } else {
+      toast({ title: "Request submitted!", description: "Our team will contact you within 24 hours." });
+      setForm({ name: "", email: "", phone: "", service_type: "", message: "" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -217,6 +250,66 @@ const Services = () => {
                   <p className="text-sm text-muted-foreground">{service.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Consultation Request Form */}
+        <section id="consultation-form" className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-10">
+                <span className="text-primary font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+                  Request a Free Consultation
+                </h2>
+                <p className="text-muted-foreground">
+                  Tell us about your property needs and our experts will get back to you within 24 hours.
+                </p>
+              </div>
+
+              <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input id="name" placeholder="John Doe" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input id="email" type="email" placeholder="you@email.com" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input id="phone" placeholder="+250 7XX XXX XXX" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="service_type">Service Needed *</Label>
+                      <Select value={form.service_type} onValueChange={v => setForm(f => ({ ...f, service_type: v }))}>
+                        <SelectTrigger id="service_type">
+                          <SelectValue placeholder="Select a service" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {[...coreServices, ...additionalServices].map(s => (
+                            <SelectItem key={s.title} value={s.title}>{s.title}</SelectItem>
+                          ))}
+                          <SelectItem value="Other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Tell us about your needs</Label>
+                    <Textarea id="message" rows={4} placeholder="Describe your property goals, challenges, or questions..." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+                  </div>
+                  <Button type="submit" size="lg" className="w-full text-base" disabled={submitting}>
+                    {submitting ? "Sending..." : "Submit Request"}
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </form>
+              </div>
             </div>
           </div>
         </section>
