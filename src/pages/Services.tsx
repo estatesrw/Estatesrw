@@ -71,6 +71,32 @@ const stats = [
 
 const Services = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", service_type: "", message: "" });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.service_type) {
+      toast({ title: "Please select a service", variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    const { error } = await supabase.from("consultation_requests" as any).insert([{
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      service_type: form.service_type,
+      message: form.message.trim() || null,
+    }]);
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Failed to submit", description: "Please try again later.", variant: "destructive" });
+    } else {
+      toast({ title: "Request submitted!", description: "Our team will contact you within 24 hours." });
+      setForm({ name: "", email: "", phone: "", service_type: "", message: "" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
