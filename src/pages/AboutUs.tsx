@@ -40,27 +40,27 @@ const AboutUs = () => (
         </div>
 
         <h2 className="font-display text-2xl text-foreground">What We Offer</h2>
-        <ul>
-          <li><strong>Property Listings:</strong> Browse hundreds of verified rental properties across Kigali and other major cities in Rwanda, with detailed descriptions, photos, and pricing.</li>
-          <li><strong>Property Management:</strong> Landlords can manage their properties, track applications, handle maintenance requests, and communicate with tenants — all from a single dashboard.</li>
-          <li><strong>Professional Services:</strong> Access a network of trusted service providers for cleaning, plumbing, electrical work, painting, gardening, and more.</li>
-          <li><strong>Secure Messaging:</strong> Communicate directly with landlords, tenants, or service providers through our built-in messaging system.</li>
-          <li><strong>Online Payments:</strong> Track and manage rental payments securely through our platform.</li>
+        <ul className="text-foreground/70">
+          <li><strong className="text-foreground">Property Listings:</strong> Browse hundreds of verified rental properties across Kigali and other major cities in Rwanda, with detailed descriptions, photos, and pricing.</li>
+          <li><strong className="text-foreground">Property Management:</strong> Landlords can manage their properties, track applications, handle maintenance requests, and communicate with tenants — all from a single dashboard.</li>
+          <li><strong className="text-foreground">Professional Services:</strong> Access a network of trusted service providers for cleaning, plumbing, electrical work, painting, gardening, and more.</li>
+          <li><strong className="text-foreground">Secure Messaging:</strong> Communicate directly with landlords, tenants, or service providers through our built-in messaging system.</li>
+          <li><strong className="text-foreground">Online Payments:</strong> Track and manage rental payments securely through our platform.</li>
         </ul>
 
         <h2 className="font-display text-2xl text-foreground">Our Team</h2>
-        <p>
+        <p className="text-foreground/70">
           EstatesRW is built and operated by a dedicated team of real estate professionals and technology experts based in Kigali, Rwanda. Our team combines deep local market knowledge with modern technology expertise to deliver the best possible experience for our users. We are passionate about improving how people find, rent, and manage properties in Rwanda.
         </p>
 
         <h2 className="font-display text-2xl text-foreground">Contact Us</h2>
-        <p>
+        <p className="text-foreground/70">
           We're always happy to hear from you. Whether you have questions about our platform, need assistance with your account, or want to explore partnership opportunities, don't hesitate to reach out.
         </p>
-        <ul>
-          <li><strong>Email:</strong> <a href="mailto:info@estatesrw.com" className="text-primary hover:underline">info@estatesrw.com</a></li>
-          <li><strong>Phone:</strong> +250 791 915 459</li>
-          <li><strong>Location:</strong> Kigali, Rwanda</li>
+        <ul className="text-foreground/70">
+          <li><strong className="text-foreground">Email:</strong> <a href="mailto:info@estatesrw.com" className="text-primary hover:underline">info@estatesrw.com</a></li>
+          <li><strong className="text-foreground">Phone:</strong> +250 791 915 459</li>
+          <li><strong className="text-foreground">Location:</strong> Kigali, Rwanda</li>
         </ul>
       </div>
     </main>
