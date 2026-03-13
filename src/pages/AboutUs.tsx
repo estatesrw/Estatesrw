@@ -49,9 +49,29 @@ const AboutUs = () => (
         </ul>
 
         <h2 className="font-display text-2xl text-foreground">Our Team</h2>
-        <p className="text-foreground/70">
-          EstatesRW is built and operated by a dedicated team of real estate professionals and technology experts based in Kigali, Rwanda. Our team combines deep local market knowledge with modern technology expertise to deliver the best possible experience for our users. We are passionate about improving how people find, rent, and manage properties in Rwanda.
+        <p className="text-foreground/70 mb-8">
+          EstatesRW is built and operated by a dedicated team of real estate professionals and technology experts based in Kigali, Rwanda.
         </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 not-prose">
+          {[
+            { name: "Jean-Paul Mugabo", role: "CEO & Founder", bio: "10+ years in Rwanda's real estate market. Passionate about digital transformation of property services.", initials: "JM" },
+            { name: "Aline Uwase", role: "Head of Operations", bio: "Expert in property management and tenant relations. Ensures smooth platform operations daily.", initials: "AU" },
+            { name: "David Niyonzima", role: "Lead Developer", bio: "Full-stack engineer driving the technology behind EstatesRW's seamless user experience.", initials: "DN" },
+            { name: "Grace Mukamana", role: "Client Relations Manager", bio: "Dedicated to helping landlords and tenants find the perfect match through personalized support.", initials: "GM" },
+            { name: "Patrick Habimana", role: "Property Consultant", bio: "Certified real estate consultant specializing in Kigali's residential and commercial markets.", initials: "PH" },
+            { name: "Diane Ingabire", role: "Marketing Lead", bio: "Crafts the brand story and connects EstatesRW with communities across Rwanda.", initials: "DI" },
+          ].map((member) => (
+            <div key={member.name} className="bg-card rounded-xl shadow-card p-6 text-center border border-border hover:border-primary/20 hover:shadow-card-hover transition-all group">
+              <div className="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 text-2xl font-bold group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                {member.initials}
+              </div>
+              <h3 className="font-display font-semibold text-foreground text-lg">{member.name}</h3>
+              <p className="text-primary text-sm font-medium mb-2">{member.role}</p>
+              <p className="text-muted-foreground text-sm">{member.bio}</p>
+            </div>
+          ))}
+        </div>
 
         <h2 className="font-display text-2xl text-foreground">Contact Us</h2>
         <p className="text-foreground/70">
