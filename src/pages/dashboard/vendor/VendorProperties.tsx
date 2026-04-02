@@ -191,6 +191,11 @@ const VendorProperties = () => {
                   <Input value={form.longitude} onChange={(e) => setForm({ ...form, longitude: e.target.value })} placeholder="29.8739" />
                 </div>
               </div>
+              <PropertyImageUpload
+                userId={user!.id}
+                images={form.uploadedImages}
+                onChange={(imgs) => setForm({ ...form, uploadedImages: imgs })}
+              />
               <Button type="submit" className="w-full">{editId ? "Update" : "Add"} Property</Button>
             </form>
           </DialogContent>
