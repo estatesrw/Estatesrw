@@ -10,8 +10,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Building2, Edit, Trash2, BedDouble, Eye } from "lucide-react";
+import { Plus, Building2, Edit, Trash2, BedDouble } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import PropertyImageUpload from "@/components/properties/PropertyImageUpload";
 
 const CITIES = ["Kigali", "Musanze", "Rubavu", "Huye", "Gisenyi", "Butare", "Nyanza", "Rusizi", "Karongi", "Muhanga"];
 const PROPERTY_TYPES = [
@@ -35,6 +36,7 @@ const VendorProperties = () => {
   const [form, setForm] = useState({
     title: "", description: "", property_type: "hotel", address: "", city: "Kigali",
     country: "Rwanda", price: 0, bedrooms: 1, bathrooms: 1, latitude: "", longitude: "",
+    uploadedImages: [] as string[],
   });
 
   const fetchData = async () => {
@@ -61,6 +63,7 @@ const VendorProperties = () => {
   const resetForm = () => setForm({
     title: "", description: "", property_type: "hotel", address: "", city: "Kigali",
     country: "Rwanda", price: 0, bedrooms: 1, bathrooms: 1, latitude: "", longitude: "",
+    uploadedImages: [],
   });
 
   const handleSave = async (e: React.FormEvent) => {
@@ -70,6 +73,7 @@ const VendorProperties = () => {
       title: form.title, description: form.description, property_type: form.property_type,
       address: form.address, city: form.city, country: form.country, price: form.price,
       bedrooms: form.bedrooms, bathrooms: form.bathrooms, landlord_id: user.id, status: "active",
+      images: form.uploadedImages,
       latitude: form.latitude ? Number(form.latitude) : null,
       longitude: form.longitude ? Number(form.longitude) : null,
     };
@@ -96,6 +100,7 @@ const VendorProperties = () => {
       address: p.address, city: p.city, country: p.country || "Rwanda", price: p.price,
       bedrooms: p.bedrooms || 1, bathrooms: p.bathrooms || 1,
       latitude: p.latitude?.toString() || "", longitude: p.longitude?.toString() || "",
+      uploadedImages: p.images || [],
     });
     setDialogOpen(true);
   };
@@ -186,6 +191,11 @@ const VendorProperties = () => {
                   <Input value={form.longitude} onChange={(e) => setForm({ ...form, longitude: e.target.value })} placeholder="29.8739" />
                 </div>
               </div>
+              <PropertyImageUpload
+                userId={user!.id}
+                images={form.uploadedImages}
+                onChange={(imgs) => setForm({ ...form, uploadedImages: imgs })}
+              />
               <Button type="submit" className="w-full">{editId ? "Update" : "Add"} Property</Button>
             </form>
           </DialogContent>
@@ -205,9 +215,14 @@ const VendorProperties = () => {
           {properties.map((p) => (
             <Card key={p.id} className="shadow-card hover:shadow-elevated transition-shadow">
               <CardContent className="p-5 space-y-3">
+                {p.images && p.images.length > 0 && (
+                  <div className="aspect-video overflow-hidden rounded-md -mx-5 -mt-5 mb-3">
+                    <img src={p.images[0]} alt={p.title} className="w-full h-full object-cover" />
+                  </div>
+                )}
                 <div className="flex items-start justify-between">
-                  <div className="space-y-1 min-w-0 flex-1">
-                    <h3 className="font-display font-semibold text-foreground truncate">{p.title}</h3>
+                   <div className="space-y-1 min-w-0 flex-1">
+                     <h3 className="font-display font-semibold text-foreground truncate">{p.title}</h3>
                     <p className="text-xs text-muted-foreground">{p.address}, {p.city}</p>
                   </div>
                   <Badge className={p.status === "active" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}>{p.status}</Badge>
