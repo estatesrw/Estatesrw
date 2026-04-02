@@ -10,8 +10,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Building2, Edit, Trash2, BedDouble, Eye } from "lucide-react";
+import { Plus, Building2, Edit, Trash2, BedDouble } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import PropertyImageUpload from "@/components/properties/PropertyImageUpload";
 
 const CITIES = ["Kigali", "Musanze", "Rubavu", "Huye", "Gisenyi", "Butare", "Nyanza", "Rusizi", "Karongi", "Muhanga"];
 const PROPERTY_TYPES = [
