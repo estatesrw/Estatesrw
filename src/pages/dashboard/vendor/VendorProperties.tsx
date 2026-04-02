@@ -73,6 +73,7 @@ const VendorProperties = () => {
       title: form.title, description: form.description, property_type: form.property_type,
       address: form.address, city: form.city, country: form.country, price: form.price,
       bedrooms: form.bedrooms, bathrooms: form.bathrooms, landlord_id: user.id, status: "active",
+      images: form.uploadedImages,
       latitude: form.latitude ? Number(form.latitude) : null,
       longitude: form.longitude ? Number(form.longitude) : null,
     };
