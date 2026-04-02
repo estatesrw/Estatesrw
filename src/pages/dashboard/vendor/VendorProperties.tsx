@@ -63,6 +63,7 @@ const VendorProperties = () => {
   const resetForm = () => setForm({
     title: "", description: "", property_type: "hotel", address: "", city: "Kigali",
     country: "Rwanda", price: 0, bedrooms: 1, bathrooms: 1, latitude: "", longitude: "",
+    uploadedImages: [],
   });
 
   const handleSave = async (e: React.FormEvent) => {
