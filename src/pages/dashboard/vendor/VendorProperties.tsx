@@ -100,6 +100,7 @@ const VendorProperties = () => {
       address: p.address, city: p.city, country: p.country || "Rwanda", price: p.price,
       bedrooms: p.bedrooms || 1, bathrooms: p.bathrooms || 1,
       latitude: p.latitude?.toString() || "", longitude: p.longitude?.toString() || "",
+      uploadedImages: p.images || [],
     });
     setDialogOpen(true);
   };
