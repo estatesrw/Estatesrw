@@ -215,9 +215,14 @@ const VendorProperties = () => {
           {properties.map((p) => (
             <Card key={p.id} className="shadow-card hover:shadow-elevated transition-shadow">
               <CardContent className="p-5 space-y-3">
+                {p.images && p.images.length > 0 && (
+                  <div className="aspect-video overflow-hidden rounded-md -mx-5 -mt-5 mb-3">
+                    <img src={p.images[0]} alt={p.title} className="w-full h-full object-cover" />
+                  </div>
+                )}
                 <div className="flex items-start justify-between">
-                  <div className="space-y-1 min-w-0 flex-1">
-                    <h3 className="font-display font-semibold text-foreground truncate">{p.title}</h3>
+                   <div className="space-y-1 min-w-0 flex-1">
+                     <h3 className="font-display font-semibold text-foreground truncate">{p.title}</h3>
                     <p className="text-xs text-muted-foreground">{p.address}, {p.city}</p>
                   </div>
                   <Badge className={p.status === "active" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}>{p.status}</Badge>
