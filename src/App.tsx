@@ -145,6 +145,7 @@ const App = () => (
           <BrowserRouter>
             <AuthProvider>
               <AppRoutes />
+              <CookieConsent />
             </AuthProvider>
           </BrowserRouter>
         </TooltipProvider>
