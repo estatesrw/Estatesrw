@@ -264,7 +264,7 @@ const PropertyDetailsPage = () => {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-24">
           {/* Landlord card */}
           <Card className="shadow-card">
             <CardContent className="p-6 space-y-4">
