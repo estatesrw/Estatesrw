@@ -161,7 +161,7 @@ const PropertyDetailsPage = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-20 lg:pb-0">
         {/* Main details */}
         <div className="lg:col-span-2 space-y-6">
           <div>
@@ -182,7 +182,7 @@ const PropertyDetailsPage = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Card className="shadow-card">
               <CardContent className="p-4 flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-primary/10">
@@ -264,7 +264,7 @@ const PropertyDetailsPage = () => {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-24">
           {/* Landlord card */}
           <Card className="shadow-card">
             <CardContent className="p-6 space-y-4">
@@ -317,6 +317,18 @@ const PropertyDetailsPage = () => {
           </Card>
         </div>
       </div>
+
+      {/* Sticky mobile Apply button */}
+      {isTenant && (
+        <div className="fixed bottom-0 left-0 right-0 lg:hidden z-40 bg-card/95 backdrop-blur-lg border-t border-border p-4 flex items-center gap-3">
+          <div className="flex-1 min-w-0">
+            <p className="text-lg font-bold text-foreground">{Number(property.price).toLocaleString()} <span className="text-sm font-normal text-muted-foreground">RWF/mo</span></p>
+          </div>
+          <Button onClick={() => { setMessage(""); setApplyOpen(true); }} className="shrink-0">
+            <Send className="w-4 h-4 mr-2" />Apply Now
+          </Button>
+        </div>
+      )}
 
       {/* Contact Dialog */}
       <Dialog open={contactOpen} onOpenChange={setContactOpen}>
