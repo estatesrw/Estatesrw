@@ -82,6 +82,7 @@ const AppRoutes = () => (
     <Route path="/contact" element={<Contact />} />
     <Route path="/blog" element={<Blog />} />
     <Route path="/blog/:slug" element={<BlogPost />} />
+    <Route path="/pitch" element={<PitchDeck />} />
 
     {/* Dashboard - Shared */}
     <Route path="/dashboard" element={<DashboardRoute><DashboardOverview /></DashboardRoute>} />

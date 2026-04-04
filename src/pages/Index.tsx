@@ -41,6 +41,7 @@ const Index = () => {
         <AdBanner />
         <TrustedBySection />
         <PartnersSlider />
+        <PlatformOverview />
         <FeaturedProperties />
         <HowItWorks />
         <ProductShowcase />
