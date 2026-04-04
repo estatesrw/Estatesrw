@@ -11,6 +11,7 @@ import TrustedBySection from "@/components/home/TrustedBySection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
 import PartnersSlider from "@/components/home/PartnersSlider";
+import PlatformOverview from "@/components/home/PlatformOverview";
 
 const Index = () => {
   return (
