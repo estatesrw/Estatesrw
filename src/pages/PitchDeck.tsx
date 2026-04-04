@@ -31,21 +31,86 @@ const PitchDeck = () => (
     {/* HERO */}
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="Kigali skyline real estate" className="w-full h-full object-cover" width={1920} height={1080} />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+        <iframe
+          src="https://www.youtube.com/embed/odcE9EbrFs8?autoplay=1&mute=1&loop=1&playlist=odcE9EbrFs8&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&vq=small"
+          title="EstatesRW background"
+          className="absolute top-1/2 left-1/2 w-[120vw] h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{ border: 0, minWidth: '120%', minHeight: '120%' }}
+          allow="autoplay; encrypted-media"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
       </div>
       <div className="container mx-auto px-4 relative z-10 pt-24 pb-16">
         <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl">
           <motion.span variants={fade} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             <Briefcase className="w-4 h-4" /> Company Overview
           </motion.span>
-          <motion.h1 variants={fade} className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-6">
-            Your Trusted Gateway to <span className="text-primary">Real Estate Investment</span> in Rwanda
+          <motion.h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-6">
+            <motion.span
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="inline-block"
+            >
+              Your{" "}
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 30, rotateX: 90 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 100 }}
+              className="inline-block text-primary"
+            >
+              Trusted Gateway
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.8 }}
+              className="inline-block"
+            >
+              {" "}to{" "}
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.1, type: "spring", stiffness: 120 }}
+              className="inline-block bg-primary text-primary-foreground px-3 py-1 rounded-lg"
+            >
+              Real Estate
+            </motion.span>
+            <br />
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.4 }}
+              className="inline-block"
+            >
+              Investment in{" "}
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, letterSpacing: "0.5em" }}
+              animate={{ opacity: 1, letterSpacing: "0em" }}
+              transition={{ duration: 1, delay: 1.7 }}
+              className="inline-block text-primary"
+            >
+              Rwanda
+            </motion.span>
           </motion.h1>
-          <motion.p variants={fade} className="text-lg text-muted-foreground mb-8 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 2.2 }}
+            className="text-lg text-muted-foreground mb-8 leading-relaxed"
+          >
             EstatesRW sits at the intersection of investment advisory, property sourcing, and technology — simplifying how investors enter the market and how property owners manage and monetize their assets.
           </motion.p>
-          <motion.div variants={fade} className="flex flex-wrap gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.6 }}
+            className="flex flex-wrap gap-4"
+          >
             <Button size="lg" asChild><Link to="/contact">Schedule a Consultation <ArrowRight className="ml-2 w-4 h-4" /></Link></Button>
             <Button size="lg" variant="outline" asChild><Link to="/services">Explore Our Services</Link></Button>
           </motion.div>
