@@ -18,6 +18,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import PitchDeck from "./pages/PitchDeck";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DashboardOverview from "./pages/dashboard/DashboardOverview";
 import PropertiesPage from "./pages/dashboard/PropertiesPage";
@@ -81,6 +82,7 @@ const AppRoutes = () => (
     <Route path="/contact" element={<Contact />} />
     <Route path="/blog" element={<Blog />} />
     <Route path="/blog/:slug" element={<BlogPost />} />
+    <Route path="/pitch" element={<PitchDeck />} />
 
     {/* Dashboard - Shared */}
     <Route path="/dashboard" element={<DashboardRoute><DashboardOverview /></DashboardRoute>} />
