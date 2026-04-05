@@ -46,55 +46,30 @@ const PitchDeck = () => (
           <motion.span variants={fade} className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             <Briefcase className="w-4 h-4" /> Company Overview
           </motion.span>
-          <motion.h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-6">
-            <motion.span
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="inline-block"
-            >
-              Your{" "}
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 30, rotateX: 90 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 100 }}
-              className="inline-block text-primary"
-            >
-              Trusted Gateway
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.8 }}
-              className="inline-block"
-            >
-              {" "}to{" "}
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 1.1, type: "spring", stiffness: 120 }}
-              className="inline-block bg-primary text-primary-foreground px-3 py-1 rounded-lg"
-            >
-              Real Estate
-            </motion.span>
-            <br />
+          <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.4 }}
-              className="inline-block"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="block"
             >
-              Investment in{" "}
+              Your <span className="text-primary">Trusted Gateway</span> to
             </motion.span>
             <motion.span
-              initial={{ opacity: 0, letterSpacing: "0.5em" }}
-              animate={{ opacity: 1, letterSpacing: "0em" }}
-              transition={{ duration: 1, delay: 1.7 }}
-              className="inline-block text-primary"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="block mt-1"
             >
-              Rwanda
+              <span className="bg-primary text-primary-foreground px-3 py-1 rounded-lg">Real Estate</span> Investment
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="block mt-1"
+            >
+              in <span className="text-primary">Rwanda</span>
             </motion.span>
           </motion.h1>
           <motion.p
