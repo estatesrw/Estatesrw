@@ -3,25 +3,30 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Building2, Lightbulb, ArrowRight, Globe, Shield, Users } from "lucide-react";
 
-const fade = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
-const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
-
 const PlatformOverview = () => (
-  <section className="py-20 bg-secondary">
+  <section className="py-16 md:py-20 bg-secondary">
     <div className="container mx-auto px-4">
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto mb-12">
-        <motion.span variants={fade} className="text-primary font-semibold text-sm uppercase tracking-wider">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-center max-w-3xl mx-auto mb-10 md:mb-12"
+      >
+        <span className="text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">
           More Than a Marketplace
-        </motion.span>
-        <motion.h2 variants={fade} className="text-3xl md:text-4xl font-bold text-foreground mt-2">
+        </span>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mt-2">
           Your Complete Real Estate Ecosystem
-        </motion.h2>
-        <motion.p variants={fade} className="text-muted-foreground mt-4">
+        </h2>
+        <p className="text-sm sm:text-base text-muted-foreground mt-3 md:mt-4 px-2">
           EstatesRW isn't just about finding properties — we're building the infrastructure for smarter real estate investment, management, and growth in Rwanda.
-        </motion.p>
+        </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-8 mb-10">
+      {/* Cards */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-10">
         {[
           {
             icon: TrendingUp,
@@ -41,39 +46,52 @@ const PlatformOverview = () => (
         ].map((card, i) => (
           <motion.div
             key={card.title}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            variants={fade}
-            transition={{ delay: i * 0.12 }}
-            className="bg-card rounded-2xl p-8 border border-border hover:shadow-lg transition-shadow group"
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="bg-card rounded-2xl p-6 md:p-8 border border-border hover:shadow-lg transition-shadow group"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors">
-              <card.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 md:mb-5 group-hover:bg-primary transition-colors">
+              <card.icon className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-2">{card.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+            <h3 className="text-base md:text-lg font-bold text-foreground mb-2">{card.title}</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
         {[
           { icon: Shield, value: "End-to-End", label: "Investor Support" },
           { icon: Users, value: "International", label: "Network Access" },
           { icon: Lightbulb, value: "Tech-Driven", label: "PMS Platform" },
           { icon: TrendingUp, value: "5%", label: "Avg Commission" },
-        ].map((stat) => (
-          <motion.div key={stat.label} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}
-            className="bg-card rounded-xl p-5 border border-border text-center">
-            <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-            <p className="text-xl font-bold text-foreground">{stat.value}</p>
-            <p className="text-xs text-muted-foreground">{stat.label}</p>
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: i * 0.08 }}
+            className="bg-card rounded-xl p-4 md:p-5 border border-border text-center"
+          >
+            <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-primary mx-auto mb-2" />
+            <p className="text-base md:text-xl font-bold text-foreground">{stat.value}</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">{stat.label}</p>
           </motion.div>
         ))}
       </div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center">
+      {/* CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="text-center"
+      >
         <Button asChild size="lg">
           <Link to="/pitch">
             Learn More About What We Do <ArrowRight className="ml-2 w-4 h-4" />
