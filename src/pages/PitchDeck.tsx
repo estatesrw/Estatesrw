@@ -32,7 +32,7 @@ const PitchDeck = () => (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <iframe
-          src="https://www.youtube.com/embed/odcE9EbrFs8?autoplay=1&mute=1&loop=1&playlist=odcE9EbrFs8&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&vq=small"
+          src="https://www.youtube.com/embed/dBI2gxMpTkg?autoplay=1&mute=1&loop=1&playlist=dBI2gxMpTkg&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&vq=small"
           title="EstatesRW background"
           className="absolute top-1/2 left-1/2 w-[120vw] h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           style={{ border: 0, minWidth: '120%', minHeight: '120%' }}
