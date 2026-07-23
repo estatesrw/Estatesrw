@@ -1,10 +1,10 @@
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, ShieldCheck, Building2, Globe2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden bg-background">
+    <section className="relative pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden bg-background">
       {/* Subtle line pattern */}
       <div
         aria-hidden
@@ -28,10 +28,10 @@ const HeroSection = () => {
           {/* Eyebrow chip */}
           <div className="inline-flex items-center gap-2 bg-card border border-border rounded-full pl-1.5 pr-4 py-1.5 mb-8 shadow-soft animate-fade-up">
             <span className="text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-full px-2.5 py-1">
-              New
+              EstatesRW
             </span>
             <span className="text-xs md:text-sm font-medium text-foreground/80">
-              Rwanda's #1 property platform — verified & secure
+              Rwanda's trusted property management & investment partner
             </span>
           </div>
 
@@ -40,23 +40,22 @@ const HeroSection = () => {
             className="font-display text-5xl md:text-7xl lg:text-[80px] leading-[1.02] tracking-tight text-foreground mb-6 animate-fade-up"
             style={{ animationDelay: "0.05s" }}
           >
-            Find Your Perfect
+            Professional Property
             <br />
-            <span className="italic font-medium text-primary">Place to Call</span>{" "}
-            <span className="italic font-medium">Home</span>
+            <span className="italic font-medium text-primary">Management</span>{" "}
+            <span className="italic font-medium">Made Simple</span>
           </h1>
 
           <p
             className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-up leading-relaxed"
             style={{ animationDelay: "0.1s" }}
           >
-            Discover properties for sale and rent across Rwanda. Connect with
-            landlords, tenants, and professional services all in one platform.
+            We manage, market, and grow your real estate assets in Rwanda — from investment advisory and property sourcing to full-service operations powered by our end-to-end management platform.
           </p>
 
           {/* CTAs */}
           <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10 animate-fade-up"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12 animate-fade-up"
             style={{ animationDelay: "0.15s" }}
           >
             <Button
@@ -64,8 +63,8 @@ const HeroSection = () => {
               size="lg"
               className="rounded-full h-12 px-7 bg-foreground text-background hover:bg-foreground/90 shadow-elevated"
             >
-              <Link to="/auth">
-                Get started free
+              <Link to="/contact">
+                Schedule a consultation
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </Button>
@@ -75,86 +74,33 @@ const HeroSection = () => {
               variant="outline"
               className="rounded-full h-12 px-7 border-foreground/15 bg-card hover:bg-secondary"
             >
-              <Link to="/dashboard/browse">Browse properties</Link>
+              <Link to="/services">Explore our services</Link>
             </Button>
           </div>
 
-          {/* Rating strip */}
+          {/* Trust strip */}
           <div
-            className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm animate-fade-up"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-              ))}
-            </div>
-            <span className="font-semibold text-foreground">4.8/5</span>
-            <span className="text-muted-foreground">
-              from 3,200+ verified tenants & landlords
-            </span>
-          </div>
-        </div>
-
-        {/* Product preview mock */}
-        <div
-          className="mt-16 md:mt-20 max-w-5xl mx-auto animate-fade-up"
-          style={{ animationDelay: "0.25s" }}
-        >
-          <div className="relative rounded-3xl border border-border bg-card shadow-elevated overflow-hidden">
-            <div className="flex items-center gap-2 px-5 py-3 border-b border-border bg-secondary/50">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-muted-foreground/30" />
-                <span className="w-3 h-3 rounded-full bg-muted-foreground/30" />
-                <span className="w-3 h-3 rounded-full bg-muted-foreground/30" />
-              </div>
-              <span className="text-xs text-muted-foreground ml-2 font-medium">
-                estatesrw.com — Browse properties
-              </span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5 md:p-8 bg-background">
-              {[
-                {
-                  title: "Modern Villa",
-                  loc: "Nyarutarama",
-                  price: "$450,000",
-                  img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
-                },
-                {
-                  title: "Downtown Apartment",
-                  loc: "Kiyovu",
-                  price: "$1,500/mo",
-                  img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80",
-                },
-                {
-                  title: "Family Home",
-                  loc: "Kimihurura",
-                  price: "$280,000",
-                  img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
-                },
-              ].map((p) => (
-                <div
-                  key={p.title}
-                  className="rounded-2xl overflow-hidden border border-border bg-card shadow-soft"
-                >
-                  <div className="aspect-[4/3] overflow-hidden bg-muted">
-                    <img
-                      src={p.img}
-                      alt={p.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="font-semibold text-foreground text-sm">{p.title}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{p.loc}, Kigali</p>
-                    <p className="mt-2 text-base font-bold text-primary font-sans">
-                      {p.price}
-                    </p>
-                  </div>
+            {[
+              { icon: ShieldCheck, title: "End-to-end support", desc: "From sourcing to operations" },
+              { icon: Building2, title: "Full-service PMS", desc: "Bookings, occupancy & payouts" },
+              { icon: Globe2, title: "Global investor network", desc: "Diaspora & international reach" },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4 text-left shadow-soft"
+              >
+                <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <item.icon className="w-4.5 h-4.5 text-primary" />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
