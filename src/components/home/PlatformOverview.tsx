@@ -93,8 +93,8 @@ const PlatformOverview = () => (
         className="text-center"
       >
         <Button asChild size="lg">
-          <Link to="/pitch">
-            Learn More About What We Do <ArrowRight className="ml-2 w-4 h-4" />
+          <Link to="/services">
+            Explore Our Services <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
         </Button>
       </motion.div>
