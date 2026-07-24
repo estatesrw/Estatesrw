@@ -2,6 +2,9 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { Building2, Users, Shield, Award } from "lucide-react";
+import founderFiston from "@/assets/founder-fiston.png";
+import founderJoshua from "@/assets/founder-joshua.png";
+
 
 const AboutUs = () => (
   <div className="min-h-screen bg-background">
