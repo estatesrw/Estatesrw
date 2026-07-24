@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { trackCTAClick } from "@/lib/analytics";
 
 const CTASection = () => {
   const benefits = [
