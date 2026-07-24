@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { trackSocialClick } from "@/lib/analytics";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg
