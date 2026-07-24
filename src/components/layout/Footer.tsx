@@ -1,6 +1,44 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
+
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4c0 1.5 1.5 3 4 3v2.5c-2.5 0-4-1.5-4-3v8a4 4 0 1 1-4-4Z" />
+  </svg>
+);
+
+const socialLinks = [
+  {
+    Icon: Facebook,
+    href: "https://web.facebook.com/estatesrw?mibextid=wwXIfr&rdid=rnJxsUd5wBvJCkVZ&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F16RJFH4Nky%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr",
+    label: "Facebook",
+  },
+  {
+    Icon: Instagram,
+    href: "https://www.instagram.com/estatesrw/",
+    label: "Instagram",
+  },
+  {
+    Icon: TikTokIcon,
+    href: "https://www.tiktok.com/@estates_rw",
+    label: "TikTok",
+  },
+  {
+    Icon: Linkedin,
+    href: "https://www.linkedin.com/in/estates-rw-722783391",
+    label: "LinkedIn",
+  },
+];
 
 const Footer = () => {
   const footerLinks = {
@@ -33,11 +71,13 @@ const Footer = () => {
               Rwanda's premier property management platform. Find your perfect home, list your property, or discover professional services.
             </p>
             <div className="flex gap-3">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+              {socialLinks.map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow EstatesRW on ${label}`}
                   className="w-9 h-9 rounded-full bg-sidebar-foreground/10 flex items-center justify-center hover:bg-sidebar-accent transition-colors"
                 >
                   <Icon className="w-4 h-4" />

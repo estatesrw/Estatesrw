@@ -38,8 +38,8 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <TrustedBySection />
         <WhatWeDo />
+        <TrustedBySection />
         <PlatformOverview />
         <AdBanner />
         <HowItWorks />
