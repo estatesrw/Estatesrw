@@ -29,7 +29,7 @@ const socialLinks = [
     label: "Instagram",
   },
   {
-    Icon: TikTok,
+    Icon: TikTokIcon,
     href: "https://www.tiktok.com/@estates_rw",
     label: "TikTok",
   },
