@@ -1,6 +1,29 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, TikTok, Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
+
+const socialLinks = [
+  {
+    Icon: Facebook,
+    href: "https://web.facebook.com/estatesrw?mibextid=wwXIfr&rdid=rnJxsUd5wBvJCkVZ&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F16RJFH4Nky%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr",
+    label: "Facebook",
+  },
+  {
+    Icon: Instagram,
+    href: "https://www.instagram.com/estatesrw/",
+    label: "Instagram",
+  },
+  {
+    Icon: TikTok,
+    href: "https://www.tiktok.com/@estates_rw",
+    label: "TikTok",
+  },
+  {
+    Icon: Linkedin,
+    href: "https://www.linkedin.com/in/estates-rw-722783391",
+    label: "LinkedIn",
+  },
+];
 
 const Footer = () => {
   const footerLinks = {
@@ -33,11 +56,13 @@ const Footer = () => {
               Rwanda's premier property management platform. Find your perfect home, list your property, or discover professional services.
             </p>
             <div className="flex gap-3">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+              {socialLinks.map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow EstatesRW on ${label}`}
                   className="w-9 h-9 rounded-full bg-sidebar-foreground/10 flex items-center justify-center hover:bg-sidebar-accent transition-colors"
                 >
                   <Icon className="w-4 h-4" />
