@@ -1,6 +1,7 @@
 import { ArrowRight, ShieldCheck, Building2, Globe2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { trackCTAClick } from "@/lib/analytics";
 
 const HeroSection = () => {
   return (
@@ -63,7 +64,10 @@ const HeroSection = () => {
               size="lg"
               className="rounded-full h-12 px-7 bg-foreground text-background hover:bg-foreground/90 shadow-elevated"
             >
-              <Link to="/contact">
+              <Link
+                to="/contact"
+                onClick={() => trackCTAClick("hero_primary_consultation", "hero", "/contact")}
+              >
                 Schedule a consultation
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
@@ -74,7 +78,12 @@ const HeroSection = () => {
               variant="outline"
               className="rounded-full h-12 px-7 border-foreground/15 bg-card hover:bg-secondary"
             >
-              <Link to="/services">Explore our services</Link>
+              <Link
+                to="/services"
+                onClick={() => trackCTAClick("hero_secondary_services", "hero", "/services")}
+              >
+                Explore our services
+              </Link>
             </Button>
           </div>
 

@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { trackCTAClick } from "@/lib/analytics";
 
 const CTASection = () => {
   const benefits = [
@@ -46,7 +47,10 @@ const CTASection = () => {
                 size="lg"
                 className="rounded-full h-12 px-7 bg-background text-foreground hover:bg-background/90"
               >
-                <Link to="/auth">
+                <Link
+                  to="/auth"
+                  onClick={() => trackCTAClick("cta_get_started", "cta_section", "/auth")}
+                >
                   Get started free
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
@@ -57,7 +61,12 @@ const CTASection = () => {
                 variant="outline"
                 className="rounded-full h-12 px-7 border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
               >
-                <Link to="/auth">List your property</Link>
+                <Link
+                  to="/auth"
+                  onClick={() => trackCTAClick("cta_list_property", "cta_section", "/auth")}
+                >
+                  List your property
+                </Link>
               </Button>
             </div>
           </div>
