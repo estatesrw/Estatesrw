@@ -78,6 +78,7 @@ const Footer = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackSocialClick(label, href)}
                   aria-label={`Follow EstatesRW on ${label}`}
                   className="w-9 h-9 rounded-full bg-sidebar-foreground/10 flex items-center justify-center hover:bg-sidebar-accent transition-colors"
                 >
