@@ -174,35 +174,45 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
   const roleLabel = roleLabels[primaryRole] || "User";
 
+  const currentLabel = navGroups.flatMap(g => g.items).find(i => i.href === location.pathname)?.label || "Overview";
+  const currentGroup = navGroups.find(g => g.items.some(i => i.href === location.pathname))?.label;
+
   return (
-    <div className="min-h-screen bg-background flex">
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-sidebar text-sidebar-foreground transform transition-transform duration-300 ease-out lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-sidebar-border">
+    <div className="min-h-screen bg-secondary/40 flex">
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[264px] p-3 transform transition-transform duration-300 ease-out lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="flex flex-col h-full bg-card border border-border rounded-3xl shadow-card overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-sidebar-primary flex items-center justify-center">
-                <Home className="w-4 h-4 text-sidebar-primary-foreground" />
+              <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center">
+                <Home className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-display text-lg font-bold text-sidebar-foreground">EstatesRW</span>
+              <span className="font-display text-lg font-semibold text-foreground tracking-tight">EstatesRW</span>
             </Link>
-            <button className="lg:hidden text-sidebar-foreground/60 hover:text-sidebar-foreground" onClick={() => setSidebarOpen(false)}>
+            <button className="lg:hidden text-muted-foreground hover:text-foreground" onClick={() => setSidebarOpen(false)}>
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="px-5 py-3 border-b border-sidebar-border">
-            <p className="text-sm font-medium text-sidebar-foreground truncate">{profile?.full_name || user?.email}</p>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-sidebar-primary/20 text-sidebar-primary font-medium mt-1 inline-block">{roleLabel}</span>
+          <div className="mx-3 mb-3 rounded-2xl bg-secondary/70 border border-border/60 px-4 py-3">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                <span className="text-xs font-bold text-primary">{(profile?.full_name || user?.email || "U").charAt(0).toUpperCase()}</span>
+              </div>
+              <div className="min-w-0">
+                <p className="text-[13px] font-semibold text-foreground truncate">{profile?.full_name || user?.email}</p>
+                <p className="text-[11px] text-muted-foreground truncate">{roleLabel}</p>
+              </div>
+            </div>
           </div>
 
-          <nav className="flex-1 px-3 py-3 overflow-y-auto space-y-4">
+          <nav className="flex-1 px-3 pb-3 overflow-y-auto space-y-5">
             {navGroups.map((group) => {
               const isCollapsed = collapsedGroups.has(group.label);
               return (
                 <div key={group.label}>
-                  <button onClick={() => toggleGroup(group.label)} className="flex items-center justify-between w-full px-2 mb-1">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-sidebar-foreground/40">{group.label}</span>
-                    <ChevronDown className={`w-3 h-3 text-sidebar-foreground/30 transition-transform ${isCollapsed ? "-rotate-90" : ""}`} />
+                  <button onClick={() => toggleGroup(group.label)} className="flex items-center justify-between w-full px-3 mb-1.5 group">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground/70">{group.label}</span>
+                    <ChevronDown className={`w-3 h-3 text-muted-foreground/50 transition-transform ${isCollapsed ? "-rotate-90" : ""}`} />
                   </button>
                   {!isCollapsed && (
                     <div className="space-y-0.5">
@@ -213,13 +223,13 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
                             key={item.href}
                             to={item.href}
                             onClick={() => setSidebarOpen(false)}
-                            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
+                            className={`flex items-center gap-3 px-3 py-2 rounded-full text-[13px] font-medium transition-all duration-200 ${
                               active
-                                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                                : "text-sidebar-foreground/65 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                                ? "bg-primary text-primary-foreground shadow-soft"
+                                : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                             }`}
                           >
-                            {item.icon}
+                            <span className={active ? "text-primary-foreground" : "text-muted-foreground/80"}>{item.icon}</span>
                             {item.label}
                           </Link>
                         );
@@ -231,8 +241,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             })}
           </nav>
 
-          <div className="px-3 py-3 border-t border-sidebar-border space-y-0.5">
-            <button onClick={handleSignOut} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-sidebar-foreground/50 hover:bg-destructive/20 hover:text-destructive transition-all w-full">
+          <div className="px-3 py-3 border-t border-border">
+            <button onClick={handleSignOut} className="flex items-center gap-3 px-3 py-2 rounded-full text-[13px] font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all w-full">
               <LogOut className="w-4 h-4" />
               {t("nav.signOut")}
             </button>
@@ -242,29 +252,32 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
       {sidebarOpen && <div className="fixed inset-0 z-40 bg-foreground/30 backdrop-blur-sm lg:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      <div className="flex-1 lg:ml-64">
-        <header className="sticky top-0 z-30 bg-card/90 backdrop-blur-xl border-b border-border px-6 py-3 flex items-center gap-4">
+      <div className="flex-1 lg:ml-[264px] min-w-0">
+        <header className="sticky top-0 z-30 bg-secondary/70 backdrop-blur-xl px-4 sm:px-6 py-3 flex items-center gap-4">
           <button className="lg:hidden text-foreground" onClick={() => setSidebarOpen(true)}>
             <Menu className="w-5 h-5" />
           </button>
-          <div className="flex-1">
-            <h1 className="font-sans text-sm font-semibold text-foreground">
-              {navGroups.flatMap(g => g.items).find(i => i.href === location.pathname)?.label || "Dashboard"}
-            </h1>
+          <div className="flex-1 min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground/70 font-semibold">
+              {currentGroup ? `${currentGroup} —` : ""} EstatesRW
+            </p>
+            <h1 className="font-display text-xl font-semibold text-foreground truncate leading-tight">{currentLabel}</h1>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 rounded-full border border-border bg-card px-2 py-1.5 shadow-soft">
             <LanguageSwitcher />
             <ThemeToggle />
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="text-xs font-bold text-primary">{(profile?.full_name || user?.email || "U").charAt(0).toUpperCase()}</span>
-            </div>
           </div>
         </header>
 
-        <main className="p-3 sm:p-4 md:p-6 lg:p-8 pb-20 lg:pb-8">{children}</main>
+        <main className="px-3 sm:px-4 md:px-6 pb-20 lg:pb-6">
+          <div className="bg-background border border-border rounded-3xl shadow-card p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-6.5rem)]">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
   );
+
 };
 
 export default DashboardLayout;
