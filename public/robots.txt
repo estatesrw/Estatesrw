@@ -1,6 +1,18 @@
 User-agent: Googlebot
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+User-agent: Google-AdSense
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -12,5 +24,7 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /auth
 
 Sitemap: https://estatesrw.lovable.app/sitemap.xml
