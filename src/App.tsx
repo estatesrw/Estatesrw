@@ -36,6 +36,7 @@ import ServiceBookingsPage from "./pages/dashboard/ServiceBookingsPage";
 import PropertyDetailsPage from "./pages/dashboard/PropertyDetailsPage";
 import BlogManagementPage from "./pages/dashboard/BlogManagementPage";
 import AdsManagementPage from "./pages/dashboard/AdsManagementPage";
+import AdSenseCompliance from "./pages/dashboard/admin/AdSenseCompliance";
 import VendorRegister from "./pages/dashboard/vendor/VendorRegister";
 import VendorProperties from "./pages/dashboard/vendor/VendorProperties";
 import VendorRoomTypes from "./pages/dashboard/vendor/VendorRoomTypes";
