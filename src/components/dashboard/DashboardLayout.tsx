@@ -90,6 +90,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "Content", items: [
             { label: "Blog", href: "/dashboard/blog", icon: <FileText className="w-4 h-4" /> },
             { label: "Advertisements", href: "/dashboard/ads", icon: <Shield className="w-4 h-4" /> },
+            { label: "AdSense Compliance", href: "/dashboard/admin/adsense-compliance", icon: <ClipboardList className="w-4 h-4" /> },
             { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
         ];

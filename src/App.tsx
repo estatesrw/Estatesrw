@@ -36,6 +36,7 @@ import ServiceBookingsPage from "./pages/dashboard/ServiceBookingsPage";
 import PropertyDetailsPage from "./pages/dashboard/PropertyDetailsPage";
 import BlogManagementPage from "./pages/dashboard/BlogManagementPage";
 import AdsManagementPage from "./pages/dashboard/AdsManagementPage";
+import AdSenseCompliance from "./pages/dashboard/admin/AdSenseCompliance";
 import VendorRegister from "./pages/dashboard/vendor/VendorRegister";
 import VendorProperties from "./pages/dashboard/vendor/VendorProperties";
 import VendorRoomTypes from "./pages/dashboard/vendor/VendorRoomTypes";
@@ -134,6 +135,7 @@ const AppRoutes = () => (
     <Route path="/dashboard/admin/agents" element={<DashboardRoute><AdminAgents /></DashboardRoute>} />
     <Route path="/dashboard/blog" element={<DashboardRoute><BlogManagementPage /></DashboardRoute>} />
     <Route path="/dashboard/ads" element={<DashboardRoute><AdsManagementPage /></DashboardRoute>} />
+    <Route path="/dashboard/admin/adsense-compliance" element={<DashboardRoute><AdSenseCompliance /></DashboardRoute>} />
 
     <Route path="*" element={<NotFound />} />
   </Routes>
