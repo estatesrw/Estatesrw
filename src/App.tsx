@@ -135,6 +135,7 @@ const AppRoutes = () => (
     <Route path="/dashboard/admin/agents" element={<DashboardRoute><AdminAgents /></DashboardRoute>} />
     <Route path="/dashboard/blog" element={<DashboardRoute><BlogManagementPage /></DashboardRoute>} />
     <Route path="/dashboard/ads" element={<DashboardRoute><AdsManagementPage /></DashboardRoute>} />
+    <Route path="/dashboard/admin/adsense-compliance" element={<DashboardRoute><AdSenseCompliance /></DashboardRoute>} />
 
     <Route path="*" element={<NotFound />} />
   </Routes>
