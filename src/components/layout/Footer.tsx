@@ -53,6 +53,7 @@ const Footer = () => {
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms & Conditions", href: "/terms-and-conditions" },
       { label: "Disclaimer", href: "/disclaimer" },
+      { label: "Cookie Policy", href: "/cookie-policy" },
     ],
   };
 

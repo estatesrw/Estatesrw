@@ -4,6 +4,21 @@ import { Cookie, X } from "lucide-react";
 
 const CONSENT_KEY = "estatesrw_cookie_consent";
 
+const updateConsentMode = (granted: boolean) => {
+  const value = granted ? "granted" : "denied";
+  const w = window as any;
+  w.dataLayer = w.dataLayer || [];
+  function gtag(...args: any[]) {
+    w.dataLayer.push(args);
+  }
+  gtag("consent", "update", {
+    ad_storage: value,
+    ad_user_data: value,
+    ad_personalization: value,
+    analytics_storage: value,
+  });
+};
+
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
 
@@ -17,11 +32,13 @@ const CookieConsent = () => {
 
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
+    updateConsentMode(true);
     setVisible(false);
   };
 
   const decline = () => {
     localStorage.setItem(CONSENT_KEY, "declined");
+    updateConsentMode(false);
     setVisible(false);
   };
 
@@ -35,9 +52,11 @@ const CookieConsent = () => {
           <div>
             <p className="text-sm font-semibold text-foreground mb-1">We value your privacy</p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              We use cookies and similar technologies to personalize content, serve ads through Google AdSense, and analyze traffic. 
-              By clicking "Accept All", you consent to our use of cookies. Read our{" "}
-              <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a> for more details.
+              We use cookies and similar technologies to keep you signed in, remember your preferences, analyze traffic,
+              and serve advertising through Google AdSense. Advertising and analytics cookies are only set after you
+              click "Accept All". You can withdraw consent at any time. Read our{" "}
+              <a href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</a> and{" "}
+              <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>.
             </p>
           </div>
         </div>
@@ -49,7 +68,7 @@ const CookieConsent = () => {
             Accept All
           </Button>
         </div>
-        <button onClick={decline} className="absolute top-3 right-3 md:hidden text-muted-foreground hover:text-foreground">
+        <button onClick={decline} aria-label="Close cookie banner" className="absolute top-3 right-3 md:hidden text-muted-foreground hover:text-foreground">
           <X className="w-4 h-4" />
         </button>
       </div>
