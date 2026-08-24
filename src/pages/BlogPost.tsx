@@ -8,6 +8,8 @@ import { Calendar, User, ArrowLeft, Facebook, Twitter, Linkedin, Link2 } from "l
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
+import AdSlot from "@/components/ads/AdSlot";
+
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
