@@ -210,8 +210,8 @@ const BlogPost = () => {
           </div>
 
           {/* Content */}
-          <div
-            className="prose prose-lg max-w-none text-foreground
+          {(() => {
+            const proseClass = `prose prose-lg max-w-none text-foreground
               prose-headings:font-display prose-headings:text-foreground
               prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
@@ -221,24 +221,21 @@ const BlogPost = () => {
               prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-blockquote:italic
               prose-ul:text-muted-foreground prose-ol:text-muted-foreground
               prose-li:mb-2
-              prose-img:rounded-xl"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(renderContentWithAds(post.content), {
-              ALLOWED_TAGS: ['p','h2','h3','h4','h5','h6','ul','ol','li','strong','em','a','blockquote','img','ins','div','br','span','code','pre','video','iframe'],
-              ALLOWED_ATTR: ['href','src','alt','class','style','data-ad-client','data-ad-slot','data-ad-format','data-full-width-responsive','target','rel','loading','controls','frameborder','allowfullscreen','width','height']
-            }) }}
-          />
+              prose-img:rounded-xl`;
+            return (
+              <>
+                <div className={proseClass} dangerouslySetInnerHTML={{ __html: sanitize(firstHalf) }} />
+                {secondHalf && <AdSlot name="articleInline" className="my-8" />}
+                {secondHalf && (
+                  <div className={proseClass} dangerouslySetInnerHTML={{ __html: sanitize(secondHalf) }} />
+                )}
+              </>
+            );
+          })()}
 
           {/* End-of-article ad */}
-          <div className="my-10 text-center">
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-2123974525989512"
-              data-ad-slot="auto"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          </div>
+          <AdSlot name="articleEnd" className="my-10" />
+
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
