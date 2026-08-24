@@ -8,6 +8,8 @@ import { Calendar, User, ArrowLeft, Facebook, Twitter, Linkedin, Link2 } from "l
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
+import AdSlot from "@/components/ads/AdSlot";
+
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -90,25 +92,35 @@ const BlogPost = () => {
     mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
   };
 
-  // Split content into paragraphs for ad insertion
-  const renderContentWithAds = (content: string) => {
-    // If content is HTML, split by closing tags of block elements
+  // Split the article into two halves so a real React-managed ad unit can be
+  // rendered between them (raw <ins> injected via innerHTML never initializes).
+  const splitContent = (content: string) => {
     const blocks = content.split(/(<\/(?:p|h[2-6]|ul|ol|blockquote)>)/gi);
-    const result: string[] = [];
     let blockCount = 0;
+    let splitIndex = -1;
 
     for (let i = 0; i < blocks.length; i++) {
-      result.push(blocks[i]);
       if (blocks[i].match(/^<\/(?:p|h[2-6]|ul|ol|blockquote)>$/i)) {
         blockCount++;
-        // Insert ad after 3rd block
         if (blockCount === 3) {
-          result.push('<div class="my-8 text-center"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2123974525989512" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins></div>');
+          splitIndex = i + 1;
+          break;
         }
       }
     }
-    return result.join("");
+
+    if (splitIndex === -1) return [content, ""];
+    return [blocks.slice(0, splitIndex).join(""), blocks.slice(splitIndex).join("")];
   };
+
+  const sanitize = (html: string) =>
+    DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ['p','h2','h3','h4','h5','h6','ul','ol','li','strong','em','a','blockquote','img','div','br','span','code','pre','video','iframe'],
+      ALLOWED_ATTR: ['href','src','alt','class','style','target','rel','loading','controls','frameborder','allowfullscreen','width','height'],
+    });
+
+  const [firstHalf, secondHalf] = splitContent(post.content);
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -200,8 +212,8 @@ const BlogPost = () => {
           </div>
 
           {/* Content */}
-          <div
-            className="prose prose-lg max-w-none text-foreground
+          {(() => {
+            const proseClass = `prose prose-lg max-w-none text-foreground
               prose-headings:font-display prose-headings:text-foreground
               prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
@@ -211,24 +223,21 @@ const BlogPost = () => {
               prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-blockquote:italic
               prose-ul:text-muted-foreground prose-ol:text-muted-foreground
               prose-li:mb-2
-              prose-img:rounded-xl"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(renderContentWithAds(post.content), {
-              ALLOWED_TAGS: ['p','h2','h3','h4','h5','h6','ul','ol','li','strong','em','a','blockquote','img','ins','div','br','span','code','pre','video','iframe'],
-              ALLOWED_ATTR: ['href','src','alt','class','style','data-ad-client','data-ad-slot','data-ad-format','data-full-width-responsive','target','rel','loading','controls','frameborder','allowfullscreen','width','height']
-            }) }}
-          />
+              prose-img:rounded-xl`;
+            return (
+              <>
+                <div className={proseClass} dangerouslySetInnerHTML={{ __html: sanitize(firstHalf) }} />
+                {secondHalf && <AdSlot name="articleInline" className="my-8" />}
+                {secondHalf && (
+                  <div className={proseClass} dangerouslySetInnerHTML={{ __html: sanitize(secondHalf) }} />
+                )}
+              </>
+            );
+          })()}
 
           {/* End-of-article ad */}
-          <div className="my-10 text-center">
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-2123974525989512"
-              data-ad-slot="auto"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          </div>
+          <AdSlot name="articleEnd" className="my-10" />
+
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
