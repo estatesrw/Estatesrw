@@ -287,6 +287,42 @@ export type Database = {
           },
         ]
       }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          id: string
+          new_value: Json | null
+          old_value: Json | null
+          property_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          new_value?: Json | null
+          old_value?: Json | null
+          property_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          new_value?: Json | null
+          old_value?: Json | null
+          property_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       blocked_dates: {
         Row: {
           created_at: string
@@ -424,6 +460,44 @@ export type Database = {
             columns: ["property_id"]
             isOneToOne: false
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      buildings: {
+        Row: {
+          code: string
+          created_at: string
+          display_order: number
+          id: string
+          name: string
+          property_id: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          name: string
+          property_id: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          name?: string
+          property_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "buildings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
             referencedColumns: ["id"]
           },
         ]
@@ -567,6 +641,38 @@ export type Database = {
         }
         Relationships: []
       }
+      floors: {
+        Row: {
+          building_id: string
+          created_at: string
+          id: string
+          label: string | null
+          level: number
+        }
+        Insert: {
+          building_id: string
+          created_at?: string
+          id?: string
+          label?: string | null
+          level: number
+        }
+        Update: {
+          building_id?: string
+          created_at?: string
+          id?: string
+          label?: string | null
+          level?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "floors_building_id_fkey"
+            columns: ["building_id"]
+            isOneToOne: false
+            referencedRelation: "buildings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       maintenance_tickets: {
         Row: {
           assigned_to: string | null
@@ -614,6 +720,53 @@ export type Database = {
           },
         ]
       }
+      management_agreements: {
+        Row: {
+          agent_commission_percent: number
+          created_at: string
+          end_date: string | null
+          id: string
+          management_fee_percent: number
+          notes: string | null
+          property_id: string
+          start_date: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          agent_commission_percent?: number
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          management_fee_percent?: number
+          notes?: string | null
+          property_id: string
+          start_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          agent_commission_percent?: number
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          management_fee_percent?: number
+          notes?: string | null
+          property_id?: string
+          start_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "management_agreements_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       messages: {
         Row: {
           content: string
@@ -638,6 +791,77 @@ export type Database = {
           read?: boolean
           receiver_id?: string
           sender_id?: string
+        }
+        Relationships: []
+      }
+      organization_members: {
+        Row: {
+          created_at: string
+          id: string
+          member_role: Database["public"]["Enums"]["org_member_role"]
+          organization_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          member_role?: Database["public"]["Enums"]["org_member_role"]
+          organization_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          member_role?: Database["public"]["Enums"]["org_member_role"]
+          organization_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_members_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          contact_email: string | null
+          contact_phone: string | null
+          country: string
+          created_at: string
+          created_by: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          slug?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -678,6 +902,65 @@ export type Database = {
             columns: ["booking_id"]
             isOneToOne: false
             referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pm_properties: {
+        Row: {
+          address: string
+          city: string
+          code: string
+          country: string
+          cover_image: string | null
+          created_at: string
+          currency: string
+          description: string | null
+          id: string
+          name: string
+          organization_id: string
+          status: string
+          unit_id_format: string
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          city?: string
+          code: string
+          country?: string
+          cover_image?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          name: string
+          organization_id: string
+          status?: string
+          unit_id_format?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          city?: string
+          code?: string
+          country?: string
+          cover_image?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          name?: string
+          organization_id?: string
+          status?: string
+          unit_id_format?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pm_properties_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
             referencedColumns: ["id"]
           },
         ]
@@ -777,6 +1060,38 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      property_assignments: {
+        Row: {
+          assignment_role: Database["public"]["Enums"]["pm_assignment_role"]
+          created_at: string
+          id: string
+          property_id: string
+          user_id: string
+        }
+        Insert: {
+          assignment_role: Database["public"]["Enums"]["pm_assignment_role"]
+          created_at?: string
+          id?: string
+          property_id: string
+          user_id: string
+        }
+        Update: {
+          assignment_role?: Database["public"]["Enums"]["pm_assignment_role"]
+          created_at?: string
+          id?: string
+          property_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_assignments_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       property_images: {
         Row: {
@@ -1108,6 +1423,145 @@ export type Database = {
           },
         ]
       }
+      unit_status_history: {
+        Row: {
+          changed_by: string | null
+          created_at: string
+          from_status: Database["public"]["Enums"]["unit_status"] | null
+          id: string
+          note: string | null
+          property_id: string
+          to_status: Database["public"]["Enums"]["unit_status"]
+          unit_id: string
+        }
+        Insert: {
+          changed_by?: string | null
+          created_at?: string
+          from_status?: Database["public"]["Enums"]["unit_status"] | null
+          id?: string
+          note?: string | null
+          property_id: string
+          to_status: Database["public"]["Enums"]["unit_status"]
+          unit_id: string
+        }
+        Update: {
+          changed_by?: string | null
+          created_at?: string
+          from_status?: Database["public"]["Enums"]["unit_status"] | null
+          id?: string
+          note?: string | null
+          property_id?: string
+          to_status?: Database["public"]["Enums"]["unit_status"]
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_status_history_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_status_history_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      units: {
+        Row: {
+          bathrooms: number
+          bedrooms: number
+          building_id: string
+          created_at: string
+          deposit: number | null
+          features: string[]
+          floor_id: string
+          furnished: string
+          id: string
+          images: string[]
+          monthly_rent: number
+          notes: string | null
+          parking_spaces: number
+          property_id: string
+          size_sqm: number | null
+          status: Database["public"]["Enums"]["unit_status"]
+          unit_code: string
+          unit_number: string
+          updated_at: string
+          view_description: string | null
+        }
+        Insert: {
+          bathrooms?: number
+          bedrooms?: number
+          building_id: string
+          created_at?: string
+          deposit?: number | null
+          features?: string[]
+          floor_id: string
+          furnished?: string
+          id?: string
+          images?: string[]
+          monthly_rent?: number
+          notes?: string | null
+          parking_spaces?: number
+          property_id: string
+          size_sqm?: number | null
+          status?: Database["public"]["Enums"]["unit_status"]
+          unit_code: string
+          unit_number: string
+          updated_at?: string
+          view_description?: string | null
+        }
+        Update: {
+          bathrooms?: number
+          bedrooms?: number
+          building_id?: string
+          created_at?: string
+          deposit?: number | null
+          features?: string[]
+          floor_id?: string
+          furnished?: string
+          id?: string
+          images?: string[]
+          monthly_rent?: number
+          notes?: string | null
+          parking_spaces?: number
+          property_id?: string
+          size_sqm?: number | null
+          status?: Database["public"]["Enums"]["unit_status"]
+          unit_code?: string
+          unit_number?: string
+          updated_at?: string
+          view_description?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "units_building_id_fkey"
+            columns: ["building_id"]
+            isOneToOne: false
+            referencedRelation: "buildings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "units_floor_id_fkey"
+            columns: ["floor_id"]
+            isOneToOne: false
+            referencedRelation: "floors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "units_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -1278,6 +1732,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      building_property_id: { Args: { _building_id: string }; Returns: string }
+      floor_property_id: { Args: { _floor_id: string }; Returns: string }
       get_vendor_id: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
@@ -1286,12 +1742,28 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_org_member: {
+        Args: { _org_id: string; _user_id: string }
+        Returns: boolean
+      }
       is_property_owner: {
         Args: { _property_id: string; _user_id: string }
         Returns: boolean
       }
       is_vendor_owner: {
         Args: { _user_id: string; _vendor_id: string }
+        Returns: boolean
+      }
+      pm_can_manage_property: {
+        Args: { _property_id: string; _user_id: string }
+        Returns: boolean
+      }
+      pm_can_view_owner_finances: {
+        Args: { _property_id: string; _user_id: string }
+        Returns: boolean
+      }
+      pm_can_view_property: {
+        Args: { _property_id: string; _user_id: string }
         Returns: boolean
       }
     }
@@ -1303,6 +1775,19 @@ export type Database = {
         | "admin"
         | "vendor"
         | "agent"
+      org_member_role: "owner" | "admin" | "member"
+      pm_assignment_role: "manager" | "agent"
+      unit_status:
+        | "available"
+        | "viewing"
+        | "reserved"
+        | "lease_pending"
+        | "occupied"
+        | "notice_given"
+        | "move_out"
+        | "inspection"
+        | "maintenance"
+        | "offline"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1437,6 +1922,20 @@ export const Constants = {
         "admin",
         "vendor",
         "agent",
+      ],
+      org_member_role: ["owner", "admin", "member"],
+      pm_assignment_role: ["manager", "agent"],
+      unit_status: [
+        "available",
+        "viewing",
+        "reserved",
+        "lease_pending",
+        "occupied",
+        "notice_given",
+        "move_out",
+        "inspection",
+        "maintenance",
+        "offline",
       ],
     },
   },
