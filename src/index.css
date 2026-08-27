@@ -216,3 +216,47 @@
   from { opacity: 0; transform: translateX(-12px); }
   to { opacity: 1; transform: translateX(0); }
 }
+/* ── Unit status tokens (Property Management OS) ───────────────── */
+:root {
+  --status-available: 152 45% 38%;
+  --status-viewing: 199 70% 42%;
+  --status-reserved: 262 52% 52%;
+  --status-lease_pending: 32 85% 45%;
+  --status-occupied: 158 100% 13%;
+  --status-notice_given: 45 85% 42%;
+  --status-move_out: 15 75% 48%;
+  --status-inspection: 220 12% 42%;
+  --status-maintenance: 0 65% 48%;
+  --status-offline: 220 8% 55%;
+}
+.dark {
+  --status-available: 152 45% 55%;
+  --status-viewing: 199 70% 58%;
+  --status-reserved: 262 52% 68%;
+  --status-lease_pending: 32 85% 60%;
+  --status-occupied: 158 40% 55%;
+  --status-notice_given: 45 85% 58%;
+  --status-move_out: 15 75% 62%;
+  --status-inspection: 220 12% 65%;
+  --status-maintenance: 0 65% 62%;
+  --status-offline: 220 8% 62%;
+}
+
+@layer components {
+  .status-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide;
+    background-color: hsl(var(--status-color) / 0.12);
+    color: hsl(var(--status-color));
+  }
+  .unit-card {
+    border-color: hsl(var(--status-color) / 0.35);
+    background-color: hsl(var(--status-color) / 0.07);
+  }
+  .unit-card:hover {
+    border-color: hsl(var(--status-color) / 0.7);
+    background-color: hsl(var(--status-color) / 0.14);
+  }
+  .status-dot {
+    background-color: hsl(var(--status-color));
+  }
+}
