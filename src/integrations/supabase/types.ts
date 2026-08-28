@@ -673,6 +673,81 @@ export type Database = {
           },
         ]
       }
+      leases: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          deposit: number
+          end_date: string | null
+          id: string
+          monthly_rent: number
+          notes: string | null
+          payment_day: number
+          property_id: string
+          start_date: string
+          status: string
+          tenant_email: string | null
+          tenant_id: string
+          tenant_name: string
+          tenant_phone: string | null
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          deposit?: number
+          end_date?: string | null
+          id?: string
+          monthly_rent?: number
+          notes?: string | null
+          payment_day?: number
+          property_id: string
+          start_date: string
+          status?: string
+          tenant_email?: string | null
+          tenant_id: string
+          tenant_name: string
+          tenant_phone?: string | null
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          deposit?: number
+          end_date?: string | null
+          id?: string
+          monthly_rent?: number
+          notes?: string | null
+          payment_day?: number
+          property_id?: string
+          start_date?: string
+          status?: string
+          tenant_email?: string | null
+          tenant_id?: string
+          tenant_name?: string
+          tenant_phone?: string | null
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leases_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leases_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       maintenance_tickets: {
         Row: {
           assigned_to: string | null
@@ -1124,6 +1199,79 @@ export type Database = {
             columns: ["property_id"]
             isOneToOne: false
             referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rent_invoices: {
+        Row: {
+          amount: number
+          amount_paid: number
+          created_at: string
+          due_date: string
+          id: string
+          lease_id: string
+          paid_at: string | null
+          period_start: string
+          property_id: string
+          reference: string | null
+          status: string
+          tenant_id: string
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          amount_paid?: number
+          created_at?: string
+          due_date: string
+          id?: string
+          lease_id: string
+          paid_at?: string | null
+          period_start: string
+          property_id: string
+          reference?: string | null
+          status?: string
+          tenant_id: string
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          amount_paid?: number
+          created_at?: string
+          due_date?: string
+          id?: string
+          lease_id?: string
+          paid_at?: string | null
+          period_start?: string
+          property_id?: string
+          reference?: string | null
+          status?: string
+          tenant_id?: string
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rent_invoices_lease_id_fkey"
+            columns: ["lease_id"]
+            isOneToOne: false
+            referencedRelation: "leases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rent_invoices_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rent_invoices_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "units"
             referencedColumns: ["id"]
           },
         ]
@@ -1764,6 +1912,14 @@ export type Database = {
       }
       pm_can_view_property: {
         Args: { _property_id: string; _user_id: string }
+        Returns: boolean
+      }
+      pm_is_tenant_of_property: {
+        Args: { _property_id: string; _user_id: string }
+        Returns: boolean
+      }
+      pm_is_tenant_of_unit: {
+        Args: { _unit_id: string; _user_id: string }
         Returns: boolean
       }
     }
