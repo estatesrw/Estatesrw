@@ -1,7 +1,7 @@
+import { Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import TenantOverview from "@/components/dashboard/tenant/TenantOverview";
 import LandlordOverview from "@/components/dashboard/landlord/LandlordOverview";
-import AdminOverview from "@/components/dashboard/admin/AdminOverview";
 import VendorOverview from "@/pages/dashboard/vendor/VendorOverview";
 import AgentOverview from "@/pages/dashboard/agent/AgentOverview";
 
@@ -13,7 +13,7 @@ const DashboardOverview = () => {
     case "landlord":
       return <LandlordOverview />;
     case "admin":
-      return <AdminOverview />;
+      return <Navigate to="/manage" replace />;
     case "vendor":
       return <VendorOverview />;
     case "agent":

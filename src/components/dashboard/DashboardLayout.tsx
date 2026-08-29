@@ -70,28 +70,26 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         ];
       case "admin":
         return [
-          { label: "Platform", items: [
-            { label: "Overview", href: "/dashboard", icon: <PieChart className="w-4 h-4" /> },
-            { label: "Analytics", href: "/dashboard/admin/analytics", icon: <BarChart3 className="w-4 h-4" /> },
+          { label: "Property Management", items: [
+            { label: "Command Center", href: "/manage", icon: <PieChart className="w-4 h-4" /> },
+            { label: "Occupancy Map", href: "/manage/occupancy", icon: <Building2 className="w-4 h-4" /> },
+            { label: "Team & Access", href: "/manage/access", icon: <Shield className="w-4 h-4" /> },
           ]},
-          { label: "Management", items: [
-            { label: "Properties", href: "/dashboard/properties", icon: <Building2 className="w-4 h-4" /> },
-            { label: "Vendors", href: "/dashboard/admin/vendors", icon: <BedDouble className="w-4 h-4" /> },
-            { label: "Bookings", href: "/dashboard/admin/bookings", icon: <CalendarCheck className="w-4 h-4" /> },
-            { label: "Service Providers", href: "/dashboard/services", icon: <Briefcase className="w-4 h-4" /> },
-            { label: "Agents", href: "/dashboard/admin/agents", icon: <UserPlus className="w-4 h-4" /> },
-          ]},
-          { label: "Users & Finance", items: [
+          { label: "People", items: [
             { label: "Users", href: "/dashboard/users", icon: <Users className="w-4 h-4" /> },
+            { label: "Agents", href: "/dashboard/admin/agents", icon: <UserPlus className="w-4 h-4" /> },
+            { label: "Vendors", href: "/dashboard/admin/vendors", icon: <BedDouble className="w-4 h-4" /> },
+            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+          ]},
+          { label: "Finance", items: [
+            { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
             { label: "Revenue", href: "/dashboard/admin/commissions", icon: <DollarSign className="w-4 h-4" /> },
             { label: "Withdrawals", href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
-            { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
           ]},
-          { label: "Content", items: [
+          { label: "Content & Growth", items: [
+            { label: "Analytics", href: "/dashboard/admin/analytics", icon: <BarChart3 className="w-4 h-4" /> },
             { label: "Blog", href: "/dashboard/blog", icon: <FileText className="w-4 h-4" /> },
-            { label: "Advertisements", href: "/dashboard/ads", icon: <Shield className="w-4 h-4" /> },
-            { label: "AdSense Compliance", href: "/dashboard/admin/adsense-compliance", icon: <ClipboardList className="w-4 h-4" /> },
-            { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
+            { label: "Advertisements", href: "/dashboard/ads", icon: <ClipboardList className="w-4 h-4" /> },
           ]},
         ];
       case "landlord":

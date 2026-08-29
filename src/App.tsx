@@ -57,6 +57,9 @@ import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
 import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
 import GuestPaymentHistoryPage from "./pages/dashboard/GuestPaymentHistoryPage";
 import WithdrawalsPage from "./pages/dashboard/WithdrawalsPage";
+import ManageOverview from "./pages/manage/ManageOverview";
+import OccupancyMap from "./pages/manage/OccupancyMap";
+import AccessControlPage from "./pages/manage/AccessControlPage";
 
 const queryClient = new QueryClient();
 
@@ -86,6 +89,11 @@ const AppRoutes = () => (
     <Route path="/blog" element={<Blog />} />
     <Route path="/blog/:slug" element={<BlogPost />} />
     
+
+    {/* Property Management OS */}
+    <Route path="/manage" element={<DashboardRoute><ManageOverview /></DashboardRoute>} />
+    <Route path="/manage/occupancy" element={<DashboardRoute><OccupancyMap /></DashboardRoute>} />
+    <Route path="/manage/access" element={<DashboardRoute><AccessControlPage /></DashboardRoute>} />
 
     {/* Dashboard - Shared */}
     <Route path="/dashboard" element={<DashboardRoute><DashboardOverview /></DashboardRoute>} />
