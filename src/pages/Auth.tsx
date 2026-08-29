@@ -29,17 +29,29 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
 
+    const friendly = (message: string) => {
+      const m = message.toLowerCase();
+      if (m.includes("already registered") || m.includes("already been registered"))
+        return "This email already has an account. Try signing in instead.";
+      if (m.includes("invalid login credentials")) return "Wrong email or password. Please try again.";
+      if (m.includes("email not confirmed")) return "Please confirm your email, then sign in.";
+      if (m.includes("password")) return message;
+      return message;
+    };
+
     if (isLogin) {
-      const { error } = await signIn(email, password);
+      const { error } = await signIn(email.trim(), password);
       if (error) {
-        toast({ title: "Login failed", description: error.message, variant: "destructive" });
+        toast({ title: "Login failed", description: friendly(error.message), variant: "destructive" });
       } else {
         navigate("/dashboard");
       }
     } else {
-      const { error } = await signUp(email, password, fullName, role);
+      const { error } = await signUp(email.trim(), password, fullName.trim(), role);
       if (error) {
-        toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
+        const isExisting = /already/i.test(error.message);
+        toast({ title: "Sign up failed", description: friendly(error.message), variant: "destructive" });
+        if (isExisting) setIsLogin(true);
       } else {
         toast({ title: "Account created!", description: "You're all set. Redirecting to your dashboard..." });
         navigate("/dashboard");
