@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import DemoUserSwitcher from "@/components/dashboard/DemoUserSwitcher";
 
 interface NavGroup {
   label: string;
