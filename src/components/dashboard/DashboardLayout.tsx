@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import DemoUserSwitcher from "@/components/dashboard/DemoUserSwitcher";
 
 interface NavGroup {
   label: string;
@@ -240,7 +241,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             })}
           </nav>
 
-          <div className="px-3 py-3 border-t border-border">
+          <div className="px-3 py-3 border-t border-border space-y-1">
+            <DemoUserSwitcher />
             <button onClick={handleSignOut} className="flex items-center gap-3 px-3 py-2 rounded-full text-[13px] font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all w-full">
               <LogOut className="w-4 h-4" />
               {t("nav.signOut")}
