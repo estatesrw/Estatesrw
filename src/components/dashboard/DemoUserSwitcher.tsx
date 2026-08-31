@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { preservedRoute, setImpersonation } from "@/lib/impersonation";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,7 @@ const DEMO_ACCOUNTS = [
 const DemoUserSwitcher = () => {
   const { roles, signIn, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
 
@@ -28,13 +30,17 @@ const DemoUserSwitcher = () => {
 
   const switchTo = async (email: string, label: string) => {
     setPending(email);
+    // Keep the admin's current view (including property/unit filters in the query string)
+    // so the impersonated user lands on the most relevant screen.
+    const target = preservedRoute(location.pathname, location.search);
     try {
       await signOut();
       const { error } = await signIn(email, DEMO_PASSWORD);
       if (error) throw error;
-      toast.success(`Now viewing as ${label}`, { description: "Sign out to return to your admin account." });
+      setImpersonation({ email, label, returnPath: target });
+      toast.success(`Now viewing as ${label}`, { description: "Use “Exit impersonation” in the banner to return." });
       setOpen(false);
-      navigate("/dashboard");
+      navigate(target);
     } catch (e: any) {
       toast.error(e?.message || "Could not switch to this demo account");
     } finally {
