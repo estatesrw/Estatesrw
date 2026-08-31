@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import CookieConsent from "@/components/CookieConsent";
+import ImpersonationBanner from "@/components/dashboard/ImpersonationBanner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -159,6 +160,7 @@ const App = () => (
           <BrowserRouter>
             <AuthProvider>
               <AppRoutes />
+              <ImpersonationBanner />
               <CookieConsent />
             </AuthProvider>
           </BrowserRouter>

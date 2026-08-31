@@ -24,6 +24,8 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const nextParam = new URLSearchParams(window.location.search).get("next");
+  const destination = nextParam && nextParam.startsWith("/") ? nextParam : "/dashboard";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +46,7 @@ const Auth = () => {
       if (error) {
         toast({ title: "Login failed", description: friendly(error.message), variant: "destructive" });
       } else {
-        navigate("/dashboard");
+        navigate(destination);
       }
     } else {
       const { error } = await signUp(email.trim(), password, fullName.trim(), role);
