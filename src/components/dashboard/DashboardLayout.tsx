@@ -145,6 +145,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "Dashboard", items: [
             { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
+          { label: "My Tenancy", items: [
+            { label: "My Home", href: "/manage/my-home", icon: <Home className="w-4 h-4" /> },
+          ]},
           { label: "Accommodation", items: [
             { label: "Browse Stays", href: "/dashboard/accommodation", icon: <BedDouble className="w-4 h-4" /> },
             { label: "Browse Rentals", href: "/dashboard/browse", icon: <Building2 className="w-4 h-4" /> },

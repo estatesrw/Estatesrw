@@ -61,6 +61,7 @@ import WithdrawalsPage from "./pages/dashboard/WithdrawalsPage";
 import ManageOverview from "./pages/manage/ManageOverview";
 import OccupancyMap from "./pages/manage/OccupancyMap";
 import AccessControlPage from "./pages/manage/AccessControlPage";
+import MyHomePage from "./pages/manage/MyHomePage";
 
 const queryClient = new QueryClient();
 
@@ -95,6 +96,7 @@ const AppRoutes = () => (
     <Route path="/manage" element={<DashboardRoute><ManageOverview /></DashboardRoute>} />
     <Route path="/manage/occupancy" element={<DashboardRoute><OccupancyMap /></DashboardRoute>} />
     <Route path="/manage/access" element={<DashboardRoute><AccessControlPage /></DashboardRoute>} />
+    <Route path="/manage/my-home" element={<DashboardRoute><MyHomePage /></DashboardRoute>} />
 
     {/* Dashboard - Shared */}
     <Route path="/dashboard" element={<DashboardRoute><DashboardOverview /></DashboardRoute>} />
