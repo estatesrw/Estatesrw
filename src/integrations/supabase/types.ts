@@ -641,6 +641,144 @@ export type Database = {
         }
         Relationships: []
       }
+      contract_signatures: {
+        Row: {
+          contract_id: string
+          id: string
+          signed_at: string
+          signer_name: string
+          signer_role: string
+          typed_signature: string
+          user_id: string
+        }
+        Insert: {
+          contract_id: string
+          id?: string
+          signed_at?: string
+          signer_name: string
+          signer_role: string
+          typed_signature: string
+          user_id: string
+        }
+        Update: {
+          contract_id?: string
+          id?: string
+          signed_at?: string
+          signer_name?: string
+          signer_role?: string
+          typed_signature?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contract_signatures_contract_id_fkey"
+            columns: ["contract_id"]
+            isOneToOne: false
+            referencedRelation: "contracts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contracts: {
+        Row: {
+          content: string
+          contract_type: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          deposit: number
+          end_date: string | null
+          id: string
+          input_details: Json
+          landlord_id: string | null
+          landlord_name: string | null
+          lease_id: string | null
+          management_fee_percent: number
+          manager_name: string | null
+          monthly_rent: number
+          property_id: string
+          start_date: string | null
+          status: string
+          tenant_id: string | null
+          tenant_name: string
+          title: string
+          unit_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          contract_type?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          deposit?: number
+          end_date?: string | null
+          id?: string
+          input_details?: Json
+          landlord_id?: string | null
+          landlord_name?: string | null
+          lease_id?: string | null
+          management_fee_percent?: number
+          manager_name?: string | null
+          monthly_rent?: number
+          property_id: string
+          start_date?: string | null
+          status?: string
+          tenant_id?: string | null
+          tenant_name: string
+          title: string
+          unit_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          contract_type?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          deposit?: number
+          end_date?: string | null
+          id?: string
+          input_details?: Json
+          landlord_id?: string | null
+          landlord_name?: string | null
+          lease_id?: string | null
+          management_fee_percent?: number
+          manager_name?: string | null
+          monthly_rent?: number
+          property_id?: string
+          start_date?: string | null
+          status?: string
+          tenant_id?: string | null
+          tenant_name?: string
+          title?: string
+          unit_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contracts_lease_id_fkey"
+            columns: ["lease_id"]
+            isOneToOne: false
+            referencedRelation: "leases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "pm_properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       floors: {
         Row: {
           building_id: string
@@ -1881,6 +2019,10 @@ export type Database = {
     }
     Functions: {
       building_property_id: { Args: { _building_id: string }; Returns: string }
+      can_view_contract: {
+        Args: { _contract_id: string; _user_id: string }
+        Returns: boolean
+      }
       floor_property_id: { Args: { _floor_id: string }; Returns: string }
       get_vendor_id: { Args: { _user_id: string }; Returns: string }
       has_role: {
@@ -1888,6 +2030,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_contract_party: {
+        Args: { _contract_id: string; _user_id: string }
         Returns: boolean
       }
       is_org_member: {
