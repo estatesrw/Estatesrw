@@ -1,0 +1,1 @@
+REVOKE ALL ON FUNCTION public.sync_contract_signature_status() FROM PUBLIC, anon, authenticated;
