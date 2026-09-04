@@ -61,6 +61,7 @@ import WithdrawalsPage from "./pages/dashboard/WithdrawalsPage";
 import ManageOverview from "./pages/manage/ManageOverview";
 import OccupancyMap from "./pages/manage/OccupancyMap";
 import AccessControlPage from "./pages/manage/AccessControlPage";
+import MyHomePage from "./pages/manage/MyHomePage";
 
 const queryClient = new QueryClient();
 
