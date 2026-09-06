@@ -62,6 +62,12 @@ import ManageOverview from "./pages/manage/ManageOverview";
 import OccupancyMap from "./pages/manage/OccupancyMap";
 import AccessControlPage from "./pages/manage/AccessControlPage";
 import MyHomePage from "./pages/manage/MyHomePage";
+import LeasesPage from "./pages/manage/LeasesPage";
+import RentCollectionPage from "./pages/manage/RentCollectionPage";
+import UnitsTablePage from "./pages/manage/UnitsTablePage";
+import PropertySetupPage from "./pages/manage/PropertySetupPage";
+import ActivityLogPage from "./pages/manage/ActivityLogPage";
+import ContractsPage from "./pages/manage/ContractsPage";
 
 const queryClient = new QueryClient();
 
