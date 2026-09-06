@@ -7,7 +7,7 @@ import {
   BarChart3, LogOut, Menu, X, FileText, ClipboardList,
   Briefcase, ShoppingBag, CalendarCheck, BedDouble, Calendar,
   DollarSign, Wallet, ChevronDown, Link2, Settings, UserPlus,
-  PieChart, Shield, Heart
+  PieChart, Shield, Heart, FileSignature, History
 } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -74,7 +74,12 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "Property Management", items: [
             { label: "Command Center", href: "/manage", icon: <PieChart className="w-4 h-4" /> },
             { label: "Occupancy Map", href: "/manage/occupancy", icon: <Building2 className="w-4 h-4" /> },
+            { label: "Units Register", href: "/manage/units", icon: <ClipboardList className="w-4 h-4" /> },
+            { label: "Leases", href: "/manage/leases", icon: <FileText className="w-4 h-4" /> },
+            { label: "Contracts", href: "/manage/contracts", icon: <FileSignature className="w-4 h-4" /> },
+            { label: "Property Setup", href: "/manage/setup", icon: <Settings className="w-4 h-4" /> },
             { label: "Team & Access", href: "/manage/access", icon: <Shield className="w-4 h-4" /> },
+            { label: "Activity Log", href: "/manage/activity", icon: <History className="w-4 h-4" /> },
           ]},
           { label: "People", items: [
             { label: "Users", href: "/dashboard/users", icon: <Users className="w-4 h-4" /> },
@@ -83,6 +88,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
           { label: "Finance", items: [
+            { label: "Rent Collection", href: "/manage/rent", icon: <DollarSign className="w-4 h-4" /> },
             { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
             { label: "Revenue", href: "/dashboard/admin/commissions", icon: <DollarSign className="w-4 h-4" /> },
             { label: "Withdrawals", href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
@@ -103,6 +109,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             { label: "Applications", href: "/dashboard/applications", icon: <ClipboardList className="w-4 h-4" /> },
             { label: "Bookings", href: "/dashboard/bookings", icon: <FileText className="w-4 h-4" /> },
             { label: "Maintenance", href: "/dashboard/maintenance", icon: <Wrench className="w-4 h-4" /> },
+            { label: "Contracts", href: "/manage/contracts", icon: <FileSignature className="w-4 h-4" /> },
           ]},
           { label: "Finance", items: [
             { label: "Payments", href: "/dashboard/payments", icon: <CreditCard className="w-4 h-4" /> },
@@ -147,6 +154,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           ]},
           { label: "My Tenancy", items: [
             { label: "My Home", href: "/manage/my-home", icon: <Home className="w-4 h-4" /> },
+            { label: "My Contracts", href: "/manage/contracts", icon: <FileSignature className="w-4 h-4" /> },
           ]},
           { label: "Accommodation", items: [
             { label: "Browse Stays", href: "/dashboard/accommodation", icon: <BedDouble className="w-4 h-4" /> },
