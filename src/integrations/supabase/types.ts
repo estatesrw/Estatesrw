@@ -1213,16 +1213,20 @@ export type Database = {
           address: string
           amenities: string[] | null
           area: number | null
+          available_from: string | null
           bathrooms: number | null
           bedrooms: number | null
           city: string
           country: string
           created_at: string
+          currency: string
           description: string | null
           id: string
           images: string[] | null
           landlord_id: string
           latitude: number | null
+          listed_at: string | null
+          listing_type: string
           longitude: number | null
           price: number
           property_type: string
@@ -1234,16 +1238,20 @@ export type Database = {
           address: string
           amenities?: string[] | null
           area?: number | null
+          available_from?: string | null
           bathrooms?: number | null
           bedrooms?: number | null
           city: string
           country?: string
           created_at?: string
+          currency?: string
           description?: string | null
           id?: string
           images?: string[] | null
           landlord_id: string
           latitude?: number | null
+          listed_at?: string | null
+          listing_type?: string
           longitude?: number | null
           price?: number
           property_type?: string
@@ -1255,16 +1263,20 @@ export type Database = {
           address?: string
           amenities?: string[] | null
           area?: number | null
+          available_from?: string | null
           bathrooms?: number | null
           bedrooms?: number | null
           city?: string
           country?: string
           created_at?: string
+          currency?: string
           description?: string | null
           id?: string
           images?: string[] | null
           landlord_id?: string
           latitude?: number | null
+          listed_at?: string | null
+          listing_type?: string
           longitude?: number | null
           price?: number
           property_type?: string

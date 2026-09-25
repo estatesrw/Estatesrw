@@ -15,7 +15,8 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   const navLinks = [
-    { label: t("nav.properties"), href: "/dashboard/browse" },
+    { label: "Buy", href: "/houses-for-sale-kigali" },
+    { label: "Rent", href: "/houses-for-rent-kigali" },
     { label: "Services", href: "/services" },
     { label: t("nav.blog"), href: "/blog" },
     { label: t("nav.about"), href: "/about-us" },

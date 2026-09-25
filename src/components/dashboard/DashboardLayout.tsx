@@ -75,6 +75,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             { label: "Command Center", href: "/manage", icon: <PieChart className="w-4 h-4" /> },
             { label: "Occupancy Map", href: "/manage/occupancy", icon: <Building2 className="w-4 h-4" /> },
             { label: "Units Register", href: "/manage/units", icon: <ClipboardList className="w-4 h-4" /> },
+            { label: "Sale & Rent Listings", href: "/dashboard/properties", icon: <Building2 className="w-4 h-4" /> },
             { label: "Leases", href: "/manage/leases", icon: <FileText className="w-4 h-4" /> },
             { label: "Contracts", href: "/manage/contracts", icon: <FileSignature className="w-4 h-4" /> },
             { label: "Property Setup", href: "/manage/setup", icon: <Settings className="w-4 h-4" /> },
