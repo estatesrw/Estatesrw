@@ -20,6 +20,8 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import PublicListings from "./pages/PublicListings";
+import ListingDetail from "./pages/ListingDetail";
 
 import DashboardLayout from "./components/dashboard/DashboardLayout";
 import DashboardOverview from "./pages/dashboard/DashboardOverview";
@@ -96,6 +98,9 @@ const AppRoutes = () => (
     <Route path="/contact" element={<Contact />} />
     <Route path="/blog" element={<Blog />} />
     <Route path="/blog/:slug" element={<BlogPost />} />
+    <Route path="/houses-for-sale-kigali" element={<PublicListings type="sale" />} />
+    <Route path="/houses-for-rent-kigali" element={<PublicListings type="rent" />} />
+    <Route path="/listing/:id" element={<ListingDetail />} />
     
 
     {/* Property Management OS */}
