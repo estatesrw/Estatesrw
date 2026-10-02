@@ -45,6 +45,7 @@ const Footer = () => {
   const footerLinks = {
     company: [
       { label: "About Us", href: "/about-us" },
+      { label: "Our Work", href: "/our-work" },
       { label: "Houses for Sale", href: "/houses-for-sale-kigali" },
       { label: "Houses for Rent", href: "/houses-for-rent-kigali" },
       { label: "Blog", href: "/blog" },

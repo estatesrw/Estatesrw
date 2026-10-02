@@ -16,6 +16,7 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import Disclaimer from "./pages/Disclaimer";
 import CookiePolicy from "./pages/CookiePolicy";
 import AboutUs from "./pages/AboutUs";
+import OurWork from "./pages/OurWork";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
@@ -94,6 +95,7 @@ const AppRoutes = () => (
     <Route path="/disclaimer" element={<Disclaimer />} />
     <Route path="/cookie-policy" element={<CookiePolicy />} />
     <Route path="/about-us" element={<AboutUs />} />
+    <Route path="/our-work" element={<OurWork />} />
     <Route path="/services" element={<Services />} />
     <Route path="/contact" element={<Contact />} />
     <Route path="/blog" element={<Blog />} />
