@@ -9,7 +9,8 @@ import {
   Hotel, Users, Briefcase, Home, Wrench, Scale, ClipboardCheck, ShieldCheck,
 } from "lucide-react";
 
-const PDF_PATH = "/EstatesRW-Company-Profile.pdf";
+import profilePdf from "@/assets/EstatesRW-Company-Profile.pdf.asset.json";
+const PDF_PATH = profilePdf.url;
 
 const pillars = [
   {
@@ -114,7 +115,7 @@ const OurWork = () => {
                   asChild
                   onClick={handleDownload}
                 >
-                  <a href={PDF_PATH} download>
+                  <a href={PDF_PATH} target="_blank" rel="noopener noreferrer" download="EstatesRW-Company-Profile.pdf">
                     <Download className="w-4 h-4 mr-2" />
                     Download company profile
                   </a>
@@ -170,7 +171,7 @@ const OurWork = () => {
                     ))}
                   </ul>
                   <Button size="lg" className="rounded-full px-7 mt-8" asChild onClick={handleDownload}>
-                    <a href={PDF_PATH} download>
+                    <a href={PDF_PATH} target="_blank" rel="noopener noreferrer" download="EstatesRW-Company-Profile.pdf">
                       <Download className="w-4 h-4 mr-2" />
                       Download PDF
                     </a>
@@ -179,7 +180,9 @@ const OurWork = () => {
 
                 <a
                   href={PDF_PATH}
-                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="EstatesRW-Company-Profile.pdf"
                   onClick={handleDownload}
                   className="group rounded-3xl bg-primary p-10 md:p-14 flex flex-col items-center justify-center text-center transition-transform hover:-translate-y-1"
                 >
@@ -331,7 +334,7 @@ const OurWork = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-9">
               <Button size="lg" variant="secondary" className="rounded-full px-7" asChild onClick={handleDownload}>
-                <a href={PDF_PATH} download>
+                <a href={PDF_PATH} target="_blank" rel="noopener noreferrer" download="EstatesRW-Company-Profile.pdf">
                   <Download className="w-4 h-4 mr-2" />
                   Download company profile
                 </a>
