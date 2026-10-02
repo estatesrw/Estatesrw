@@ -71,7 +71,7 @@ const stats = [
 ];
 
 const OurWork = () => {
-  const handleDownload = () => trackCTAClick("Download Company Profile", "our-work");
+  const handleDownload = () => trackCTAClick("Download Company Profile", "our-work", PDF_PATH);
 
   return (
     <div className="min-h-screen bg-background">
