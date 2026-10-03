@@ -66,7 +66,7 @@ const PublicListings = ({ type }: { type: "sale" | "rent" }) => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((p) => (
-              <Link key={p.id} to={`/listing/${p.id}`}>
+              <Link key={p.id} to={p.slug ? `/property/${p.slug}` : `/listing/${p.id}`}>
                 <Card className="overflow-hidden h-full hover:shadow-card-hover transition-shadow">
                   <div className="aspect-video bg-muted overflow-hidden">
                     {p.images?.[0] ? <img src={p.images[0]} alt={p.title} loading="lazy" className="w-full h-full object-cover" /> :

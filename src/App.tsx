@@ -103,6 +103,7 @@ const AppRoutes = () => (
     <Route path="/houses-for-sale-kigali" element={<PublicListings type="sale" />} />
     <Route path="/houses-for-rent-kigali" element={<PublicListings type="rent" />} />
     <Route path="/listing/:id" element={<ListingDetail />} />
+    <Route path="/property/:slug" element={<ListingDetail />} />
     
 
     {/* Property Management OS */}

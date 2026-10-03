@@ -1,24 +1,38 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Bed, Bath, Maximize, Calendar } from "lucide-react";
+import { MapPin, Bed, Bath, Maximize, Calendar, Share2 } from "lucide-react";
+import { toast } from "sonner";
 import { formatPrice, formatDate } from "@/lib/listings";
 
 const ListingDetail = () => {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const [p, setP] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    supabase.from("properties").select("*").eq("id", id!).maybeSingle()
+    const q = supabase.from("properties").select("*");
+    (slug ? q.eq("slug", slug) : q.eq("id", id!)).maybeSingle()
       .then(({ data }) => { setP(data); setLoading(false); });
-  }, [id]);
+  }, [id, slug]);
+
+  if (!slug && p?.slug) return <Navigate to={`/property/${p.slug}`} replace />;
+
+  const isTaken = p?.status === "sold";
+  const takenLabel = p?.listing_type === "sale" ? "Sold" : "Rented";
+  const pageUrl = p?.slug ? `https://estatesrw.lovable.app/property/${p.slug}` : "";
+  const share = async () => {
+    try {
+      if (navigator.share) await navigator.share({ title: p.title, url: pageUrl });
+      else { await navigator.clipboard.writeText(pageUrl); toast.success("Link copied"); }
+    } catch { /* cancelled */ }
+  };
 
   const back = p?.listing_type === "sale" ? "/houses-for-sale-kigali" : "/houses-for-rent-kigali";
   const images: string[] = p?.images || [];
@@ -29,6 +43,11 @@ const ListingDetail = () => {
         <Helmet>
           <title>{`${p.title} – ${p.listing_type === "sale" ? "For Sale" : "For Rent"} in ${p.city} | EstatesRW`}</title>
           <meta name="description" content={(p.description || `${p.title} in ${p.city}`).slice(0, 155)} />
+          {pageUrl && <link rel="canonical" href={pageUrl} />}
+          <meta property="og:title" content={p.title} />
+          <meta property="og:description" content={(p.description || `${p.title} in ${p.city}`).slice(0, 155)} />
+          {images[0] && <meta property="og:image" content={images[0]} />}
+          {pageUrl && <meta property="og:url" content={pageUrl} />}
         </Helmet>
       )}
       <Navbar />
@@ -39,7 +58,10 @@ const ListingDetail = () => {
           <>
             <Link to={back} className="text-sm text-muted-foreground underline">← All {p.listing_type === "sale" ? "houses for sale" : "houses for rent"}</Link>
             <div className="mt-4 mb-6">
-              <Badge className="mb-2">{p.listing_type === "sale" ? "For Sale" : "For Rent"}</Badge>
+              <div className="flex gap-2 mb-2">
+                <Badge>{p.listing_type === "sale" ? "For Sale" : "For Rent"}</Badge>
+                {isTaken && <Badge variant="destructive">{takenLabel}</Badge>}
+              </div>
               <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">{p.title}</h1>
               <p className="text-muted-foreground flex items-center gap-1 mt-2"><MapPin className="w-4 h-4" />{p.address}, {p.city}</p>
             </div>
@@ -75,7 +97,12 @@ const ListingDetail = () => {
                 <p className="text-2xl font-bold text-primary">{formatPrice(p.price, p.currency, p.listing_type)}</p>
                 <p className="text-sm text-muted-foreground flex items-center gap-2"><Calendar className="w-4 h-4" />Available from {formatDate(p.available_from)}</p>
                 <p className="text-sm text-muted-foreground">Listed {formatDate(p.listed_at || p.created_at)}</p>
-                <Button asChild className="w-full"><Link to="/contact">Contact us about this house</Link></Button>
+                {isTaken ? (
+                  <p className="text-sm font-medium text-foreground">This house has been {takenLabel.toLowerCase()}. <Link to={back} className="underline">See similar houses</Link></p>
+                ) : (
+                  <Button asChild className="w-full"><Link to="/contact">Contact us about this house</Link></Button>
+                )}
+                <Button variant="outline" className="w-full" onClick={share}><Share2 className="w-4 h-4 mr-2" />Share this house</Button>
               </aside>
             </div>
           </>

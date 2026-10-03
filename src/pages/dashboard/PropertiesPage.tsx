@@ -88,6 +88,14 @@ const PropertiesPage = () => {
     setDialogOpen(true);
   };
 
+  const toggleTaken = async (p: any) => {
+    const status = p.status === "sold" ? "active" : "sold";
+    const { error } = await supabase.from("properties").update({ status }).eq("id", p.id);
+    if (error) { toast({ title: "Couldn't update", description: error.message, variant: "destructive" }); return; }
+    toast({ title: status === "sold" ? (p.listing_type === "sale" ? "Marked as sold" : "Marked as rented") : "Listing is available again" });
+    fetchProperties();
+  };
+
   const confirmDelete = async () => {
     if (!deleteId) return;
     const { error } = await supabase.from("properties").delete().eq("id", deleteId);
@@ -144,7 +152,7 @@ const PropertiesPage = () => {
                   <SelectContent>
                     <SelectItem value="active">Published</SelectItem>
                     <SelectItem value="draft">Hidden (draft)</SelectItem>
-                    <SelectItem value="sold">Sold / Rented</SelectItem>
+                    <SelectItem value="sold">Sold / Rented (page stays up)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -216,7 +224,7 @@ const PropertiesPage = () => {
               <div className="aspect-video bg-muted overflow-hidden relative">
                 {p.images?.[0] && <img src={p.images[0]} alt={p.title} className="w-full h-full object-cover" />}
                 <Badge className="absolute top-2 left-2">{p.listing_type === "sale" ? "For Sale" : "For Rent"}</Badge>
-                {p.status !== "active" && <Badge variant="secondary" className="absolute top-2 right-2">{p.status === "draft" ? "Hidden" : p.status}</Badge>}
+                {p.status !== "active" && <Badge variant="secondary" className="absolute top-2 right-2">{p.status === "draft" ? "Hidden" : p.status === "sold" ? (p.listing_type === "sale" ? "Sold" : "Rented") : p.status}</Badge>}
               </div>
               <CardContent className="p-5 space-y-2">
                 <h3 className="font-display font-semibold text-foreground">{p.title}</h3>
@@ -231,7 +239,17 @@ const PropertiesPage = () => {
                   <div className="flex gap-2 pt-2">
                     <Button variant="outline" size="sm" onClick={() => handleEdit(p)}><Pencil className="w-3 h-3 mr-1" />Edit</Button>
                     <Button variant="outline" size="sm" className="text-destructive" onClick={() => setDeleteId(p.id)}><Trash2 className="w-3 h-3 mr-1" />Delete</Button>
-                    <Button variant="ghost" size="sm" asChild><Link to={`/listing/${p.id}`} target="_blank"><ExternalLink className="w-3 h-3" /></Link></Button>
+                    <Button variant="ghost" size="sm" asChild><Link to={p.slug ? `/property/${p.slug}` : `/listing/${p.id}`} target="_blank"><ExternalLink className="w-3 h-3" /></Link></Button>
+                  </div>
+                )}
+                {(isAdmin || p.landlord_id === user?.id) && (
+                  <div className="flex flex-wrap gap-2">
+                    <Button size="sm" variant={p.status === "sold" ? "outline" : "default"} onClick={() => toggleTaken(p)}>
+                      {p.status === "sold" ? "Mark available again" : p.listing_type === "sale" ? "Mark as sold" : "Mark as rented"}
+                    </Button>
+                    {p.slug && (
+                      <Button size="sm" variant="outline" onClick={() => { navigator.clipboard.writeText(`https://estatesrw.lovable.app/property/${p.slug}`); toast({ title: "Link copied" }); }}>Copy link</Button>
+                    )}
                   </div>
                 )}
               </CardContent>
