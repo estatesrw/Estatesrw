@@ -15,6 +15,13 @@
       "when": 1791042718882,
       "tag": "0001_property_slugs",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791042732132,
+      "tag": "0002_sold_listings_visible_authenticated",
+      "breakpoints": true
     }
   ]
 }
