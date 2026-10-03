@@ -1230,6 +1230,7 @@ export type Database = {
           longitude: number | null
           price: number
           property_type: string
+          slug: string | null
           status: string
           title: string
           updated_at: string
@@ -1255,6 +1256,7 @@ export type Database = {
           longitude?: number | null
           price?: number
           property_type?: string
+          slug?: string | null
           status?: string
           title: string
           updated_at?: string
@@ -1280,6 +1282,7 @@ export type Database = {
           longitude?: number | null
           price?: number
           property_type?: string
+          slug?: string | null
           status?: string
           title?: string
           updated_at?: string
