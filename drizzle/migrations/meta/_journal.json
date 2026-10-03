@@ -8,6 +8,13 @@
       "when": 1790348373368,
       "tag": "0000_listing_fields_and_public_access",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791042718882,
+      "tag": "0001_property_slugs",
+      "breakpoints": true
     }
   ]
 }
