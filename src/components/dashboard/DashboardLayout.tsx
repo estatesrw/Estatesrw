@@ -80,6 +80,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             { label: "Property Setup", href: "/manage/setup", icon: <Settings className="w-4 h-4" /> },
             { label: "Team & Access", href: "/manage/access", icon: <Shield className="w-4 h-4" /> },
             { label: "Activity Log", href: "/manage/activity", icon: <History className="w-4 h-4" /> },
+            { label: "Reports", href: "/manage/reports", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
           { label: "People", items: [
             { label: "Users", href: "/dashboard/users", icon: <Users className="w-4 h-4" /> },

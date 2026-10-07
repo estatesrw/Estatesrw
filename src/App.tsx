@@ -70,6 +70,7 @@ import RentCollectionPage from "./pages/manage/RentCollectionPage";
 import UnitsTablePage from "./pages/manage/UnitsTablePage";
 import PropertySetupPage from "./pages/manage/PropertySetupPage";
 import ActivityLogPage from "./pages/manage/ActivityLogPage";
+import ReportsPage from "./pages/manage/ReportsPage";
 import ContractsPage from "./pages/manage/ContractsPage";
 
 const queryClient = new QueryClient();
@@ -117,6 +118,7 @@ const AppRoutes = () => (
     <Route path="/manage/contracts" element={<DashboardRoute><ContractsPage /></DashboardRoute>} />
     <Route path="/manage/setup" element={<DashboardRoute><PropertySetupPage /></DashboardRoute>} />
     <Route path="/manage/activity" element={<DashboardRoute><ActivityLogPage /></DashboardRoute>} />
+    <Route path="/manage/reports" element={<DashboardRoute><ReportsPage /></DashboardRoute>} />
 
     {/* Dashboard - Shared */}
     <Route path="/dashboard" element={<DashboardRoute><DashboardOverview /></DashboardRoute>} />
