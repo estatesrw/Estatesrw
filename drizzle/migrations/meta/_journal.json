@@ -22,6 +22,13 @@
       "when": 1791042732132,
       "tag": "0002_sold_listings_visible_authenticated",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791903670529,
+      "tag": "0003_agent_leads_and_marketing",
+      "breakpoints": true
     }
   ]
 }

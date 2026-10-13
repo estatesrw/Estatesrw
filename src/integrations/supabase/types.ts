@@ -156,6 +156,89 @@ export type Database = {
         }
         Relationships: []
       }
+      agent_leads: {
+        Row: {
+          agent_id: string
+          budget: number
+          created_at: string
+          email: string | null
+          id: string
+          interest: string
+          name: string
+          notes: string | null
+          phone: string | null
+          property_id: string | null
+          stage: string
+          updated_at: string
+        }
+        Insert: {
+          agent_id: string
+          budget?: number
+          created_at?: string
+          email?: string | null
+          id?: string
+          interest?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          property_id?: string | null
+          stage?: string
+          updated_at?: string
+        }
+        Update: {
+          agent_id?: string
+          budget?: number
+          created_at?: string
+          email?: string | null
+          id?: string
+          interest?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          property_id?: string | null
+          stage?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_leads_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agent_marketing_costs: {
+        Row: {
+          agent_id: string
+          amount: number
+          channel: string
+          created_at: string
+          description: string
+          id: string
+          spent_on: string
+        }
+        Insert: {
+          agent_id: string
+          amount: number
+          channel?: string
+          created_at?: string
+          description: string
+          id?: string
+          spent_on?: string
+        }
+        Update: {
+          agent_id?: string
+          amount?: number
+          channel?: string
+          created_at?: string
+          description?: string
+          id?: string
+          spent_on?: string
+        }
+        Relationships: []
+      }
       agent_referrals: {
         Row: {
           agent_id: string
