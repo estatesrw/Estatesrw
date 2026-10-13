@@ -56,6 +56,9 @@ import AdminBookingsPage from "./pages/dashboard/admin/AdminBookingsPage";
 import AdminAgents from "./pages/dashboard/admin/AdminAgents";
 import AgentReferrals from "./pages/dashboard/agent/AgentReferrals";
 import AgentCommissions from "./pages/dashboard/agent/AgentCommissions";
+import AgentLeads from "./pages/dashboard/agent/AgentLeads";
+import AgentMarketing from "./pages/dashboard/agent/AgentMarketing";
+import AgentEarnings from "./pages/dashboard/admin/AgentEarnings";
 import BrowseAccommodationPage from "./pages/dashboard/BrowseAccommodationPage";
 import GuestBookingsPage from "./pages/dashboard/GuestBookingsPage";
 import SavedPropertiesPage from "./pages/dashboard/SavedPropertiesPage";
@@ -157,6 +160,9 @@ const AppRoutes = () => (
     {/* Agent */}
     <Route path="/dashboard/agent/referrals" element={<DashboardRoute><AgentReferrals /></DashboardRoute>} />
     <Route path="/dashboard/agent/commissions" element={<DashboardRoute><AgentCommissions /></DashboardRoute>} />
+    <Route path="/dashboard/agent/leads" element={<DashboardRoute><AgentLeads /></DashboardRoute>} />
+    <Route path="/dashboard/agent/marketing" element={<DashboardRoute><AgentMarketing /></DashboardRoute>} />
+    <Route path="/dashboard/admin/agent-earnings" element={<DashboardRoute><AgentEarnings /></DashboardRoute>} />
 
     {/* Admin */}
     <Route path="/dashboard/users" element={<DashboardRoute><UsersPage /></DashboardRoute>} />
