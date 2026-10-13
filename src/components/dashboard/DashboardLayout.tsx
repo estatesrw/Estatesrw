@@ -85,6 +85,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           { label: "People", items: [
             { label: "Users", href: "/dashboard/users", icon: <Users className="w-4 h-4" /> },
             { label: "Agents", href: "/dashboard/admin/agents", icon: <UserPlus className="w-4 h-4" /> },
+            { label: "Agent Earnings", href: "/dashboard/admin/agent-earnings", icon: <DollarSign className="w-4 h-4" /> },
             { label: "Vendors", href: "/dashboard/admin/vendors", icon: <BedDouble className="w-4 h-4" /> },
             { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
@@ -139,11 +140,13 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             { label: "Overview", href: "/dashboard", icon: <BarChart3 className="w-4 h-4" /> },
           ]},
           { label: "Referrals", items: [
+            { label: "Leads", href: "/dashboard/agent/leads", icon: <Users className="w-4 h-4" /> },
             { label: "My Referrals", href: "/dashboard/agent/referrals", icon: <UserPlus className="w-4 h-4" /> },
             { label: "Browse Properties", href: "/dashboard/browse", icon: <Building2 className="w-4 h-4" /> },
           ]},
           { label: "Finance", items: [
             { label: "Commissions", href: "/dashboard/agent/commissions", icon: <DollarSign className="w-4 h-4" /> },
+            { label: "Marketing Costs", href: "/dashboard/agent/marketing", icon: <BarChart3 className="w-4 h-4" /> },
             { label: "Withdrawals", href: "/dashboard/withdrawals", icon: <Wallet className="w-4 h-4" /> },
             { label: "Messages", href: "/dashboard/messages", icon: <MessageSquare className="w-4 h-4" /> },
           ]},
